@@ -8,7 +8,7 @@ const cname = await readFile("CNAME", "utf8");
 
 test("site remains a static custom-domain site with no framework bundle", () => {
   assert.doesNotMatch(html, /https:\/\/fonts\.googleapis\.com/);
-  assert.doesNotMatch(html, /React|Next\.js|Astro|vite|tailwind/i);
+  assert.doesNotMatch(html, /react-dom|next\/|astro|vite\/|tailwindcss/i);
   assert.match(html, /fetch\('data\/state\.json/);
 });
 
@@ -30,6 +30,10 @@ test("state carries proof stories and current signals", () => {
   assert.ok(state.signals.length >= 4);
   assert.ok(Array.isArray(state.systems));
   assert.ok(state.systems.length >= 5);
+  assert.ok(Array.isArray(state.liveFeeds));
+  assert.ok(state.liveFeeds.length >= 4);
+  assert.ok(Array.isArray(state.operatingModes));
+  assert.ok(state.operatingModes.length >= 3);
 });
 
 test("every proof story has evidence and a public-safe angle", () => {
@@ -44,4 +48,35 @@ test("every proof story has evidence and a public-safe angle", () => {
 
 test("site declares the intended custom domain", () => {
   assert.equal(cname.trim(), "me.balgaly.com");
+});
+
+test("homepage behaves like a living product cockpit", () => {
+  for (const id of ["mode-strip", "feed-rail", "signal-lens", "proof-ledger"]) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+
+  assert.match(html, /data-mode-button/);
+  assert.match(html, /data-feed-filter/);
+  assert.match(html, /IntersectionObserver/);
+  assert.match(html, /requestAnimationFrame/);
+  assert.match(html, /prefers-reduced-motion/);
+});
+
+test("site avoids common AI-slop decoration patterns", () => {
+  assert.doesNotMatch(html, /orb|blob|bokeh|glassmorphism|neon|cyberpunk/i);
+  assert.doesNotMatch(html, /linear-gradient\([^)]*purple/i);
+  assert.doesNotMatch(html, /Lorem ipsum/i);
+});
+
+test("live feeds carry useful context and actions", () => {
+  const validKinds = new Set(["repo", "writing", "system", "public"]);
+  for (const item of state.liveFeeds) {
+    assert.ok(validKinds.has(item.kind), `unexpected live feed kind ${item.kind}`);
+    assert.equal(typeof item.title, "string");
+    assert.ok(item.title.length > 4);
+    assert.equal(typeof item.context, "string");
+    assert.ok(item.context.length > 20);
+    assert.equal(typeof item.action, "string");
+    assert.ok(item.action.length > 10);
+  }
 });

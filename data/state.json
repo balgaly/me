@@ -25,6 +25,67 @@
       "detail": "Nothing is done until there is a command, screenshot, report, commit hash, or live URL."
     }
   ],
+  "operatingModes": [
+    {
+      "id": "builder",
+      "label": "Builder",
+      "title": "I turn fuzzy AI work into operating systems.",
+      "summary": "The useful part is not prompting harder. It is giving the work durable shape: state files, proofs, handoffs, reports, and tools that can run again tomorrow.",
+      "proof": [
+        "JARVIS Constitution turns chat into repeatable operating rules.",
+        "Worktrees make every agent task isolated and reversible.",
+        "Promoter packages proof into public material instead of opinions."
+      ]
+    },
+    {
+      "id": "operator",
+      "label": "Operator",
+      "title": "I care about systems that keep moving without heroics.",
+      "summary": "The design bias is boring reliability with a sharp interface: small tickets, explicit dependencies, proof gates, dashboards, and scheduled audits.",
+      "proof": [
+        "MISSION_STATE.md lets every session self-orient.",
+        "reports/sessions.log makes completion auditable.",
+        "Night shift and satellites turn idle time into checked work."
+      ]
+    },
+    {
+      "id": "writer",
+      "label": "Writer",
+      "title": "The writing comes from the machinery, not a content calendar.",
+      "summary": "The site should expose the ideas already proven by commits and reports. The voice stays direct, slightly skeptical, and grounded in what actually happened.",
+      "proof": [
+        "Proof stories are generated from real repo evidence.",
+        "words.balgaly.com carries the longer essays.",
+        "Promoter keeps drafts reviewable before anything goes public."
+      ]
+    }
+  ],
+  "liveFeeds": [
+    {
+      "kind": "repo",
+      "title": "Current build trace",
+      "context": "The personal site now reads like an operating profile: proof stories, source state, and a canvas map instead of a template portfolio.",
+      "action": "Turn the branch proof into a deployable public artifact."
+    },
+    {
+      "kind": "system",
+      "title": "Continuity contract",
+      "context": "Every new session begins from repo files, not memory. That makes the human the editor while the system carries context.",
+      "action": "Expose the contract publicly without leaking private implementation details."
+    },
+    {
+      "kind": "writing",
+      "title": "Short memory thread",
+      "context": "The strongest public thesis is that short AI memory is not a chat problem; it is an operating-system design problem.",
+      "action": "Link the site, blog, and Promoter around that thesis."
+    },
+    {
+      "kind": "public",
+      "title": "Public-safe proof",
+      "context": "The site needs proof without private URLs, employer detail, or invented metrics. It can show patterns, artifacts, and operating rules.",
+      "action": "Keep each proof story tied to a file, command, screenshot, or published post."
+    }
+  ],
   "proofStories": [
     {
       "kind": "agent ops",

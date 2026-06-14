@@ -86,6 +86,26 @@
       "action": "Keep each proof story tied to a file, command, screenshot, or published post."
     }
   ],
+  "buildLog": [
+    {
+      "day": "Day 1",
+      "title": "The operating spine",
+      "summary": "Process, decisions, markdown tickets, generated graph, worktree lifecycle, and the first dashboard made the repo self-orienting.",
+      "proof": "M01-M05 completed with dashboard state, graph generation, worktree scripts, and daily/session reports."
+    },
+    {
+      "day": "Day 2",
+      "title": "The machine room",
+      "summary": "Local model, router, night shift, and Hermes evaluation turned the repo from a plan into a running system.",
+      "proof": "M06-M09 produced local LLM routing, Task Scheduler night run, and a parked Hermes decision with findings."
+    },
+    {
+      "day": "Day 3",
+      "title": "The public layer",
+      "summary": "Scribe, Promoter, the personal site, and the launch post turned private work into public proof.",
+      "proof": "Live post: https://words.balgaly.com/blog/short-memory-long-repo/ plus Promoter drafts, screenshots, and me.balgaly.com cockpit branch."
+    }
+  ],
   "proofStories": [
     {
       "kind": "agent ops",
@@ -156,6 +176,12 @@
     }
   ],
   "writing": [
+    {
+      "title": "short memory, long repo.",
+      "date": "2026-06-14",
+      "note": "The public story of building a small operating system around an AI agent in three days.",
+      "url": "https://words.balgaly.com/blog/short-memory-long-repo/"
+    },
     {
       "title": "short memory.",
       "date": "2026-04-05",

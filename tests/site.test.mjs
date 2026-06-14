@@ -51,7 +51,7 @@ test("site declares the intended custom domain", () => {
 });
 
 test("homepage behaves like a living product cockpit", () => {
-  for (const id of ["mode-strip", "feed-rail", "signal-lens", "proof-ledger"]) {
+  for (const id of ["mode-strip", "feed-rail", "signal-lens", "proof-ledger", "build-log"]) {
     assert.match(html, new RegExp(`id="${id}"`));
   }
 
@@ -60,6 +60,18 @@ test("homepage behaves like a living product cockpit", () => {
   assert.match(html, /IntersectionObserver/);
   assert.match(html, /requestAnimationFrame/);
   assert.match(html, /prefers-reduced-motion/);
+});
+
+test("site carries the public three-day JARVIS build log", () => {
+  assert.ok(Array.isArray(state.buildLog));
+  assert.ok(state.buildLog.length >= 3);
+  assert.match(html, /short-memory-long-repo/);
+  assert.match(html, /3-day build log/i);
+  for (const entry of state.buildLog) {
+    assert.equal(typeof entry.day, "string");
+    assert.equal(typeof entry.title, "string");
+    assert.ok(entry.proof.length > 10);
+  }
 });
 
 test("site avoids common AI-slop decoration patterns", () => {

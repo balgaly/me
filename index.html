@@ -318,7 +318,8 @@
   }
 
   .signal-grid,
-  .feed-grid {
+  .feed-grid,
+  .build-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px;
@@ -332,6 +333,7 @@
 
   .story,
   .feed-card,
+  .build-card,
   .system-card,
   .writing-card {
     border: 1px solid var(--line);
@@ -364,6 +366,29 @@
     color: var(--ink);
     font-size: 13px;
     font-weight: 800;
+  }
+
+  .build-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .build-card {
+    min-height: 240px;
+    align-content: space-between;
+  }
+
+  .build-card strong {
+    font-family: var(--display);
+    font-size: 27px;
+    line-height: 1.18;
+  }
+
+  .build-proof {
+    border-top: 1px solid var(--line);
+    padding-top: 8px;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.45;
   }
 
   .story h3,
@@ -498,6 +523,7 @@
 
     .signal-grid,
     .feed-grid,
+    .build-grid,
     .systems-grid,
     .writing-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -514,6 +540,7 @@
     .signal-line,
     .signal-grid,
     .feed-grid,
+    .build-grid,
     .lens-proof,
     .systems-grid,
     .writing-list {
@@ -534,6 +561,7 @@
       <a href="#feed-rail">Sources</a>
       <a href="#proof">Proof</a>
       <a href="#systems">Systems</a>
+      <a href="#build-log">Build log</a>
       <a href="#writing">Writing</a>
       <a class="button primary" href="#contact">Contact</a>
     </div>
@@ -632,6 +660,19 @@
       </div>
       <div class="band-body">
         <div class="systems-grid" id="systems-grid"></div>
+      </div>
+    </section>
+
+    <section class="band reveal" id="build-log">
+      <div class="band-head">
+        <div>
+          <p class="eyebrow">3-day build log</p>
+          <h2 class="section-title">The public trail of how JARVIS became real.</h2>
+        </div>
+        <a class="button" href="https://words.balgaly.com/blog/short-memory-long-repo/" target="_blank" rel="noopener">Read the post</a>
+      </div>
+      <div class="band-body">
+        <div class="build-grid" id="build-grid"></div>
       </div>
     </section>
 
@@ -751,6 +792,17 @@ function renderFeed(item) {
       <strong>${esc(item.title)}</strong>
       <p class="meta">${esc(item.context)}</p>
       <p class="feed-action">${esc(item.action)}</p>
+    </article>
+  `;
+}
+
+function renderBuildLog(entry) {
+  return `
+    <article class="build-card">
+      <span class="tag">${esc(entry.day)}</span>
+      <strong>${esc(entry.title)}</strong>
+      <p class="meta">${esc(entry.summary)}</p>
+      <p class="build-proof">${esc(entry.proof)}</p>
     </article>
   `;
 }
@@ -955,6 +1007,7 @@ async function boot() {
   document.getElementById('signal-grid').innerHTML = data.signals.map(renderCard).join('');
   document.getElementById('proof-ledger').innerHTML = data.proofStories.map(renderStory).join('');
   document.getElementById('systems-grid').innerHTML = data.systems.map(renderSystem).join('');
+  document.getElementById('build-grid').innerHTML = data.buildLog.map(renderBuildLog).join('');
   document.getElementById('writing-list').innerHTML = data.writing.map(renderWriting).join('');
   document.getElementById('last-updated').textContent = `Updated ${data.meta.updated} by ${data.meta.updatedBy}`;
   renderAudit(data.meta);

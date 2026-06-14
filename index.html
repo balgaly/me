@@ -1,400 +1,704 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Snir Balgaly</title>
-<meta name="description" content="DevOps engineer building AI-native platforms. I make tools that monitor loops instead of running in them.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<title>Snir Balgaly - AI continuity systems</title>
+<meta name="description" content="Snir Balgaly builds AI continuity systems: agent operating contracts, proof-driven tools, and developer workflows that survive beyond a chat session.">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg:        #0b0b0e;
-    --panel:     rgba(255,255,255,.04);
-    --border:    rgba(255,255,255,.07);
-    --ink:       #f0f0f4;
-    --muted:     rgba(240,240,244,.55);
-    --dim:       rgba(240,240,244,.35);
-    --purple:    #7c51ff;
-    --purple-lo: rgba(124,81,255,.18);
-    --violet:    #b3a4ff;
-    --cyan:      #38bdf8;
-    --green:     #34d399;
-    --orange:    #f97316;
-    --pink:      #ec4899;
-    --glow-p:    radial-gradient(circle at 80% 10%, rgba(124,81,255,.28) 0%, transparent 55%);
-    --glow-c:    radial-gradient(circle at 10% 90%, rgba(56,189,248,.18) 0%, transparent 50%);
+    --ink: #111827;
+    --muted: #5f6b7a;
+    --faint: #8a96a6;
+    --paper: #f7f3ea;
+    --surface: #fffdf8;
+    --line: #d9d0c2;
+    --panel: #ece4d7;
+    --navy: #17253a;
+    --teal: #126f68;
+    --green: #2d855f;
+    --rust: #a84d33;
+    --blue: #315f9d;
+    --shadow: 0 18px 42px rgba(49, 42, 32, .10);
+    --body: Aptos, "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --display: Georgia, Cambria, "Times New Roman", serif;
   }
 
+  * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
   body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Inter", -apple-system, system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
+    margin: 0;
     min-height: 100vh;
-    overflow-x: hidden;
+    color: var(--ink);
+    background:
+      linear-gradient(90deg, rgba(217, 208, 194, .32) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(217, 208, 194, .28) 1px, transparent 1px),
+      var(--paper);
+    background-size: 56px 56px;
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0;
   }
 
-  /* Ambient glows */
-  body::before {
-    content: "";
-    position: fixed; inset: 0;
-    background: var(--glow-p), var(--glow-c);
-    pointer-events: none;
-    z-index: 0;
+  a { color: inherit; }
+  button { font: inherit; }
+  h1, h2, h3, p { margin: 0; }
+
+  .site-shell {
+    max-width: 1520px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    gap: 18px;
   }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 48px;
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(24px);
-    background: rgba(11,11,14,.75);
+  .topbar {
+    position: sticky;
+    top: 12px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255, 253, 248, .92);
+    backdrop-filter: blur(14px);
+    box-shadow: var(--shadow);
   }
-  .nav-brand {
-    font-size: 15px; font-weight: 600; letter-spacing: -.015em;
-    color: var(--ink); text-decoration: none;
-  }
-  .nav-brand em { font-style: normal; color: var(--violet); }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { color: var(--muted); font-size: 13.5px; text-decoration: none; transition: color .15s; }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-cta {
-    font-size: 12.5px; font-weight: 600; padding: 7px 16px;
-    border-radius: 8px; text-decoration: none;
-    background: var(--purple); color: #fff;
-    transition: background .15s, transform .1s;
-  }
-  .nav-cta:hover { background: #9070ff; transform: translateY(-1px); }
 
-  /* ── LAYOUT ── */
-  main { max-width: 960px; margin: 0 auto; padding: 80px 48px 120px; position: relative; z-index: 1; }
-  section { margin-bottom: 80px; }
-  .section-label {
-    font-size: 10.5px; text-transform: uppercase; letter-spacing: .15em;
-    color: var(--dim); font-weight: 600; margin-bottom: 24px;
-    display: flex; align-items: center; gap: 12px;
+  .brand {
+    display: grid;
+    gap: 0;
+    text-decoration: none;
   }
-  .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
-  /* ── HERO ── */
-  .hero { padding-top: 20px; }
-  .hero-eyebrow {
-    font-size: 12px; font-family: ui-monospace, monospace;
-    color: var(--purple); letter-spacing: .08em; margin-bottom: 20px;
-    display: flex; align-items: center; gap: 8px;
+  .brand strong {
+    font-family: var(--display);
+    font-size: 20px;
+    line-height: 1.25;
   }
-  .hero-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--purple); }
-  .hero h1 {
-    font-size: clamp(36px, 5.5vw, 62px);
-    font-weight: 700; letter-spacing: -.035em; line-height: 1.04;
-    margin-bottom: 22px;
-    background: linear-gradient(135deg, #fff 0%, var(--violet) 55%, var(--purple) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .hero h1 em { font-style: italic; }
-  .hero-sub {
-    font-size: 17px; color: var(--muted); max-width: 520px;
-    line-height: 1.65; margin-bottom: 32px;
-  }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    font-size: 13.5px; font-weight: 600; padding: 10px 22px;
-    border-radius: 9px; text-decoration: none; transition: all .15s; cursor: pointer; border: none;
-  }
-  .btn-primary { background: var(--purple); color: #fff; }
-  .btn-primary:hover { background: #9070ff; transform: translateY(-1px); }
-  .btn-ghost { background: var(--panel); border: 1px solid var(--border); color: rgba(240,240,244,.8); }
-  .btn-ghost:hover { background: rgba(255,255,255,.07); transform: translateY(-1px); }
 
-  /* ── NOW ── */
-  .now-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
+  .brand span {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.35;
   }
-  .now-item {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 10px; padding: 16px 18px;
-  }
-  .now-key { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 6px; font-weight: 600; }
-  .now-val { font-size: 13.5px; color: var(--ink); line-height: 1.45; }
 
-  /* ── PROJECTS ── */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;
+  .nav-links {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
-  .project-card {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 14px; padding: 22px 24px;
-    transition: border-color .2s, background .2s;
-    text-decoration: none; display: flex; flex-direction: column;
+
+  .nav-links a,
+  .button {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 11px;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
   }
-  .project-card:hover { border-color: rgba(124,81,255,.4); background: rgba(124,81,255,.06); }
-  .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .project-name { font-size: 15px; font-weight: 600; color: var(--ink); font-family: ui-monospace, monospace; }
-  .project-status {
-    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
-    text-transform: uppercase; letter-spacing: .06em;
+
+  .button.primary {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
   }
-  .status-prod   { background: rgba(52,211,153,.15); color: #34d399; }
-  .status-building { background: rgba(249,115,22,.15); color: #f97316; }
-  .status-v1     { background: rgba(124,81,255,.2); color: var(--violet); }
-  .status-phase1 { background: rgba(56,189,248,.15); color: var(--cyan); }
-  .status-running { background: rgba(255,255,255,.08); color: var(--muted); }
-  .project-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 14px; flex: 1; }
-  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+
+  .hero {
+    min-height: min(760px, calc(100vh - 86px));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(420px, .74fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .hero-copy,
+  .proof-map,
+  .panel {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(255, 253, 248, .94);
+    box-shadow: var(--shadow);
+  }
+
+  .hero-copy {
+    padding: clamp(26px, 5vw, 64px);
+    display: grid;
+    align-content: center;
+    gap: 22px;
+  }
+
+  .eyebrow {
+    color: var(--teal);
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  h1 {
+    max-width: 880px;
+    font-family: var(--display);
+    font-size: 76px;
+    line-height: 1.02;
+    font-weight: 700;
+  }
+
+  .lede {
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 21px;
+    line-height: 1.45;
+  }
+
+  .hero-actions,
+  .chip-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .signal-line {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 760px;
+  }
+
+  .signal-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #faf6ef;
+    padding: 12px;
+    display: grid;
+    gap: 4px;
+  }
+
+  .signal-card strong {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .signal-card span,
+  .meta {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .proof-map {
+    position: relative;
+    min-height: 520px;
+    overflow: visible;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+
+  .map-head,
+  .map-foot,
+  .band-head {
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+
+  .map-foot {
+    border-top: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  #system-map {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    display: block;
+    background:
+      linear-gradient(90deg, rgba(23, 37, 58, .06) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(23, 37, 58, .06) 1px, transparent 1px),
+      #fbf8f2;
+    background-size: 34px 34px;
+  }
+
+  .node-tip {
+    position: absolute;
+    left: 16px;
+    bottom: 72px;
+    max-width: 340px;
+    padding: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+    background: transparent;
+  }
+
+  .band {
+    overflow: visible;
+  }
+
+  .band-body {
+    padding: 16px;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: 42px;
+    line-height: 1.18;
+  }
+
+  .section-kicker {
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .signal-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .story,
+  .system-card,
+  .writing-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+  }
+
+  .story h3,
+  .system-card h3,
+  .writing-card h3 {
+    font-family: var(--display);
+    font-size: 24px;
+    line-height: 1.24;
+  }
+
+  .evidence-list {
+    display: grid;
+    gap: 6px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .evidence-list li {
+    border-top: 1px solid var(--line);
+    padding-top: 6px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .systems-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .system-card {
+    min-height: 188px;
+  }
+
   .tag {
-    font-size: 10.5px; padding: 2px 8px; border-radius: 4px;
-    background: rgba(255,255,255,.05); color: var(--dim);
-    font-family: ui-monospace, monospace;
+    width: fit-content;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: #f0ebe2;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
   }
 
-  /* ── WRITING ── */
-  .post {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 15px 0; border-bottom: 1px solid var(--border);
-    text-decoration: none; gap: 16px;
-    transition: color .15s;
+  .writing-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
   }
-  .post:first-of-type { border-top: 1px solid var(--border); }
-  .post:hover .post-title { color: var(--violet); }
-  .post-title { font-size: 15px; color: var(--ink); transition: color .15s; }
-  .post-meta { font-size: 11.5px; color: var(--dim); white-space: nowrap; font-family: ui-monospace, monospace; }
 
-  /* ── STATS ── */
-  .stats { display: flex; gap: 40px; flex-wrap: wrap; }
-  .stat .num { font-size: 38px; font-weight: 700; letter-spacing: -.04em; color: var(--ink); line-height: 1; }
-  .stat .num span { color: var(--violet); }
-  .stat .lbl { font-size: 12px; color: var(--dim); margin-top: 4px; }
-
-  /* ── CO-AUTHORED ── */
-  .coauthored {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--purple-lo); border: 1px solid rgba(124,81,255,.25);
-    border-radius: 8px; padding: 8px 14px; font-size: 12.5px; color: var(--violet);
-    text-decoration: none; transition: all .15s;
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, .45fr);
+    gap: 18px;
+    align-items: stretch;
   }
-  .coauthored:hover { background: rgba(124,81,255,.25); }
-  .coauthored svg { width: 14px; height: 14px; flex-shrink: 0; }
 
-  /* ── FOOTER ── */
+  .contact .panel {
+    padding: 22px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .audit {
+    display: grid;
+    gap: 8px;
+  }
+
+  .audit div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 8px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
   footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 24px 48px;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 16px;
+    padding: 16px 2px 28px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13px;
   }
-  .footer-left { display: flex; align-items: center; gap: 20px; }
-  .footer-copy { font-size: 12px; color: var(--dim); }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 12.5px; color: var(--dim); text-decoration: none; transition: color .15s; }
-  .footer-links a:hover { color: var(--ink); }
 
-  /* ── BADGE ── */
-  #loading-overlay {
-    position: fixed; inset: 0; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999; transition: opacity .4s;
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
   }
-  #loading-overlay.fade { opacity: 0; pointer-events: none; }
-  .loader-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); animation: pulse 1s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+  @media (max-width: 1100px) {
+    .hero,
+    .contact,
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .signal-grid,
+    .systems-grid,
+    .writing-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
 
   @media (max-width: 680px) {
-    nav { padding: 14px 20px; }
-    .nav-links { display: none; }
-    main { padding: 52px 20px 80px; }
-    footer { padding: 20px; flex-direction: column; align-items: flex-start; }
-    .stats { gap: 24px; }
+    .site-shell { padding: 12px; }
+    .topbar { position: static; align-items: flex-start; flex-direction: column; }
+    .nav-links { justify-content: flex-start; }
+    .hero-copy { padding: 24px; }
+    h1 { font-size: 44px; }
+    .section-title { font-size: 32px; }
+    .signal-line,
+    .signal-grid,
+    .systems-grid,
+    .writing-list {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
 <body>
-
-<div id="loading-overlay"><div class="loader-dot"></div></div>
-
-<nav>
-  <a class="nav-brand" href="/">balgaly<em>.com</em></a>
-  <ul class="nav-links">
-    <li><a href="#now">now</a></li>
-    <li><a href="#work">work</a></li>
-    <li><a href="#writing">writing</a></li>
-  </ul>
-  <a class="nav-cta" href="mailto:snir@balgaly.com">get in touch</a>
-</nav>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <p class="hero-eyebrow">Snir Balgaly</p>
-    <h1 id="hero-headline">I build tools that<br><em>watch loops.</em></h1>
-    <p class="hero-sub" id="hero-sub">Loading…</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#work">See the work →</a>
-      <a class="btn btn-ghost" href="https://words.balgaly.com" target="_blank" rel="noopener">Read the writing</a>
-    </div>
-  </section>
-
-  <!-- NOW -->
-  <section id="now">
-    <p class="section-label">/ now</p>
-    <div class="now-grid" id="now-grid"><!-- injected --></div>
-  </section>
-
-  <!-- STATS -->
-  <section id="stats">
-    <div class="stats" id="stats-row"><!-- injected --></div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <p class="section-label">/ selected work</p>
-    <div class="projects-grid" id="projects-grid"><!-- injected --></div>
-  </section>
-
-  <!-- WRITING -->
-  <section id="writing">
-    <p class="section-label">/ writing</p>
-    <div id="writing-list"><!-- injected --></div>
-    <div style="margin-top: 20px;">
-      <a class="btn btn-ghost" href="https://words.balgaly.com" target="_blank" rel="noopener">all posts at words.balgaly.com →</a>
-    </div>
-  </section>
-
-  <!-- CO-AUTHORED -->
-  <section style="margin-bottom: 0;">
-    <a class="coauthored" href="https://claude.ai" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-      co-authored by me &amp; Claude
+<div class="site-shell">
+  <nav class="topbar" aria-label="Primary navigation">
+    <a class="brand" href="#hero">
+      <strong>Snir Balgaly</strong>
+      <span>AI continuity systems</span>
     </a>
-    <p style="font-size: 11.5px; color: var(--dim); margin-top: 10px;" id="last-updated"></p>
-  </section>
+    <div class="nav-links">
+      <a href="#signal">Signal</a>
+      <a href="#proof">Proof</a>
+      <a href="#systems">Systems</a>
+      <a href="#writing">Writing</a>
+      <a class="button primary" href="#contact">Contact</a>
+    </div>
+  </nav>
 
-</main>
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-copy">
+        <h1>AI continuity systems for work that has to survive the chat.</h1>
+        <p class="lede">I build operating contracts, proof rails, and developer tools for agentic work. No template voice. No generic AI positioning. The point is not a smarter chat window. The point is a system that remembers, audits, and keeps moving.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#proof">See proof stories</a>
+          <a class="button" href="https://words.balgaly.com" target="_blank" rel="noopener">Read the writing</a>
+          <a class="button" href="https://github.com/balgaly" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
 
-<footer>
-  <div class="footer-left">
-    <span class="footer-copy">© 2026 Snir Balgaly · written by a human, quite into machines</span>
-  </div>
-  <div class="footer-links">
-    <a href="https://github.com/balgaly" target="_blank" rel="noopener">github</a>
-    <a href="https://words.balgaly.com" target="_blank" rel="noopener">words</a>
-    <a href="mailto:snir@balgaly.com">mail</a>
-  </div>
-</footer>
+      <aside class="proof-map" aria-label="Interactive proof map">
+        <div class="map-head">
+          <div>
+            <p class="eyebrow">Proof, not adjectives</p>
+            <p class="meta">A live map of the systems behind the public profile.</p>
+          </div>
+          <span class="tag">interactive</span>
+        </div>
+        <canvas id="system-map" width="760" height="620"></canvas>
+        <div class="node-tip" id="node-tip">
+          <strong>Move through the map.</strong>
+          <p class="meta">Each node is a public-safe system, writing thread, or proof story. The site is static, but the profile is data-driven.</p>
+        </div>
+        <div class="map-foot">
+          <span class="meta">Static GitHub Pages. Data in <code>data/state.json</code>.</span>
+          <span class="tag">zero framework</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="band" id="signal">
+      <div class="band-head">
+        <div>
+          <p class="eyebrow">Current signal</p>
+          <h2 class="section-title">What I am building now.</h2>
+        </div>
+        <p class="section-kicker">Short, current, and operational. This section should change as the work changes.</p>
+      </div>
+      <div class="band-body">
+        <div class="signal-grid" id="signal-grid"></div>
+      </div>
+    </section>
+
+    <section class="band" id="proof">
+      <div class="band-head">
+        <div>
+          <p class="eyebrow">Proof stories</p>
+          <h2 class="section-title">The work is the credential.</h2>
+        </div>
+        <p class="section-kicker">Selected stories with evidence. No inflated titles, no fake case studies, no private links required.</p>
+      </div>
+      <div class="band-body">
+        <div class="proof-grid" id="proof-grid"></div>
+      </div>
+    </section>
+
+    <section class="band" id="systems">
+      <div class="band-head">
+        <div>
+          <p class="eyebrow">Systems</p>
+          <h2 class="section-title">Tools that reduce human memory load.</h2>
+        </div>
+        <p class="section-kicker">A compact index of the systems and patterns that keep showing up in the work.</p>
+      </div>
+      <div class="band-body">
+        <div class="systems-grid" id="systems-grid"></div>
+      </div>
+    </section>
+
+    <section class="band" id="writing">
+      <div class="band-head">
+        <div>
+          <p class="eyebrow">Writing</p>
+          <h2 class="section-title">Small essays about long systems.</h2>
+        </div>
+        <a class="button" href="https://words.balgaly.com" target="_blank" rel="noopener">All writing</a>
+      </div>
+      <div class="band-body">
+        <div class="writing-list" id="writing-list"></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="panel">
+        <p class="eyebrow">Contact</p>
+        <h2 class="section-title">Useful conversations only.</h2>
+        <p class="lede">I am interested in agentic developer tools, AI operating contracts, platform engineering, and systems that make continuity cheap.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="mailto:snir@balgaly.com">snir@balgaly.com</a>
+          <a class="button" href="https://github.com/balgaly" target="_blank" rel="noopener">github.com/balgaly</a>
+        </div>
+      </div>
+      <div class="panel">
+        <p class="eyebrow">Site contract</p>
+        <div class="audit" id="site-audit"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Snir Balgaly - written by a human, maintained by a repo.</span>
+    <span id="last-updated">Loading state.</span>
+  </footer>
+</div>
 
 <script>
-  const STATUS_LABELS = {
-    prod:     { text: 'prod',      cls: 'status-prod' },
-    building: { text: 'building',  cls: 'status-building' },
-    v1:       { text: 'v1',        cls: 'status-v1' },
-    phase1:   { text: 'phase 1',   cls: 'status-phase1' },
-    running:  { text: 'running',   cls: 'status-running' },
-  };
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const NOW_KEYS = { dayJob: 'day job', building: 'building', shipping: 'shipping', reading: 'reading', talking: 'talking' };
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  }[char]));
+}
 
-  async function load() {
-    let data;
-    try {
-      const r = await fetch('data/state.json?v=' + Date.now());
-      data = await r.json();
-    } catch(e) {
-      console.error('Failed to load state.json', e);
-      document.getElementById('hero-sub').textContent = 'DevOps engineer · AI-native platform builder.';
-      dismiss();
-      return;
+function renderCard(item) {
+  return `
+    <article class="signal-card">
+      <span class="tag">${esc(item.kind || item.label || 'signal')}</span>
+      <strong>${esc(item.title)}</strong>
+      <span>${esc(item.detail)}</span>
+    </article>
+  `;
+}
+
+function renderStory(story) {
+  return `
+    <article class="story">
+      <span class="tag">${esc(story.kind)}</span>
+      <h3>${esc(story.title)}</h3>
+      <p class="meta">${esc(story.angle)}</p>
+      <ul class="evidence-list">
+        ${story.evidence.map((line) => `<li>${esc(line)}</li>`).join('')}
+      </ul>
+    </article>
+  `;
+}
+
+function renderSystem(system) {
+  return `
+    <article class="system-card">
+      <span class="tag">${esc(system.status)}</span>
+      <h3>${esc(system.name)}</h3>
+      <p class="meta">${esc(system.role)}</p>
+    </article>
+  `;
+}
+
+function renderWriting(post) {
+  return `
+    <a class="writing-card" href="${esc(post.url)}" target="_blank" rel="noopener">
+      <span class="tag">${esc(post.date)}</span>
+      <h3>${esc(post.title)}</h3>
+      <p class="meta">${esc(post.note)}</p>
+    </a>
+  `;
+}
+
+function renderAudit(meta) {
+  const audit = [
+    ['Updated', meta.updated],
+    ['Maintainer', meta.updatedBy],
+    ['Stack', 'static HTML + JSON'],
+    ['Constraint', 'fast, public-safe, no framework'],
+  ];
+  document.getElementById('site-audit').innerHTML = audit.map(([key, value]) => `
+    <div><strong>${esc(key)}</strong><span>${esc(value)}</span></div>
+  `).join('');
+}
+
+function drawMap(data) {
+  const canvas = document.getElementById('system-map');
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  const scale = window.devicePixelRatio || 1;
+  canvas.width = Math.max(640, Math.floor(rect.width * scale));
+  canvas.height = Math.max(520, Math.floor(rect.height * scale));
+  ctx.setTransform(scale, 0, 0, scale, 0, 0);
+
+  const width = canvas.width / scale;
+  const height = canvas.height / scale;
+  const center = { x: width / 2, y: height / 2 };
+  const nodes = [
+    { label: 'Snir', kind: 'center', x: center.x, y: center.y, r: 42, detail: 'The human stays the editor, not the database.' },
+    ...data.systems.slice(0, 5).map((system, index) => {
+      const angle = (Math.PI * 2 * index) / 5 - Math.PI / 2;
+      const radius = Math.min(width, height) * .34;
+      return {
+        label: system.name,
+        kind: 'system',
+        x: center.x + Math.cos(angle) * radius,
+        y: center.y + Math.sin(angle) * radius,
+        r: 28,
+        detail: system.role,
+      };
+    }),
+  ];
+
+  let active = 0;
+  function paint(t = 0) {
+    ctx.clearRect(0, 0, width, height);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = '#d9d0c2';
+    ctx.fillStyle = '#fffdf8';
+    ctx.fillRect(0, 0, width, height);
+
+    for (let i = 1; i < nodes.length; i++) {
+      const node = nodes[i];
+      ctx.beginPath();
+      ctx.moveTo(center.x, center.y);
+      const wobble = prefersReducedMotion ? 0 : Math.sin(t / 900 + i) * 10;
+      ctx.quadraticCurveTo((center.x + node.x) / 2 + wobble, (center.y + node.y) / 2 - wobble, node.x, node.y);
+      ctx.strokeStyle = i === active ? '#126f68' : '#c8beae';
+      ctx.lineWidth = i === active ? 2 : 1;
+      ctx.stroke();
     }
 
-    // hero
-    if (data.hero) {
-      if (data.hero.tagline) document.getElementById('hero-headline').innerHTML = data.hero.tagline.replace('watch loops.', '<em>watch loops.</em>').replace('watching a loop.', '<em>watching a loop.</em>');
-      if (data.hero.sub) document.getElementById('hero-sub').textContent = data.hero.sub;
-    }
+    nodes.forEach((node, index) => {
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+      ctx.fillStyle = index === 0 ? '#17253a' : index === active ? '#e2f2ef' : '#f3ede4';
+      ctx.strokeStyle = index === active ? '#126f68' : '#d9d0c2';
+      ctx.lineWidth = 2;
+      ctx.fill();
+      ctx.stroke();
 
-    // now
-    if (data.now) {
-      const g = document.getElementById('now-grid');
-      g.innerHTML = Object.entries(NOW_KEYS).map(([k, label]) => data.now[k] ? `
-        <div class="now-item">
-          <div class="now-key">${label}</div>
-          <div class="now-val">${esc(data.now[k])}</div>
-        </div>` : '').join('');
-    }
+      ctx.fillStyle = index === 0 ? '#ffffff' : '#111827';
+      ctx.font = index === 0 ? '700 13px Aptos, Segoe UI, sans-serif' : '700 11px Aptos, Segoe UI, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const label = node.label.length > 16 ? node.label.slice(0, 15) + '.' : node.label;
+      ctx.fillText(label, node.x, node.y);
+    });
 
-    // stats
-    if (data.stats) {
-      const s = data.stats;
-      document.getElementById('stats-row').innerHTML = `
-        <div class="stat"><div class="num">${s.yearsManaging}<span>yrs</span></div><div class="lbl">managing PAMonCloud team</div></div>
-        <div class="stat"><div class="num">${s.prodServices} <span>prod</span></div><div class="lbl">live AI service inside CyberArk</div></div>
-        <div class="stat"><div class="num">${s.kickoffAttendees}</div><div class="lbl">attendees · AI Kickoff series</div></div>
-        <div class="stat"><div class="num">${s.posts} <span>posts</span></div><div class="lbl">published philosophy</div></div>
-      `;
-    }
-
-    // projects
-    if (data.projects) {
-      document.getElementById('projects-grid').innerHTML = data.projects.map(p => {
-        const s = STATUS_LABELS[p.status] || { text: p.status, cls: 'status-running' };
-        const wrap = p.url ? `<a class="project-card" href="${esc(p.url)}" target="_blank" rel="noopener">` : `<div class="project-card">`;
-        const close = p.url ? `</a>` : `</div>`;
-        return `${wrap}
-          <div class="project-header">
-            <span class="project-name">${esc(p.name)}</span>
-            <span class="project-status ${s.cls}">${s.text}</span>
-          </div>
-          <p class="project-desc">${esc(p.desc)}</p>
-          <div class="project-tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-        ${close}`;
-      }).join('');
-    }
-
-    // writing
-    if (data.writing) {
-      document.getElementById('writing-list').innerHTML = data.writing.map(w => `
-        <a class="post" href="${esc(w.url)}" target="_blank" rel="noopener">
-          <span class="post-title">${esc(w.title)}</span>
-          <span class="post-meta">${fmtDate(w.date)} · ~${w.mins} min</span>
-        </a>`).join('');
-    }
-
-    // last updated
-    if (data.meta?.updated) {
-      document.getElementById('last-updated').textContent = `last updated ${data.meta.updated}${data.meta.updatedBy ? ' · ' + data.meta.updatedBy : ''}`;
-    }
-
-    dismiss();
+    if (!prefersReducedMotion) requestAnimationFrame(paint);
   }
 
-  function dismiss() {
-    const o = document.getElementById('loading-overlay');
-    o.classList.add('fade');
-    setTimeout(() => o.remove(), 500);
-  }
+  canvas.addEventListener('mousemove', (event) => {
+    const bounds = canvas.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const hit = nodes.findIndex((node) => Math.hypot(node.x - x, node.y - y) <= node.r + 8);
+    if (hit >= 0) {
+      active = hit;
+      document.getElementById('node-tip').innerHTML = `<strong>${esc(nodes[hit].label)}</strong><p class="meta">${esc(nodes[hit].detail)}</p>`;
+      if (prefersReducedMotion) paint();
+    }
+  });
 
-  function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  paint();
+}
 
-  function fmtDate(d) {
-    try {
-      const dt = new Date(d + 'T00:00:00');
-      return dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toLowerCase();
-    } catch { return d; }
-  }
+async function boot() {
+  const response = await fetch('data/state.json?v=' + Date.now(), { cache: 'no-store' });
+  const data = await response.json();
 
-  load();
+  document.getElementById('signal-grid').innerHTML = data.signals.map(renderCard).join('');
+  document.getElementById('proof-grid').innerHTML = data.proofStories.map(renderStory).join('');
+  document.getElementById('systems-grid').innerHTML = data.systems.map(renderSystem).join('');
+  document.getElementById('writing-list').innerHTML = data.writing.map(renderWriting).join('');
+  document.getElementById('last-updated').textContent = `Updated ${data.meta.updated} by ${data.meta.updatedBy}`;
+  renderAudit(data.meta);
+  drawMap(data);
+}
+
+boot().catch((error) => {
+  document.getElementById('hero-signals').innerHTML = `<article class="signal-card"><strong>State failed</strong><span>${esc(error.message)}</span></article>`;
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,8 @@
+{
+  "name": "me-balgaly",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

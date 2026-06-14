@@ -1,79 +1,123 @@
 {
   "meta": {
     "updated": "2026-06-14",
-    "updatedBy": "whetstone@work-pc"
+    "updatedBy": "jarvis@lenovo"
   },
-  "hero": {
-    "tagline": "I build tools that watch loops.",
-    "sub": "DevOps engineer · AI-native platform builder · CyberArk. I make infrastructure that monitors agents instead of running in them."
-  },
-  "now": {
-    "dayJob": "Code Koala 2.0 — contributor-readiness pass",
-    "building": "amit-hub — AI-agent-native worktree orchestrator",
-    "shipping": "skit MVP — AIC distribution platform demo",
-    "reading": "Anthropic agent papers, Strands SDK source",
-    "talking": "Self-Hosted AI Kickoff series · weekly · CyberArk R&D"
-  },
-  "projects": [
+  "signals": [
     {
-      "slug": "code-koala",
-      "name": "code-koala",
-      "desc": "AI code reviewer running inside CyberArk's GitHub Enterprise. Lambda + Bedrock + Claude Opus 4.7. Self-serve install, multi-org adoption.",
-      "tags": ["python", "aws", "internal"],
-      "status": "prod",
-      "url": "https://github.cyberng.com/snir/code-koala"
+      "kind": "building",
+      "title": "JARVIS operating repo",
+      "detail": "A private agent operating system with missions, tickets, worktrees, reports, Scribe, and Promoter."
     },
     {
-      "slug": "skit",
-      "name": "skit",
-      "desc": "Package manager for AI capabilities — skills, subagents, rules — across Claude Code, Cursor, Windsurf. The npm of AICs.",
-      "tags": ["typescript", "cli", "oss"],
-      "status": "building",
-      "url": "https://github.com/balgaly/skit"
+      "kind": "writing",
+      "title": "short memory, long repo",
+      "detail": "The thesis: chat is runtime exhaust; the repo is the durable product."
     },
     {
-      "slug": "brif",
-      "name": "brif",
-      "desc": "Mission-aware statusline and dashboard for Claude Code. Real-time ctx%, cost, model, branch.",
-      "tags": ["node", "tui", "oss"],
-      "status": "v1",
-      "url": "https://github.com/balgaly/brif"
+      "kind": "shipping",
+      "title": "Promoter",
+      "detail": "A publishing product that turns commits, reports, and lessons into reviewable public material."
     },
     {
-      "slug": "amit-hub",
-      "name": "amit-hub",
-      "desc": "AI-agent-native worktree orchestrator. CLI + VS Code ext + Claude Code MCP plugin, one TS core.",
-      "tags": ["typescript", "monorepo"],
-      "status": "phase1",
-      "url": null
+      "kind": "pattern",
+      "title": "Proof rails",
+      "detail": "Nothing is done until there is a command, screenshot, report, commit hash, or live URL."
+    }
+  ],
+  "proofStories": [
+    {
+      "kind": "agent ops",
+      "title": "The repo that survives the chat",
+      "angle": "AI work needs continuity, not longer context windows. The operating contract lives in files, not memory.",
+      "evidence": [
+        "MASTERPLAN.md defines the mission sequence and acceptance demo.",
+        "MISSION_STATE.md holds current truth for every new session.",
+        "reports/sessions.log records proof lines instead of vibes."
+      ]
     },
     {
-      "slug": "workwright",
-      "name": "workwright",
-      "desc": "Playwright for terminals — MCP server for visible, AI-driveable PTY sessions with live browser viewer.",
-      "tags": ["node", "mcp", "oss"],
-      "status": "v1",
-      "url": "https://github.com/balgaly/workwright"
+      "kind": "developer tools",
+      "title": "Worktrees as the unit of agent work",
+      "angle": "Main checkouts stay clean while short-lived worktrees carry isolated tasks from ticket to merge.",
+      "evidence": [
+        "scripts/wt-new.ps1 creates ticket branches under C:/dev/.wt.",
+        "scripts/wt-done.ps1 merges, removes the worktree, and updates dashboard state.",
+        "Ticket dependencies are checked before a branch can start."
+      ]
     },
     {
-      "slug": "whetstone",
-      "name": "whetstone",
-      "desc": "Mentor AI system for continuity and drift control. Session notes, daily/weekly history, scope hooks.",
-      "tags": ["node", "obsidian"],
-      "status": "running",
-      "url": null
+      "kind": "publishing system",
+      "title": "Promoter turns proof into public material",
+      "angle": "The publishing workflow should prepare, rank, and package ideas while the human keeps editorial control.",
+      "evidence": [
+        "Promoter generates LinkedIn and blog drafts from reports, commits, and lessons.",
+        "Each pack includes hooks, timing, image prompt, CTA, and checklist.",
+        "Archive controls keep posted and passed ideas out of tomorrow's queue."
+      ]
+    },
+    {
+      "kind": "second brain",
+      "title": "Scribe audits whether yesterday survived",
+      "angle": "A personal operating system needs an auditor that checks continuity, not another place to manually summarize work.",
+      "evidence": [
+        "Scribe runs on a schedule and writes daily reports.",
+        "It scans local repos for fresh trace and stale assumptions.",
+        "Findings become dashboard state and backlog material."
+      ]
+    }
+  ],
+  "systems": [
+    {
+      "name": "JARVIS",
+      "status": "active",
+      "role": "Mission control for plans, tickets, worktrees, reports, and proof."
+    },
+    {
+      "name": "Promoter",
+      "status": "active",
+      "role": "Turns the proof trail into public writing and launch material."
+    },
+    {
+      "name": "Scribe",
+      "status": "active",
+      "role": "Audits whether daily work has durable trace and useful next actions."
+    },
+    {
+      "name": "Worktree lifecycle",
+      "status": "active",
+      "role": "Keeps agent development isolated from main checkouts."
+    },
+    {
+      "name": "Router",
+      "status": "active",
+      "role": "Sends cheap routine work to local models and keeps reasoning explicit."
     }
   ],
   "writing": [
-    { "title": "short memory.", "slug": "short-memory", "date": "2026-04-05", "mins": 6, "url": "https://words.balgaly.com/blog/short-memory" },
-    { "title": "the context bar.", "slug": "the-context-bar", "date": "2026-04-03", "mins": 5, "url": "https://words.balgaly.com/blog/the-context-bar" },
-    { "title": "the package manager nobody asked for.", "slug": "the-package-manager-nobody-asked-for", "date": "2026-03-31", "mins": 4, "url": "https://words.balgaly.com/blog/the-package-manager-nobody-asked-for" },
-    { "title": "things i didn't know.", "slug": "things-i-didnt-know", "date": "2026-03-28", "mins": 12, "url": "https://words.balgaly.com/blog/things-i-didnt-know" }
-  ],
-  "stats": {
-    "yearsManaging": "4",
-    "prodServices": "1",
-    "kickoffAttendees": "20+",
-    "posts": "6"
-  }
+    {
+      "title": "short memory.",
+      "date": "2026-04-05",
+      "note": "Why external memory is infrastructure, not a note-taking hobby.",
+      "url": "https://words.balgaly.com/blog/short-memory"
+    },
+    {
+      "title": "the context bar.",
+      "date": "2026-04-03",
+      "note": "A small UI idea for making agent work more legible.",
+      "url": "https://words.balgaly.com/blog/the-context-bar"
+    },
+    {
+      "title": "the package manager nobody asked for.",
+      "date": "2026-03-31",
+      "note": "Why AI capabilities need distribution and governance.",
+      "url": "https://words.balgaly.com/blog/the-package-manager-nobody-asked-for"
+    },
+    {
+      "title": "things i didn't know.",
+      "date": "2026-03-28",
+      "note": "A longer note on learning by building systems that push back.",
+      "url": "https://words.balgaly.com/blog/things-i-didnt-know"
+    }
+  ]
 }

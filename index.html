@@ -452,7 +452,7 @@
           <p class="meta">Each node is a public-safe system, writing thread, or proof story. The site is static, but the profile is data-driven.</p>
         </div>
         <div class="map-foot">
-          <span class="meta">Static GitHub Pages. Data in <code>data/state.json</code>.</span>
+          <span class="meta">Static HTML. Data in <code>data/state.json</code>.</span>
           <span class="tag">zero framework</span>
         </div>
       </aside>
@@ -594,6 +594,7 @@ function renderAudit(meta) {
     ['Updated', meta.updated],
     ['Maintainer', meta.updatedBy],
     ['Stack', 'static HTML + JSON'],
+    ['Deploy target', 'me.balgaly.com'],
     ['Constraint', 'fast, public-safe, no framework'],
   ];
   document.getElementById('site-audit').innerHTML = audit.map(([key, value]) => `

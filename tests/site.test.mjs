@@ -6,7 +6,7 @@ const html = await readFile("index.html", "utf8");
 const state = JSON.parse(await readFile("data/state.json", "utf8"));
 const cname = await readFile("CNAME", "utf8");
 
-test("site remains a static GitHub Pages site with no framework bundle", () => {
+test("site remains a static custom-domain site with no framework bundle", () => {
   assert.doesNotMatch(html, /https:\/\/fonts\.googleapis\.com/);
   assert.doesNotMatch(html, /React|Next\.js|Astro|vite|tailwind/i);
   assert.match(html, /fetch\('data\/state\.json/);

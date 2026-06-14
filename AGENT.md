@@ -1,6 +1,6 @@
 # balgaly/me - Agent Protocol
 
-This repo powers `balgaly.com` / `me.balgaly.com`. It is a static site: no build step, no framework. GitHub Pages serves `index.html` directly from `master`.
+This repo powers `balgaly.com` / `me.balgaly.com`. It is a static site: no build step, no framework. The current repository is private, and GitHub Pages is not enabled for it on the current plan.
 
 ## Architecture
 
@@ -8,6 +8,7 @@ This repo powers `balgaly.com` / `me.balgaly.com`. It is a static site: no build
 index.html       -> presentation and interaction layer
 data/state.json  -> single source of truth for public-safe site content
 AGENT.md         -> this file
+DEPLOYMENT.md    -> hosting status and deployment options
 tests/           -> static contract tests
 ```
 
@@ -48,7 +49,7 @@ git commit -m "chore: update site state - <what changed>"
 git push origin master
 ```
 
-GitHub Pages deploys automatically. Live in ~60 seconds.
+Deploy through the path recorded in `DEPLOYMENT.md`.
 
 ## Machine slugs
 

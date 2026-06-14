@@ -5,6 +5,8 @@ import test from "node:test";
 const html = await readFile("index.html", "utf8");
 const state = JSON.parse(await readFile("data/state.json", "utf8"));
 const cname = await readFile("CNAME", "utf8");
+const pkg = JSON.parse(await readFile("package.json", "utf8"));
+const deployment = await readFile("DEPLOYMENT.md", "utf8");
 
 test("site remains a static custom-domain site with no framework bundle", () => {
   assert.doesNotMatch(html, /https:\/\/fonts\.googleapis\.com/);
@@ -48,6 +50,14 @@ test("every proof story has evidence and a public-safe angle", () => {
 
 test("site declares the intended custom domain", () => {
   assert.equal(cname.trim(), "me.balgaly.com");
+});
+
+test("deployment path uses a public artifact repo without exposing source", () => {
+  assert.equal(pkg.scripts["deploy:artifact"], "powershell -ExecutionPolicy Bypass -File scripts/publish-public.ps1");
+  assert.match(deployment, /me-site-public/);
+  assert.match(deployment, /balgaly\.github\.io/);
+  assert.match(deployment, /Host:\s*me/);
+  assert.match(deployment, /Type:\s*CNAME/);
 });
 
 test("homepage behaves like a living product cockpit", () => {

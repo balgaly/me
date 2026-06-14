@@ -9,6 +9,7 @@ index.html       -> presentation and interaction layer
 data/state.json  -> single source of truth for public-safe site content
 AGENT.md         -> this file
 DEPLOYMENT.md    -> hosting status and deployment options
+scripts/         -> artifact publish helper
 tests/           -> static contract tests
 ```
 
@@ -47,9 +48,10 @@ npm test
 git add data/state.json
 git commit -m "chore: update site state - <what changed>"
 git push origin master
+npm run deploy:artifact
 ```
 
-Deploy through the path recorded in `DEPLOYMENT.md`.
+`npm run deploy:artifact` syncs `index.html`, `CNAME`, and `data/` into the public `balgaly/me-site-public` repository and pushes the static artifact.
 
 ## Machine slugs
 
@@ -80,3 +82,4 @@ Add an object to `data/state.json` -> `proofStories[]`:
 - Keep `index.html` untouched unless changing the presentation or interaction layer itself
 - `data/state.json` must always be valid JSON — validate before pushing
 - Both agents can push to `master` directly for content-only updates; use a worktree for presentation changes
+- The public Pages artifact lives in `balgaly/me-site-public`; never move private source or internal notes there

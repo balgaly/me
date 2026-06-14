@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snir Balgaly</title>
+<meta name="description" content="DevOps engineer building AI-native platforms. I make tools that monitor loops instead of running in them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #0b0b0e;
+    --panel:     rgba(255,255,255,.04);
+    --border:    rgba(255,255,255,.07);
+    --ink:       #f0f0f4;
+    --muted:     rgba(240,240,244,.55);
+    --dim:       rgba(240,240,244,.35);
+    --purple:    #7c51ff;
+    --purple-lo: rgba(124,81,255,.18);
+    --violet:    #b3a4ff;
+    --cyan:      #38bdf8;
+    --green:     #34d399;
+    --orange:    #f97316;
+    --pink:      #ec4899;
+    --glow-p:    radial-gradient(circle at 80% 10%, rgba(124,81,255,.28) 0%, transparent 55%);
+    --glow-c:    radial-gradient(circle at 10% 90%, rgba(56,189,248,.18) 0%, transparent 50%);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Ambient glows */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background: var(--glow-p), var(--glow-c);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(24px);
+    background: rgba(11,11,14,.75);
+  }
+  .nav-brand {
+    font-size: 15px; font-weight: 600; letter-spacing: -.015em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-brand em { font-style: normal; color: var(--violet); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: var(--muted); font-size: 13.5px; text-decoration: none; transition: color .15s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 12.5px; font-weight: 600; padding: 7px 16px;
+    border-radius: 8px; text-decoration: none;
+    background: var(--purple); color: #fff;
+    transition: background .15s, transform .1s;
+  }
+  .nav-cta:hover { background: #9070ff; transform: translateY(-1px); }
+
+  /* ── LAYOUT ── */
+  main { max-width: 960px; margin: 0 auto; padding: 80px 48px 120px; position: relative; z-index: 1; }
+  section { margin-bottom: 80px; }
+  .section-label {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: .15em;
+    color: var(--dim); font-weight: 600; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── HERO ── */
+  .hero { padding-top: 20px; }
+  .hero-eyebrow {
+    font-size: 12px; font-family: ui-monospace, monospace;
+    color: var(--purple); letter-spacing: .08em; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .hero-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--purple); }
+  .hero h1 {
+    font-size: clamp(36px, 5.5vw, 62px);
+    font-weight: 700; letter-spacing: -.035em; line-height: 1.04;
+    margin-bottom: 22px;
+    background: linear-gradient(135deg, #fff 0%, var(--violet) 55%, var(--purple) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero h1 em { font-style: italic; }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); max-width: 520px;
+    line-height: 1.65; margin-bottom: 32px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    font-size: 13.5px; font-weight: 600; padding: 10px 22px;
+    border-radius: 9px; text-decoration: none; transition: all .15s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--purple); color: #fff; }
+  .btn-primary:hover { background: #9070ff; transform: translateY(-1px); }
+  .btn-ghost { background: var(--panel); border: 1px solid var(--border); color: rgba(240,240,244,.8); }
+  .btn-ghost:hover { background: rgba(255,255,255,.07); transform: translateY(-1px); }
+
+  /* ── NOW ── */
+  .now-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
+  }
+  .now-item {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .now-key { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 6px; font-weight: 600; }
+  .now-val { font-size: 13.5px; color: var(--ink); line-height: 1.45; }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;
+  }
+  .project-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px 24px;
+    transition: border-color .2s, background .2s;
+    text-decoration: none; display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: rgba(124,81,255,.4); background: rgba(124,81,255,.06); }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .project-name { font-size: 15px; font-weight: 600; color: var(--ink); font-family: ui-monospace, monospace; }
+  .project-status {
+    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  .status-prod   { background: rgba(52,211,153,.15); color: #34d399; }
+  .status-building { background: rgba(249,115,22,.15); color: #f97316; }
+  .status-v1     { background: rgba(124,81,255,.2); color: var(--violet); }
+  .status-phase1 { background: rgba(56,189,248,.15); color: var(--cyan); }
+  .status-running { background: rgba(255,255,255,.08); color: var(--muted); }
+  .project-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 14px; flex: 1; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+  .tag {
+    font-size: 10.5px; padding: 2px 8px; border-radius: 4px;
+    background: rgba(255,255,255,.05); color: var(--dim);
+    font-family: ui-monospace, monospace;
+  }
+
+  /* ── WRITING ── */
+  .post {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 15px 0; border-bottom: 1px solid var(--border);
+    text-decoration: none; gap: 16px;
+    transition: color .15s;
+  }
+  .post:first-of-type { border-top: 1px solid var(--border); }
+  .post:hover .post-title { color: var(--violet); }
+  .post-title { font-size: 15px; color: var(--ink); transition: color .15s; }
+  .post-meta { font-size: 11.5px; color: var(--dim); white-space: nowrap; font-family: ui-monospace, monospace; }
+
+  /* ── STATS ── */
+  .stats { display: flex; gap: 40px; flex-wrap: wrap; }
+  .stat .num { font-size: 38px; font-weight: 700; letter-spacing: -.04em; color: var(--ink); line-height: 1; }
+  .stat .num span { color: var(--violet); }
+  .stat .lbl { font-size: 12px; color: var(--dim); margin-top: 4px; }
+
+  /* ── CO-AUTHORED ── */
+  .coauthored {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--purple-lo); border: 1px solid rgba(124,81,255,.25);
+    border-radius: 8px; padding: 8px 14px; font-size: 12.5px; color: var(--violet);
+    text-decoration: none; transition: all .15s;
+  }
+  .coauthored:hover { background: rgba(124,81,255,.25); }
+  .coauthored svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-left { display: flex; align-items: center; gap: 20px; }
+  .footer-copy { font-size: 12px; color: var(--dim); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12.5px; color: var(--dim); text-decoration: none; transition: color .15s; }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ── BADGE ── */
+  #loading-overlay {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 999; transition: opacity .4s;
+  }
+  #loading-overlay.fade { opacity: 0; pointer-events: none; }
+  .loader-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); animation: pulse 1s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+  @media (max-width: 680px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    main { padding: 52px 20px 80px; }
+    footer { padding: 20px; flex-direction: column; align-items: flex-start; }
+    .stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loading-overlay"><div class="loader-dot"></div></div>
+
+<nav>
+  <a class="nav-brand" href="/">balgaly<em>.com</em></a>
+  <ul class="nav-links">
+    <li><a href="#now">now</a></li>
+    <li><a href="#work">work</a></li>
+    <li><a href="#writing">writing</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:snir@balgaly.com">get in touch</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <p class="hero-eyebrow">Snir Balgaly</p>
+    <h1 id="hero-headline">I build tools that<br><em>watch loops.</em></h1>
+    <p class="hero-sub" id="hero-sub">Loading…</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#work">See the work →</a>
+      <a class="btn btn-ghost" href="https://words.balgaly.com" target="_blank" rel="noopener">Read the writing</a>
+    </div>
+  </section>
+
+  <!-- NOW -->
+  <section id="now">
+    <p class="section-label">/ now</p>
+    <div class="now-grid" id="now-grid"><!-- injected --></div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats" id="stats-row"><!-- injected --></div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <p class="section-label">/ selected work</p>
+    <div class="projects-grid" id="projects-grid"><!-- injected --></div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <p class="section-label">/ writing</p>
+    <div id="writing-list"><!-- injected --></div>
+    <div style="margin-top: 20px;">
+      <a class="btn btn-ghost" href="https://words.balgaly.com" target="_blank" rel="noopener">all posts at words.balgaly.com →</a>
+    </div>
+  </section>
+
+  <!-- CO-AUTHORED -->
+  <section style="margin-bottom: 0;">
+    <a class="coauthored" href="https://claude.ai" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+      </svg>
+      co-authored by me &amp; Claude
+    </a>
+    <p style="font-size: 11.5px; color: var(--dim); margin-top: 10px;" id="last-updated"></p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-copy">© 2026 Snir Balgaly · written by a human, quite into machines</span>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/balgaly" target="_blank" rel="noopener">github</a>
+    <a href="https://words.balgaly.com" target="_blank" rel="noopener">words</a>
+    <a href="mailto:snir@balgaly.com">mail</a>
+  </div>
+</footer>
+
+<script>
+  const STATUS_LABELS = {
+    prod:     { text: 'prod',      cls: 'status-prod' },
+    building: { text: 'building',  cls: 'status-building' },
+    v1:       { text: 'v1',        cls: 'status-v1' },
+    phase1:   { text: 'phase 1',   cls: 'status-phase1' },
+    running:  { text: 'running',   cls: 'status-running' },
+  };
+
+  const NOW_KEYS = { dayJob: 'day job', building: 'building', shipping: 'shipping', reading: 'reading', talking: 'talking' };
+
+  async function load() {
+    let data;
+    try {
+      const r = await fetch('data/state.json?v=' + Date.now());
+      data = await r.json();
+    } catch(e) {
+      console.error('Failed to load state.json', e);
+      document.getElementById('hero-sub').textContent = 'DevOps engineer · AI-native platform builder.';
+      dismiss();
+      return;
+    }
+
+    // hero
+    if (data.hero) {
+      if (data.hero.tagline) document.getElementById('hero-headline').innerHTML = data.hero.tagline.replace('watch loops.', '<em>watch loops.</em>').replace('watching a loop.', '<em>watching a loop.</em>');
+      if (data.hero.sub) document.getElementById('hero-sub').textContent = data.hero.sub;
+    }
+
+    // now
+    if (data.now) {
+      const g = document.getElementById('now-grid');
+      g.innerHTML = Object.entries(NOW_KEYS).map(([k, label]) => data.now[k] ? `
+        <div class="now-item">
+          <div class="now-key">${label}</div>
+          <div class="now-val">${esc(data.now[k])}</div>
+        </div>` : '').join('');
+    }
+
+    // stats
+    if (data.stats) {
+      const s = data.stats;
+      document.getElementById('stats-row').innerHTML = `
+        <div class="stat"><div class="num">${s.yearsManaging}<span>yrs</span></div><div class="lbl">managing PAMonCloud team</div></div>
+        <div class="stat"><div class="num">${s.prodServices} <span>prod</span></div><div class="lbl">live AI service inside CyberArk</div></div>
+        <div class="stat"><div class="num">${s.kickoffAttendees}</div><div class="lbl">attendees · AI Kickoff series</div></div>
+        <div class="stat"><div class="num">${s.posts} <span>posts</span></div><div class="lbl">published philosophy</div></div>
+      `;
+    }
+
+    // projects
+    if (data.projects) {
+      document.getElementById('projects-grid').innerHTML = data.projects.map(p => {
+        const s = STATUS_LABELS[p.status] || { text: p.status, cls: 'status-running' };
+        const wrap = p.url ? `<a class="project-card" href="${esc(p.url)}" target="_blank" rel="noopener">` : `<div class="project-card">`;
+        const close = p.url ? `</a>` : `</div>`;
+        return `${wrap}
+          <div class="project-header">
+            <span class="project-name">${esc(p.name)}</span>
+            <span class="project-status ${s.cls}">${s.text}</span>
+          </div>
+          <p class="project-desc">${esc(p.desc)}</p>
+          <div class="project-tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        ${close}`;
+      }).join('');
+    }
+
+    // writing
+    if (data.writing) {
+      document.getElementById('writing-list').innerHTML = data.writing.map(w => `
+        <a class="post" href="${esc(w.url)}" target="_blank" rel="noopener">
+          <span class="post-title">${esc(w.title)}</span>
+          <span class="post-meta">${fmtDate(w.date)} · ~${w.mins} min</span>
+        </a>`).join('');
+    }
+
+    // last updated
+    if (data.meta?.updated) {
+      document.getElementById('last-updated').textContent = `last updated ${data.meta.updated}${data.meta.updatedBy ? ' · ' + data.meta.updatedBy : ''}`;
+    }
+
+    dismiss();
+  }
+
+  function dismiss() {
+    const o = document.getElementById('loading-overlay');
+    o.classList.add('fade');
+    setTimeout(() => o.remove(), 500);
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function fmtDate(d) {
+    try {
+      const dt = new Date(d + 'T00:00:00');
+      return dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toLowerCase();
+    } catch { return d; }
+  }
+
+  load();
+</script>
+</body>
+</html>

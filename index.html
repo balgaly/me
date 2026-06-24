@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Snir Balgaly</title>
-<meta name="description" content="devops manager at palo alto networks. i build the tools that make me unnecessary — that's the whole job, basically.">
+<meta name="description" content="devops manager at palo alto networks. i build agents that do my job, so i can go build the next one.">
 <link rel="canonical" href="https://me.balgaly.com/">
 <meta name="theme-color" content="#e5e9f1" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0a111c" media="(prefers-color-scheme: dark)">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://me.balgaly.com/">
 <meta property="og:title" content="Snir Balgaly">
-<meta property="og:description" content="devops manager at palo alto networks. i build the tools that make me unnecessary — that's the whole job, basically.">
+<meta property="og:description" content="devops manager at palo alto networks. i build agents that do my job, so i can go build the next one.">
 <meta property="og:image" content="https://me.balgaly.com/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,7 +22,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Snir Balgaly">
-<meta name="twitter:description" content="devops manager at palo alto networks. i build the tools that make me unnecessary — that's the whole job, basically.">
+<meta name="twitter:description" content="devops manager at palo alto networks. i build agents that do my job, so i can go build the next one.">
 <meta name="twitter:image" content="https://me.balgaly.com/assets/og-image.png">
 
 <!-- Favicon -->
@@ -92,9 +92,11 @@
 .h-strip-head .label { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--text-muted); font-weight: 500; }
 .h-strip-head .arrow { font-family: var(--font-mono); font-size: 13px; color: var(--text-soft); text-decoration: none; font-weight: 500; }
 .h-strip-head .arrow:hover { color: var(--accent); }
-.h-strip { display: flex; gap: 16px; padding: 0 var(--pad-x) 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
-.h-strip::-webkit-scrollbar { height: 6px; }
-.h-strip::-webkit-scrollbar-thumb { background: var(--line-base); border-radius: 3px; }
+.h-strip-wrap { position: relative; }
+.h-strip-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 80px; background: linear-gradient(to right, transparent, var(--bg-deep)); pointer-events: none; z-index: 1; }
+.h-strip { display: flex; gap: 16px; padding: 0 var(--pad-x) 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; cursor: grab; }
+.h-strip::-webkit-scrollbar { display: none; }
+.h-strip.dragging { cursor: grabbing; scroll-snap-type: none; }
 .h-strip .post-card { flex: 0 0 320px; scroll-snap-align: start; }
 
 /* sections */
@@ -115,24 +117,23 @@ section.s { max-width: var(--maxw); margin: 0 auto; padding: 88px var(--pad-x); 
 .work-card.col-2 > .work-card { border: 1px solid var(--line-base); border-radius: var(--r-lg); background: var(--bg-paper); max-width: unset; }
 .work-card.col-2 > .work-card .visual { height: 160px; }
 
-/* cta blob */
-.cta-blob { background: var(--invert-bg); color: var(--invert-text); padding: 56px; border-radius: var(--r-xl); display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; margin-top: 28px; }
-@media (max-width: 700px) { .cta-blob { grid-template-columns: 1fr; padding: 36px; } }
-.cta-blob h3 { font-family: var(--font-display); font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -.028em; line-height: 1.15; }
-.cta-blob h3 em { color: var(--accent); font-style: normal; }
-.cta-blob h3 .underline { text-decoration: underline; text-decoration-color: var(--accent-2); text-decoration-thickness: 4px; text-underline-offset: 4px; }
-.cta-blob .arrow-link { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--invert-text); text-decoration: none; border: 1.5px solid var(--invert-text); padding: 14px 22px; border-radius: var(--r-sm); transition: all var(--dur-base); white-space: nowrap; }
-.cta-blob .arrow-link:hover { background: var(--accent); border-color: var(--accent); }
 
 /* stack */
 .uses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 @media (max-width: 800px) { .uses-grid { grid-template-columns: 1fr; } }
-.uses-cell { background: var(--bg-paper); border: 1px solid var(--line-base); border-radius: var(--r-lg); padding: 22px 24px; }
+.uses-cell { background: var(--bg-paper); border: 1px solid var(--line-base); border-radius: var(--r-lg); padding: 22px 24px; transition: border-color var(--dur-base); }
+.uses-cell:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line-base)); }
 .uses-cell h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.015em; }
-.uses-cell ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.uses-cell li { font-size: 14.5px; color: var(--text-soft); display: flex; gap: 10px; align-items: baseline; }
-.uses-cell li:before { content: "\2192"; color: var(--accent); font-family: var(--font-mono); font-size: 13px; flex-shrink: 0; }
-.uses-cell li b { color: var(--text-primary); font-weight: 600; }
+.uses-cell ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.stack-item { display: flex; flex-direction: column; gap: 4px; }
+.stack-item-head { display: flex; align-items: center; gap: 8px; }
+.stack-glyph { font-family: var(--font-mono); font-size: 11px; color: var(--accent); width: 16px; text-align: center; flex-shrink: 0; opacity: 0.8; }
+.stack-name { font-size: 14px; color: var(--text-primary); font-weight: 600; }
+.stack-note { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); padding-left: 24px; }
+.stack-bar { display: flex; gap: 2px; padding-left: 24px; margin-top: 2px; }
+.stack-bar-pip { width: 12px; height: 3px; border-radius: 2px; background: var(--line-base); transition: background var(--dur-base); }
+.stack-bar-pip.on { background: var(--accent); }
+.uses-cell:hover .stack-bar-pip.on { background: var(--accent); opacity: 1; }
 
 /* footer */
 footer.f { border-top: 1px solid var(--line-base); padding: 36px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted); max-width: var(--maxw); margin: 0 auto; font-weight: 500; gap: 16px; flex-wrap: wrap; }
@@ -156,7 +157,7 @@ footer.f a:hover { color: var(--accent); }
     <span></span><span></span><span></span>
   </button>
   <nav id="primaryNav">
-    <a href="#now" class="now-link"><span class="on-air"><span class="lamp"></span><span class="txt">ON AIR</span></span> now</a>
+    <a href="#now" class="now-link"><span class="on-air"><span class="lamp"></span><span class="txt">ON AIR</span></span></a>
     <a href="#work">stuff i built</a>
     <a href="#writing">writing</a>
     <a href="#stack">stack</a>
@@ -207,8 +208,7 @@ footer.f a:hover { color: var(--accent); }
   <div class="now-block">
     <div class="now-meta">
       pulled from my obsidian vault<br>
-      <span class="week" id="now-week">2026-W26</span><br><br>
-      every monday: did last week go anywhere?
+      <span class="week" id="now-week">2026-W26</span>
     </div>
     <div>
       <div class="now-list" id="now-list"><!-- injected --></div>
@@ -224,10 +224,6 @@ footer.f a:hover { color: var(--accent); }
     <h2>tools that <em>monitor</em> the loop, instead of running inside it.</h2>
   </div>
   <div class="work-grid" id="work-grid"><!-- injected --></div>
-  <div class="cta-blob">
-    <h3>i write at <em>words.balgaly.com</em>. six posts. all opinions, no <span class="underline">listicles</span>. mostly about why working with agents feels nothing like the demos.</h3>
-    <a href="https://words.balgaly.com" class="arrow-link" target="_blank" rel="noopener">go read it &rarr;</a>
-  </div>
 </section>
 
 <!-- stack -->
@@ -245,6 +241,7 @@ footer.f a:hover { color: var(--accent); }
   </span>
   <span>
     <a href="https://github.com/balgaly" target="_blank" rel="noopener">github</a>
+    <a href="https://linkedin.com/in/balgaly" target="_blank" rel="noopener">linkedin</a>
     <a href="https://words.balgaly.com" target="_blank" rel="noopener">words</a>
     <a href="mailto:snir@balgaly.com">mail</a>
   </span>
@@ -266,7 +263,11 @@ async function boot() {
   if (d.hero) {
     if (d.hero.kicker) document.getElementById('hero-kicker').textContent = d.hero.kicker;
     if (d.hero.h1)     document.getElementById('hero-h1').innerHTML = d.hero.h1;
-    if (d.hero.lede)   document.getElementById('hero-lede').innerHTML = d.hero.lede;
+    if (d.hero.lede) {
+      const ledeEl = document.getElementById('hero-lede');
+      ledeEl.innerHTML = d.hero.lede;
+      if (d.hero.lede_cv) ledeEl.dataset.cv = d.hero.lede_cv;
+    }
   }
 
   // now week
@@ -275,7 +276,7 @@ async function boot() {
   // now rows
   if (d.now?.rows) {
     document.getElementById('now-list').innerHTML = d.now.rows.map(r =>
-      `<div class="now-row"><span class="lbl">${esc(r.lbl)}</span><span class="val">${r.val}</span></div>`
+      `<div class="now-row"><span class="lbl">${esc(r.lbl)}</span><span class="val"${r.cv ? ` data-cv="${esc(r.cv)}"` : ''}>${r.val}</span></div>`
     ).join('');
   }
 
@@ -298,7 +299,7 @@ async function boot() {
       <div class="commit-sum">
         <span class="n">${c.total}</span> commits<br>
         <span class="n">${c.repos}</span> repos &middot; <span class="n">${c.sessions}</span> sessions
-        <span class="src">// auto-pulled from whetstone vault &mdash; <b>gather-commits-for-date.ps1</b>. yes really.</span>
+        <span class="src"><a href="https://github.com/balgaly" target="_blank" rel="noopener">github.com/balgaly</a></span>
       </div>`;
     initTileHover();
   }
@@ -310,12 +311,13 @@ async function boot() {
     let html = '';
     if (featured) {
       const href = featured.url ? `href="${esc(featured.url)}" target="_blank" rel="noopener"` : '';
+      const cvAttr = featured.desc_cv ? ` data-cv="${esc(featured.desc_cv)}"` : '';
       html += `<a ${href} class="work-card featured">
         <div class="visual"></div>
         <div class="body">
           <span class="kicker">${esc(featured.kicker)}</span>
           <h3>${esc(featured.name)}</h3>
-          <p>${featured.desc}</p>
+          <p${cvAttr}>${featured.desc}</p>
           <div class="tags">${featured.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
         </div>
       </a>`;
@@ -324,12 +326,13 @@ async function boot() {
       html += `<div class="work-card col-2">`;
       for (const p of rest) {
         const href = p.url ? `href="${esc(p.url)}" target="_blank" rel="noopener"` : '';
+        const cvAttr = p.desc_cv ? ` data-cv="${esc(p.desc_cv)}"` : '';
         html += `<a ${href} class="work-card">
           <div class="visual"></div>
           <div class="body">
             <span class="kicker">${esc(p.kicker)}</span>
             <h3>${esc(p.name)}</h3>
-            <p>${p.desc}</p>
+            <p${cvAttr}>${p.desc}</p>
             <div class="tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
           </div>
         </a>`;
@@ -361,7 +364,17 @@ async function boot() {
     document.getElementById('stack-grid').innerHTML = sections.map(s =>
       `<div class="uses-cell">
         <h4>${s.title}</h4>
-        <ul>${(d.stack[s.key]||[]).map(i=>`<li><b>${esc(i.name)}</b> &mdash; ${esc(i.note)}</li>`).join('')}</ul>
+        <ul>${(d.stack[s.key]||[]).map(i => {
+          const pips = Array.from({length:5},(_,n)=>`<span class="stack-bar-pip${n<(i.level||0)?' on':''}"></span>`).join('');
+          return `<li><div class="stack-item">
+            <div class="stack-item-head">
+              <span class="stack-glyph">${esc(i.glyph||'·')}</span>
+              <span class="stack-name">${esc(i.name)}</span>
+            </div>
+            <div class="stack-note">${esc(i.note)}</div>
+            <div class="stack-bar" aria-hidden="true">${pips}</div>
+          </div></li>`;
+        }).join('')}</ul>
       </div>`
     ).join('');
   }
@@ -376,7 +389,7 @@ async function boot() {
   }
 
   dismiss();
-  initConstellation(d.projects?.map(p => p.slug) || null);
+  initConstellation(d.hero?.sessions || d.projects?.map(p => p.slug) || null);
 }
 
 function dismiss() {
@@ -401,14 +414,13 @@ function initTileHover() {
 
 /* ── session constellation ─────────────────────────────────────────────
    Hub emits command pulses to session-dots arranged in an arc.
-   Each dot pulses independently — nothing "touches" them; they respond.
-   Uses design-language tokens via CSS variable reads on first frame.     */
+   Pulses fire on irregular intervals with occasional bursts — looks live,
+   as if an agent just touched a project. Labels fade in on receive.       */
 function initConstellation(sessions) {
   const canvas = document.getElementById('constellation');
   if (!canvas) return;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // read tokens from computed style so they respect dark mode
   function tok(name) {
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   }
@@ -433,45 +445,74 @@ function initConstellation(sessions) {
   }
 
   function nodePos(i) {
-    const spread = Math.min(0.65, 0.3 + N * 0.06);
+    const spread = Math.min(0.65, 0.28 + N * 0.05);
     const t = N === 1 ? 0.5 : i / (N - 1);
     const angle = (-spread + t * 2 * spread) * Math.PI;
     return {
-      x: cx + W * 0.28 + W * 0.22 * Math.cos(angle),
-      y: cy + H * 0.38 * Math.sin(angle),
+      x: cx + W * 0.28 + W * 0.20 * Math.cos(angle),
+      y: cy + H * 0.36 * Math.sin(angle),
       label: NODES[i],
     };
   }
 
+  // irregular pulse scheduler — feels like live agent activity
+  // next interval: 600–3200ms, occasionally burst (short delay then another)
   const pulses = [];
-  let lastPulse = 0;
-  const PULSE_INTERVAL = 2200;
-  const litState = new Array(N).fill(0);
-  let nextTarget = 0;
+  const litState  = new Array(N).fill(0);
+  const labelAlpha = new Array(N).fill(0); // fading "· running" label
+  let nextPulseAt = 800;
+  let lastTs = 0;
+
+  function scheduleNext(burst) {
+    // burst = fire again quickly, simulating a batch of agent work
+    if (burst) return 300 + Math.random() * 400;
+    return 800 + Math.random() * 2400;
+  }
+
+  function spawnPulse(target) {
+    pulses.push({from:'hub', to:target, t:0, speed:0.0006 + Math.random()*0.0004, isReply:false});
+  }
 
   function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
+  // seeded shuffle so target order feels non-mechanical
+  const order = Array.from({length:N},(_,i)=>i);
+  let orderIdx = 0;
+  function nextTarget() {
+    // reshuffle when exhausted
+    if (orderIdx >= order.length) {
+      orderIdx = 0;
+      for (let i = order.length-1; i>0; i--) {
+        const j = Math.floor((i+1) * (Math.sin(i*37.1+lastTs*0.001)*0.5+0.5));
+        [order[i],order[j]] = [order[j],order[i]];
+      }
+    }
+    return order[orderIdx++];
+  }
+
   function draw(ts) {
+    const dt = Math.min(ts - (lastTs||ts), 50); lastTs = ts;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, W, H);
     const accent  = tok('--accent');
     const accent2 = tok('--accent-2');
     const lineCl  = tok('--line-base');
     const textMut = tok('--text-muted');
+    const textPri = tok('--text-primary');
     const nodes = Array.from({length: N}, (_, i) => nodePos(i));
 
     // links
     nodes.forEach(n => {
       ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
-      ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.35; ctx.lineWidth = 1; ctx.stroke();
+      ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.32; ctx.lineWidth = 1; ctx.stroke();
       ctx.globalAlpha = 1;
     });
 
-    // hub
-    const hb = 0.85 + 0.15 * Math.sin((ts % 1800) / 1800 * Math.PI * 2);
+    // hub breathe
+    const hb = 0.85 + 0.15 * Math.sin(ts / 1800 * Math.PI * 2);
     const gr = ctx.createRadialGradient(cx, cy, 0, cx, cy, 26 * hb);
-    gr.addColorStop(0, accent.replace(')', ',0.2)').replace('rgb','rgba'));
-    gr.addColorStop(1, accent.replace(')', ',0)').replace('rgb','rgba'));
+    gr.addColorStop(0, `rgba(225,29,116,${0.22*hb})`);
+    gr.addColorStop(1, 'rgba(225,29,116,0)');
     ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(cx, cy, 26 * hb, 0, Math.PI * 2); ctx.fill();
     ctx.beginPath(); ctx.arc(cx, cy, 5.5 * hb, 0, Math.PI * 2);
     ctx.fillStyle = accent; ctx.fill();
@@ -482,31 +523,52 @@ function initConstellation(sessions) {
       const s = 0.7 + 0.3 * Math.sin(ph * Math.PI * 2);
       const lit = litState[i];
       if (lit > 0) {
-        const g2 = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22);
-        g2.addColorStop(0, `rgba(225,29,116,${0.2 * lit})`);
+        const g2 = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 20);
+        g2.addColorStop(0, `rgba(225,29,116,${0.22 * lit})`);
         g2.addColorStop(1, 'rgba(225,29,116,0)');
-        ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(n.x, n.y, 22, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(n.x, n.y, 20, 0, Math.PI * 2); ctx.fill();
       }
       ctx.beginPath(); ctx.arc(n.x, n.y, 4 * s, 0, Math.PI * 2);
       ctx.fillStyle = accent; ctx.globalAlpha = 0.5 + 0.5 * s + lit * 0.4; ctx.fill();
       ctx.globalAlpha = 1;
+
+      // static label
       ctx.font = '10px ' + tok('--font-mono'); ctx.fillStyle = textMut;
       ctx.textAlign = 'left'; ctx.fillText(n.label, n.x + 9, n.y + 4);
+
+      // "· running" fade label
+      if (labelAlpha[i] > 0) {
+        ctx.font = '9px ' + tok('--font-mono');
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = labelAlpha[i] * 0.85;
+        ctx.fillText('· running', n.x + 9, n.y + 15);
+        ctx.globalAlpha = 1;
+        labelAlpha[i] = Math.max(0, labelAlpha[i] - dt * 0.0008);
+      }
     });
 
-    // spawn pulse
-    if (ts - lastPulse > PULSE_INTERVAL) {
-      pulses.push({from:'hub', to:nextTarget, t:0, speed:0.0007 + Math.random()*0.0003, isReply:false});
-      nextTarget = (nextTarget + 1) % N; lastPulse = ts;
+    // spawn pulses on schedule
+    nextPulseAt -= dt;
+    if (nextPulseAt <= 0) {
+      const tgt = nextTarget();
+      spawnPulse(tgt);
+      // 25% chance of burst: fire a second pulse at a random different target shortly after
+      const burst = Math.random() < 0.25;
+      if (burst) {
+        const tgt2 = (tgt + 1 + Math.floor(Math.random()*(N-1))) % N;
+        setTimeout(() => spawnPulse(tgt2), 180 + Math.random()*220);
+      }
+      nextPulseAt = scheduleNext(burst);
     }
 
     // advance + draw pulses
     for (let i = pulses.length - 1; i >= 0; i--) {
       const p = pulses[i];
-      p.t += p.speed * 16;
+      p.t += p.speed * dt;
       if (p.t >= 1) {
         if (!p.isReply) {
           litState[p.to] = 1;
+          labelAlpha[p.to] = 1;
           const cap = p;
           setTimeout(() => pulses.push({from:cap.to, to:'hub', t:0, speed:cap.speed*0.85, isReply:true}), 200);
         }
@@ -521,7 +583,7 @@ function initConstellation(sessions) {
     }
 
     // decay lit
-    for (let i = 0; i < N; i++) litState[i] = Math.max(0, litState[i] - 0.016);
+    for (let i = 0; i < N; i++) litState[i] = Math.max(0, litState[i] - dt * 0.0014);
 
     requestAnimationFrame(draw);
   }
@@ -532,10 +594,10 @@ function initConstellation(sessions) {
     const nodes = Array.from({length:N}, (_,i) => nodePos(i));
     nodes.forEach(n => {
       ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
-      ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.35; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.32; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1;
     });
     ctx.beginPath(); ctx.arc(cx, cy, 5.5, 0, Math.PI*2); ctx.fillStyle = accent; ctx.fill();
-    nodes.forEach((n, i) => {
+    nodes.forEach((n) => {
       ctx.beginPath(); ctx.arc(n.x, n.y, 4, 0, Math.PI*2); ctx.fillStyle = accent; ctx.globalAlpha = 0.6; ctx.fill(); ctx.globalAlpha = 1;
       ctx.font = '10px ' + tok('--font-mono'); ctx.fillStyle = textMut; ctx.textAlign = 'left'; ctx.fillText(n.label, n.x+9, n.y+4);
     });
@@ -545,7 +607,7 @@ function initConstellation(sessions) {
   window.addEventListener('resize', () => { resize(); if (reduced) drawStatic(); });
   reduced ? drawStatic() : requestAnimationFrame(draw);
 
-  // cursor-reactive nudge (identity principle: one element reacts to visitor)
+  // cursor-reactive nudge
   if (!reduced) {
     const hero = document.querySelector('.hero');
     if (hero) {
@@ -565,12 +627,14 @@ function initConstellation(sessions) {
 
 /* ── caveman mode ─────────────────────────────────────────────────────── */
 (function () {
+  // Primary: swap [data-cv] elements to their authored caveman variant (innerHTML).
+  // Fallback: regex-strip articles/filler on any remaining plain text nodes.
   const ARTICLES = /^(a|an|the)$/i;
   const FILLER   = /^(just|really|basically|actually|simply|very|quite|that|so|some|kind|sort)$/i;
   const HEDGE    = /^(maybe|perhaps|possibly|probably)$/i;
   const SKIP_SEL = 'code, pre, svg, .mono, .brand, .kicker, .nav-toggle, .caveman-btn, .theme-btn, .now-meta, .commit-banner, .tile-hint, .stamp, .read, .date, .tags, script, style, [data-caveman="off"]';
 
-  function cavemanize(text) {
+  function stripWords(text) {
     const lead = text.match(/^\s*/)[0], trail = text.match(/\s*$/)[0], core = text.trim();
     if (!core) return text;
     const words = core.split(/\s+/), out = [];
@@ -590,22 +654,45 @@ function initConstellation(sessions) {
     return lead + out.join(' ') + trail;
   }
 
-  function collect(root) {
+  function collectTextNodes(root) {
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-      acceptNode(node) { return node.parentElement.closest(SKIP_SEL) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+      acceptNode(node) {
+        if (node.parentElement.closest(SKIP_SEL)) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement.closest('[data-cv]')) return NodeFilter.FILTER_REJECT; // handled by cv swap
+        return NodeFilter.FILTER_ACCEPT;
+      }
     });
     const nodes = []; let n; while ((n=walker.nextNode())) nodes.push(n); return nodes;
   }
 
-  let on = false, cache = null;
+  let on = false;
+  // cv elements: [data-cv] — swap innerHTML
+  const cvEls = () => document.querySelectorAll('[data-cv]');
+  // text fallback cache (built once)
+  let textCache = null;
+
   const btn = document.getElementById('cavemanBtn');
   if (btn) btn.addEventListener('click', () => {
-    on = !on; btn.setAttribute('aria-pressed', String(on));
-    if (!cache) cache = collect(document.body);
-    cache.forEach(node => {
-      if (on) { if (node.__orig==null) node.__orig=node.nodeValue; node.nodeValue=cavemanize(node.__orig); }
+    on = !on;
+    btn.setAttribute('aria-pressed', String(on));
+
+    // swap data-cv elements
+    cvEls().forEach(el => {
+      if (on) {
+        if (!el.__origHtml) el.__origHtml = el.innerHTML;
+        el.innerHTML = el.dataset.cv;
+      } else if (el.__origHtml != null) {
+        el.innerHTML = el.__origHtml;
+      }
+    });
+
+    // fallback: strip remaining plain text nodes
+    if (!textCache) textCache = collectTextNodes(document.body);
+    textCache.forEach(node => {
+      if (on) { if (node.__orig==null) node.__orig=node.nodeValue; node.nodeValue=stripWords(node.__orig); }
       else if (node.__orig!=null) node.nodeValue=node.__orig;
     });
+
     btn.querySelector('.bone').textContent = on ? '\u{1F525}' : '\u{1F9B4}';
   });
 })();
@@ -646,6 +733,48 @@ function initConstellation(sessions) {
   scrim.addEventListener('click', () => setOpen(false));
   nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+})();
+
+/* ── h-strip: wheel→scroll, drag, load nudge ───────────────────────── */
+(function () {
+  const strip = document.getElementById('writing-strip');
+  if (!strip) return;
+
+  // wheel → horizontal scroll
+  strip.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; // native horizontal, leave alone
+    e.preventDefault();
+    strip.scrollLeft += e.deltaY * 0.8;
+  }, { passive: false });
+
+  // pointer drag
+  let dragging = false, startX = 0, startScroll = 0;
+  strip.addEventListener('pointerdown', e => {
+    dragging = true; startX = e.clientX; startScroll = strip.scrollLeft;
+    strip.classList.add('dragging'); strip.setPointerCapture(e.pointerId);
+  });
+  strip.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    strip.scrollLeft = startScroll - (e.clientX - startX);
+  });
+  const endDrag = () => { dragging = false; strip.classList.remove('dragging'); };
+  strip.addEventListener('pointerup', endDrag);
+  strip.addEventListener('pointercancel', endDrag);
+
+  // load nudge: peek right then snap back
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    // wait for writing cards to inject, then nudge
+    setTimeout(() => {
+      strip.style.transition = 'scroll-behavior none';
+      strip.scrollLeft = 28;
+      setTimeout(() => {
+        strip.style.scrollBehavior = 'smooth';
+        strip.scrollLeft = 0;
+        setTimeout(() => { strip.style.scrollBehavior = ''; }, 600);
+      }, 400);
+    }, 900);
+  }
 })();
 
 boot();

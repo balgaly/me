@@ -9,7 +9,7 @@
     "h1": "I am a <span class=\"em\">strange</span> <span class=\"underline\">loop</span>.",
     "lede": "<strong>devops manager at palo alto networks.</strong> i build agents that do my job, so i can go build the next one. <span class=\"dim\">the goal is to make myself unnecessary. that is the whole job.</span>",
     "lede_cv": "boss at palo alto networks. build robot. robot do job. build next robot.",
-    "sessions": ["code-koala", "brif", "skit", "amit-hub", "workwright", "whetstone", "me"]
+    "sessions": ["code-koala", "brif", "skit", "amit-hub", "workwright", "whetstone", "whetstone-agents", "me"]
   },
   "now": {
     "week": "2026-W26",

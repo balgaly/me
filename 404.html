@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — Snir Balgaly</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/components.css">
+<script>(function(){try{var t=localStorage.getItem('balgaly-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})()</script>
+<style>
+.page-404 { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 24px; gap: 16px; }
+.page-404 .code { font-family: var(--font-mono); font-size: 96px; font-weight: 700; color: var(--accent); line-height: 1; letter-spacing: -.04em; }
+.page-404 h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 48px); font-weight: 700; letter-spacing: -.03em; margin: 0; color: var(--text-primary); }
+.page-404 p { font-size: 17px; color: var(--text-soft); max-width: 42ch; margin: 0; line-height: 1.6; }
+.page-404 .home-link { margin-top: 8px; font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary); border: 1.5px solid var(--line-base); padding: 12px 22px; border-radius: var(--r-sm); text-decoration: none; transition: all 200ms; }
+.page-404 .home-link:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<header class="topnav">
+  <a href="/" class="brand">balgaly<span class="dot">.</span>com</a>
+  <nav>
+    <a href="/#now">now</a>
+    <a href="/#work">stuff i built</a>
+    <a href="/#writing">writing</a>
+  </nav>
+</header>
+<div class="page-404">
+  <div class="code">404</div>
+  <h1>nothing here.</h1>
+  <p>this page doesn't exist — or it did and i moved it without telling anyone. classic devops.</p>
+  <a href="/" class="home-link">← back to home</a>
+</div>
+</body>
+</html>

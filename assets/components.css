@@ -1,0 +1,135 @@
+/* ============================================================
+   components.css — the balgaly design-language component styles.
+   Token-driven (tokens.css). Canonical source; the site imports this.
+   Mirrors 05-component-library.md. No hardcoded color/space values.
+   ============================================================ */
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg-base); color: var(--text-primary);
+  font-family: var(--font-body); font-size: var(--size-base); line-height: 1.55; font-weight: var(--weight-regular);
+  -webkit-font-smoothing: antialiased; }
+.mono { font-family: var(--font-mono); }
+a { color: inherit; }
+
+/* ---------- NAV ---------- */
+.topnav { position: sticky; top: 0; z-index: 50; display: flex; justify-content: space-between; align-items: center;
+  padding: var(--space-4) var(--pad-x); background: color-mix(in srgb, var(--bg-base) 92%, transparent);
+  backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft); }
+.brand { font-family: var(--font-display); font-size: var(--size-base); font-weight: var(--weight-brand);
+  letter-spacing: -.025em; color: var(--text-primary); text-decoration: none; display: inline-flex; align-items: baseline; gap: var(--space-2); }
+.brand .dot { color: var(--accent); }
+.brand .tag { font-family: var(--font-mono); font-size: var(--size-meta); font-weight: var(--weight-regular); color: var(--text-muted); letter-spacing: 0; }
+.topnav nav { display: flex; gap: var(--space-6); align-items: center; font-size: var(--size-nav); }
+.topnav nav a { color: var(--text-soft); text-decoration: none; font-weight: var(--weight-medium); transition: color var(--dur-fast); }
+.topnav nav a:hover { color: var(--text-primary); }
+.topnav nav a.now-link { display: inline-flex; align-items: center; gap: 9px; color: var(--text-primary); font-weight: var(--weight-semibold); }
+/* ON AIR tally — a tiny studio sign, replaces the generic status dot */
+.on-air { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 9px; font-weight: var(--weight-bold);
+  letter-spacing: .12em; color: var(--invert-text); background: var(--invert-bg); padding: 3px 7px 3px 6px; border-radius: var(--r-sm);
+  text-transform: uppercase; line-height: 1; }
+.on-air .lamp { width: 7px; height: 7px; border-radius: var(--r-full); background: var(--accent); animation: tally 1.8s ease-in-out infinite; }
+.on-air .txt { color: var(--accent-2); }
+@keyframes tally { 0%,100% { box-shadow: 0 0 4px 1px color-mix(in srgb, var(--accent) 70%, transparent); opacity: 1; }
+  50% { box-shadow: 0 0 7px 3px color-mix(in srgb, var(--accent) 45%, transparent); opacity: .78; } }
+
+/* theme toggle — mono pill-less button, swaps the glyph. Pair with the
+   theme-init + click JS (see DESIGN-LANGUAGE.html / any template). */
+.theme-btn { font-family: var(--font-mono); font-size: var(--size-meta); font-weight: var(--weight-medium);
+  padding: 5px 11px; border-radius: var(--r-sm); cursor: pointer; background: transparent; color: var(--text-muted);
+  border: 1px solid var(--line-base); letter-spacing: .04em; transition: all var(--dur-fast);
+  display: inline-flex; align-items: center; gap: 6px; }
+.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+.theme-btn .glyph { font-size: 12px; line-height: 1; }
+
+.caveman-btn { font-family: var(--font-mono); font-size: var(--size-meta); font-weight: var(--weight-medium);
+  padding: 5px 11px; border-radius: var(--r-sm); cursor: pointer; background: transparent; color: var(--text-muted);
+  border: 1px solid var(--line-base); letter-spacing: .04em; transition: all var(--dur-fast); display: inline-flex; align-items: center; gap: 6px; }
+.caveman-btn:hover { border-color: var(--accent); color: var(--accent); }
+.caveman-btn[aria-pressed="true"] { background: var(--invert-bg); color: var(--accent-2); border-color: var(--invert-bg); }
+
+/* ---------- HERO ---------- */
+.hero { position: relative; padding: var(--space-16) var(--pad-x) var(--space-12); overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: minmax(0,1fr) 380px; gap: var(--space-11); align-items: center; max-width: var(--maxw); margin: 0 auto; }
+@media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 32px; } }
+.hero .kicker { font-family: var(--font-mono); font-size: var(--size-kicker); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: var(--weight-semibold); margin-bottom: var(--space-5); }
+.hero h1 { font-family: var(--font-display); font-size: var(--size-hero); line-height: .96; font-weight: var(--weight-bold); letter-spacing: -.038em; margin: 0; color: var(--text-primary); }
+.hero h1 .em { color: var(--accent); }
+.hero h1 .underline { text-decoration: underline; text-decoration-color: var(--accent-2); text-decoration-thickness: 8px; text-underline-offset: 8px; }
+.hero .lede { margin-top: 28px; font-size: var(--size-lede); color: var(--text-soft); max-width: 540px; line-height: 1.55; }
+.hero .lede strong { color: var(--text-primary); font-weight: var(--weight-semibold); }
+.hero .lede .dim { color: var(--text-muted); }
+.hero-cta { margin-top: 32px; display: flex; gap: var(--space-3); flex-wrap: wrap; }
+.hero-cta a { font-family: var(--font-mono); font-size: 13px; font-weight: var(--weight-medium); text-decoration: none; padding: 11px 18px; border-radius: var(--r-sm); transition: all var(--dur-base) var(--ease-smooth); }
+.hero-cta .primary { background: var(--accent); color: #fff; }
+.hero-cta .primary:hover { background: var(--accent-deep); transform: translateY(-1px); }
+.hero-cta .ghost { border: 1.5px solid var(--line-base); color: var(--text-soft); }
+.hero-cta .ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- POST CARD (dual-use: writing / project) ---------- */
+.post-card { width: 320px; background: var(--bg-paper); border: 1px solid var(--line-base); border-radius: var(--r-md);
+  padding: var(--space-5) var(--space-6); text-decoration: none; color: var(--text-primary);
+  transition: transform var(--dur-base) var(--ease-smooth), border-color var(--dur-base);
+  display: flex; flex-direction: column; gap: 10px; min-height: 200px; overflow: hidden; }
+.post-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.post-card .thumb { height: 132px; margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-6)) 4px; border-bottom: 1px solid var(--line-base);
+  background: var(--bg-deep); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.post-card .date { font-family: var(--font-mono); font-size: var(--size-meta); color: var(--text-muted); letter-spacing: .06em; font-weight: var(--weight-medium); }
+.post-card h3 { font-family: var(--font-display); font-size: var(--size-card-h3); font-weight: var(--weight-bold); margin: 0; letter-spacing: -.028em; line-height: 1.1; }
+.post-card .excerpt { font-size: 14.5px; color: var(--text-soft); flex: 1; line-height: 1.5; }
+.post-card .read { font-family: var(--font-mono); font-size: var(--size-meta); color: var(--text-muted); font-weight: var(--weight-medium); border-top: 1px dashed var(--line-base); padding-top: 10px; }
+
+/* ---------- WORK TILE (featured + satellite) ---------- */
+.work-card { background: var(--bg-paper); border: 1px solid var(--line-base); border-radius: var(--r-lg); overflow: hidden;
+  text-decoration: none; color: var(--text-primary); display: flex; flex-direction: column;
+  transition: transform var(--dur-base) var(--ease-smooth), border-color var(--dur-base); max-width: 560px; }
+.work-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+.work-card .visual { height: 220px; background: var(--bg-deep); border-bottom: 1px solid var(--line-base); position: relative; overflow: hidden; }
+.work-card.featured .visual { height: 400px; background: linear-gradient(160deg, var(--bg-paper) 0%, var(--bg-deep) 100%); }
+.work-card .body { padding: var(--space-6) 30px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.work-card .kicker { font-family: var(--font-mono); font-size: var(--size-meta); color: var(--accent); letter-spacing: .12em; text-transform: uppercase; font-weight: var(--weight-bold); }
+.work-card h3 { font-family: var(--font-display); font-size: var(--size-work-h3); font-weight: var(--weight-bold); margin: 0; letter-spacing: -.028em; line-height: 1.08; }
+.work-card.featured h3 { font-size: 40px; }
+.work-card p { color: var(--text-soft); margin: 0; font-size: 15.5px; line-height: 1.55; }
+
+/* ---------- STACK LINE (replaces tag pills) ----------
+   Reads like a build manifest / import line, not a row of buttons.
+   Magenta slashes, no boxes. The ONLY place magenta slashes appear. */
+.tags { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-soft); line-height: 1.7;
+  display: flex; flex-wrap: wrap; align-items: baseline; }
+.tags:before { content: "built/"; color: var(--text-muted); margin-right: 2px; }
+.tags span { white-space: nowrap; }
+.tags span + span:before { content: " / "; color: var(--accent); font-weight: var(--weight-bold); }
+
+/* ---------- COMMIT HEATMAP ---------- */
+.commit-banner { background: var(--invert-bg); color: var(--invert-text); border-radius: var(--r-lg); padding: var(--space-5) 28px;
+  display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; max-width: 760px; }
+@media (max-width: 700px) { .commit-banner { grid-template-columns: 1fr; gap: var(--space-5); } }
+.commit-banner .ttl { font-family: var(--font-mono); font-size: var(--size-kicker); color: var(--accent-2); font-weight: var(--weight-bold); letter-spacing: .06em; margin-bottom: var(--space-3); }
+.tile-row { display: flex; gap: 7px; }
+.tile-day { display: flex; flex-direction: column; align-items: center; gap: 7px; cursor: default; }
+.tile { width: 32px; height: 32px; border-radius: var(--r-sm); background: var(--tile-0); transition: transform var(--dur-fast) var(--ease-smooth), box-shadow var(--dur-fast); }
+.tile.l0 { background: var(--tile-0); } .tile.l1 { background: var(--tile-1); } .tile.l2 { background: var(--tile-2); } .tile.l3 { background: var(--tile-3); } .tile.l4 { background: var(--tile-4); }
+.tile-day:hover .tile { transform: translateY(-3px) scale(1.08); box-shadow: 0 0 0 2px var(--accent-2); }
+.tile-day .d { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+.tile-day .c { font-family: var(--font-mono); font-size: var(--size-meta); color: var(--invert-text); font-weight: var(--weight-semibold); }
+.tile-hint { font-family: var(--font-mono); font-size: var(--size-meta); color: var(--text-muted); margin-top: var(--space-3); min-height: 16px; transition: color var(--dur-fast); }
+.tile-hint.active { color: var(--accent-2); }
+.commit-sum { font-family: var(--font-mono); font-size: 13px; line-height: 1.8; }
+.commit-sum .n { color: var(--accent); font-weight: var(--weight-bold); font-size: var(--size-card-h3); }
+.commit-sum .src { color: var(--text-muted); font-size: var(--size-meta); display: block; margin-top: var(--space-2); max-width: 240px; }
+.commit-sum .src b { color: var(--accent-2); font-weight: var(--weight-medium); }
+
+/* ---------- NOW ROW ---------- */
+.now-list { border-top: 1px solid var(--line-base); max-width: 760px; }
+.now-row { display: grid; grid-template-columns: 150px 1fr; gap: var(--space-5); padding: 15px 0; border-bottom: 1px solid var(--line-base); align-items: baseline; }
+.now-row .lbl { font-family: var(--font-mono); font-size: var(--size-meta); text-transform: uppercase; letter-spacing: .14em; color: var(--text-muted); font-weight: var(--weight-semibold); }
+.now-row .val { font-size: var(--size-base); font-weight: var(--weight-medium); line-height: 1.45; }
+.now-row .val em { color: var(--accent); font-style: normal; font-weight: var(--weight-bold); }
+
+/* ---------- SECTION HEAD ---------- */
+.s-head { display: grid; grid-template-columns: 200px 1fr; gap: var(--space-8); margin-bottom: 40px; align-items: baseline; max-width: var(--maxw); }
+@media (max-width: 800px) { .s-head { grid-template-columns: 1fr; gap: var(--space-2); } }
+.s-head .label { font-family: var(--font-mono); font-size: var(--size-kicker); text-transform: uppercase; color: var(--accent); letter-spacing: .14em; font-weight: var(--weight-bold); }
+.s-head h2 { font-family: var(--font-display); font-size: var(--size-h2); font-weight: var(--weight-bold); letter-spacing: -.035em; line-height: 1.02; margin: 0; }
+.s-head h2 em { color: var(--accent); font-style: normal; }
+.s-head h2 .underline { text-decoration: underline; text-decoration-color: var(--accent-2); text-decoration-thickness: 5px; text-underline-offset: 6px; }

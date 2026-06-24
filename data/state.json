@@ -1,22 +1,24 @@
 {
   "meta": {
-    "updated": "2026-06-23",
+    "updated": "2026-06-24",
     "updatedBy": "whetstone@work-pc",
-    "buildDate": "2026-06-23"
+    "buildDate": "2026-06-24"
   },
   "hero": {
     "kicker": "— on my way to become obsolete",
     "h1": "I am a <span class=\"em\">strange</span> <span class=\"underline\">loop</span>.",
-    "lede": "<strong>devops manager at palo alto networks.</strong> 4 years running the pamoncloud team. i build the tools that make me unnecessary — that's the whole job, basically. <span class=\"dim\">i love to code. ish.</span>"
+    "lede": "<strong>devops manager at palo alto networks.</strong> i build agents that do my job, so i can go build the next one. <span class=\"dim\">the goal is to make myself unnecessary. that is the whole job.</span>",
+    "lede_cv": "boss at palo alto networks. build robot. robot do job. build next robot.",
+    "sessions": ["code-koala", "brif", "skit", "amit-hub", "workwright", "whetstone", "me"]
   },
   "now": {
     "week": "2026-W26",
     "rows": [
-      { "lbl": "paying-the-bills",  "val": "CodeKoala 2.0 — handing off to the DevOps team. <em>finally.</em>" },
-      { "lbl": "obsessing-over",    "val": "amit-hub. worktrees an agent can drive." },
-      { "lbl": "about-to-demo",     "val": "skit. an npm for AI capabilities." },
-      { "lbl": "reading",           "val": "anthropic agent papers · strands sdk source." },
-      { "lbl": "meetings-about",    "val": "the weekly self-hosted AI kickoff i started." }
+      { "lbl": "paying-the-bills",  "val": "CodeKoala 2.0 — handing off to the DevOps team. <em>finally.</em>",       "cv": "koala 2.0. gave it away. free at last." },
+      { "lbl": "obsessing-over",    "val": "amit-hub. worktrees an agent can drive.",                                   "cv": "agent get own folder. agent happy." },
+      { "lbl": "about-to-demo",     "val": "skit. the npm for AI capabilities.",                                        "cv": "npm but for robots. demo friday." },
+      { "lbl": "reading",           "val": "anthropic agent papers. strands sdk source.",                               "cv": "reading. big words. brain hurt." },
+      { "lbl": "meetings-about",    "val": "the weekly self-hosted AI kickoff i started.",                              "cv": "meeting. me start it. now stuck in it." }
     ]
   },
   "commits": {
@@ -25,13 +27,13 @@
     "sessions": 58,
     "week": "2026-W25",
     "days": [
-      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · code-koala, hq-work" },
-      { "d": "TUE", "c": 12, "l": 3, "detail": "12 commits · code-koala #98+#101, hq-work W13" },
-      { "d": "WED", "c": 6,  "l": 2, "detail": "6 commits · Philanthropist merges" },
-      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · code-koala, 50-first-sessions" },
-      { "d": "FRI", "c": 0,  "l": 0, "detail": "0 commits · in-flight on NG, out of root" },
-      { "d": "SAT", "c": 34, "l": 4, "detail": "34 commits · hq-work sprint" },
-      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · hq-work, code-koala, me" }
+      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · code-koala + for the real bosses" },
+      { "d": "TUE", "c": 12, "l": 3, "detail": "12 commits · code-koala (the reviews never stop)" },
+      { "d": "WED", "c": 6,  "l": 2, "detail": "6 commits · classified, need-to-know basis" },
+      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · code-koala + personal R&D" },
+      { "d": "FRI", "c": 0,  "l": 0, "detail": "0 commits · in-flight, serving the real bosses" },
+      { "d": "SAT", "c": 34, "l": 4, "detail": "34 commits · heavy day for the real bosses" },
+      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · code-koala + the real bosses again" }
     ]
   },
   "projects": [
@@ -40,6 +42,7 @@
       "name": "CodeKoala",
       "kicker": "live in PANW · since 2025",
       "desc": "add a label to a PR. 30 seconds later, koala posts a structured review. running quietly inside palo alto networks' github enterprise — <strong>194 reviews last week across 56 repos</strong>. strips sycophancy on parse, so it never tells you your code is &ldquo;great&rdquo;.",
+      "desc_cv": "put label on PR. koala appear. koala review. koala not compliment. koala honest.",
       "tags": ["python", "aws lambda", "bedrock", "cdk"],
       "status": "prod",
       "featured": true,
@@ -50,6 +53,7 @@
       "name": "brif",
       "kicker": "v1.1 · oss",
       "desc": "a mission-aware statusline for claude code. tells you when context is dying. shows goal, cost, model. asks before it does anything irreversible — that APPROVE button is the only feature i actually care about.",
+      "desc_cv": "bar at bottom. bar say 'context die soon'. bar ask before explode. me like bar.",
       "tags": ["bash", "powershell", "tui"],
       "status": "v1",
       "url": "https://github.com/balgaly/brif"
@@ -59,6 +63,7 @@
       "name": "skit",
       "kicker": "v1.2 · oss + enterprise",
       "desc": "the npm of AICs. install once, works in claude code AND cursor AND windsurf. started on a tuesday afternoon when i should have been doing something else.",
+      "desc_cv": "npm but robot. one install. all editor. built on tuesday. should not have.",
       "tags": ["node", "cli"],
       "status": "building",
       "url": "https://github.com/balgaly/skit"
@@ -68,6 +73,7 @@
       "name": "amit-hub",
       "kicker": "phase 1 · oss",
       "desc": "git worktrees an agent can drive without losing its mind. CLI + VS Code ext + claude code MCP plugin — one TS core, three surfaces. a colleague built the same thing privately before i shipped. that's how i knew it was real.",
+      "desc_cv": "agent get own branch. agent not confused. colleague build same. that mean good idea.",
       "tags": ["typescript", "monorepo", "mcp"],
       "status": "phase1",
       "url": null
@@ -77,6 +83,7 @@
       "name": "workwright",
       "kicker": "v1 · oss",
       "desc": "playwright, but for terminals. an MCP server that lets an agent drive a real PTY — run a command, watch the output stream, react. the thing claude code couldn't do until it could.",
+      "desc_cv": "playwright but terminal. agent type command. agent watch output. agent react. very useful.",
       "tags": ["typescript", "mcp", "pty"],
       "status": "v1",
       "url": "https://github.com/balgaly/workwright"
@@ -90,19 +97,19 @@
   ],
   "stack": {
     "typing": [
-      { "name": "claude code", "note": "opus 4.8, all day" },
-      { "name": "cursor",      "note": "for the side projects" },
-      { "name": "obsidian",    "note": "vault is my second brain" }
+      { "name": "claude code", "note": "opus 4.8, all day",      "glyph": ">_", "level": 5 },
+      { "name": "cursor",      "note": "side projects",           "glyph": "[]", "level": 3 },
+      { "name": "obsidian",    "note": "vault = second brain",    "glyph": "◈",  "level": 4 }
     ],
     "bills": [
-      { "name": "aws bedrock",        "note": "claude inference at work" },
-      { "name": "github enterprise",  "note": "internal repos" },
-      { "name": "jenkins + cdk",      "note": "koala's pipeline" }
+      { "name": "aws bedrock",        "note": "claude inference at work", "glyph": "☁",  "level": 4 },
+      { "name": "github enterprise",  "note": "internal repos",            "glyph": "⎇",  "level": 3 },
+      { "name": "jenkins + cdk",      "note": "koala's pipeline",          "glyph": "⚙",  "level": 3 }
     ],
     "built": [
-      { "name": "brif",      "note": "my own statusline" },
-      { "name": "skit",      "note": "installs my own skills" },
-      { "name": "whetstone", "note": "keeps me on scope" }
+      { "name": "brif",      "note": "my own statusline",    "glyph": "▐", "level": 4 },
+      { "name": "skit",      "note": "installs my own skills","glyph": "⊕", "level": 3 },
+      { "name": "whetstone", "note": "keeps me on scope",     "glyph": "◇", "level": 5 }
     ]
   }
 }

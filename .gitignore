@@ -2,3 +2,6 @@
 Thumbs.db
 *.log
 .env
+.worktrees/
+node_modules/
+package-lock.json

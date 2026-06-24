@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PAGE TITLE — Snir Balgaly</title>
+<meta name="description" content="PAGE DESCRIPTION">
+<link rel="canonical" href="https://balgaly.com/PAGE-SLUG/">
+<meta name="theme-color" content="#e5e9f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a111c" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://balgaly.com/PAGE-SLUG/">
+<meta property="og:title" content="PAGE TITLE — Snir Balgaly">
+<meta property="og:description" content="PAGE DESCRIPTION">
+<meta property="og:image" content="https://balgaly.com/assets/og-image.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PAGE TITLE — Snir Balgaly">
+<meta name="twitter:description" content="PAGE DESCRIPTION">
+<meta name="twitter:image" content="https://balgaly.com/assets/og-image.png">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/components.css">
+
+<!-- no-flash theme init -->
+<script>(function(){try{var t=localStorage.getItem('balgaly-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})()</script>
+
+<style>
+/* ── PAGE-SLUG page styles only — tokens via var(--*), no hardcoded values ── */
+
+.skip-link { position: absolute; top: -100%; left: 8px; z-index: 999; background: var(--invert-bg); color: var(--invert-text); padding: 10px 18px; border-radius: 0 0 var(--r-sm) var(--r-sm); font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-decoration: none; transition: top var(--dur-fast); }
+.skip-link:focus { top: 0; }
+
+/* nav-toggle (mobile) */
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 6px; z-index: 70; position: relative; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 4px 0; transition: transform var(--dur-base) var(--ease-smooth), opacity var(--dur-fast); }
+.nav-scrim { position: fixed; inset: 0; z-index: 55; background: color-mix(in srgb, var(--invert-bg) 45%, transparent); opacity: 0; visibility: hidden; transition: opacity var(--dur-base) var(--ease-smooth), visibility var(--dur-base); }
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .nav-scrim.show { opacity: 1; visibility: visible; }
+  .topnav nav { position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 340px); flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 88px 28px 32px; background: var(--bg-paper); border-left: 1px solid var(--line-base); box-shadow: -16px 0 48px color-mix(in srgb, var(--invert-bg) 18%, transparent); transform: translateX(100%); transition: transform var(--dur-base) var(--ease-smooth); z-index: 60; overflow-y: auto; }
+  .topnav nav.open { transform: translateX(0); }
+  .topnav nav a { font-size: 19px; font-weight: 600; padding: 16px 4px; border-bottom: 1px solid var(--line-soft); }
+}
+
+/* ── page body ── */
+main { max-width: var(--maxw); margin: 0 auto; padding: 88px var(--pad-x); }
+@media (max-width: 600px) { main { padding: 56px 20px; } }
+
+.page-head { margin-bottom: 56px; }
+.page-head .label { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--text-muted); font-weight: 500; }
+.page-head h1 { font-family: var(--font-display); font-size: clamp(40px, 6vw, 72px); font-weight: 700; letter-spacing: -.035em; line-height: 1.08; margin: 12px 0 20px; color: var(--text-primary); text-wrap: balance; }
+.page-head h1 em { color: var(--accent); font-style: normal; }
+.page-head h1 .underline { text-decoration: underline; text-decoration-color: var(--accent-2); text-decoration-thickness: 4px; text-underline-offset: 5px; }
+.page-head p { font-size: 18px; color: var(--text-soft); max-width: 60ch; line-height: 1.65; margin: 0; }
+
+footer.f { border-top: 1px solid var(--line-base); padding: 36px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted); max-width: var(--maxw); margin: 0 auto; font-weight: 500; gap: 16px; flex-wrap: wrap; }
+footer.f a { color: var(--text-soft); text-decoration: none; margin-left: 16px; }
+footer.f a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<a href="#maincontent" class="skip-link">skip to content</a>
+
+<header class="topnav">
+  <a href="/" class="brand">balgaly<span class="dot">.</span>com</a>
+  <button class="nav-toggle" id="navToggle" aria-label="menu" aria-expanded="false" aria-controls="primaryNav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="primaryNav">
+    <a href="/#now">now</a>
+    <a href="/#work">stuff i built</a>
+    <a href="/#writing">writing</a>
+    <a href="/#stack">stack</a>
+    <a href="https://words.balgaly.com" target="_blank" rel="noopener">words &#8599;</a>
+  </nav>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
+
+<main id="maincontent">
+  <div class="page-head">
+    <div class="label">/ PAGE-SLUG</div>
+    <h1>PAGE <em>HEADING</em>.</h1>
+    <p>Page subtitle or lede goes here.</p>
+  </div>
+
+  <!-- PAGE CONTENT HERE -->
+  <div id="page-content"><!-- injected or static --></div>
+</main>
+
+<footer class="f">
+  <span>&copy; 2026 &mdash; snir balgaly. <span style="color:var(--accent);">co-authored-by: me.</span></span>
+  <span>
+    <a href="https://github.com/balgaly" target="_blank" rel="noopener">github</a>
+    <a href="https://words.balgaly.com" target="_blank" rel="noopener">words</a>
+    <a href="mailto:snir@balgaly.com">mail</a>
+  </span>
+</footer>
+
+<script>
+/* ── hamburger + scrim ── */
+(function () {
+  const t = document.getElementById('navToggle');
+  const nav = document.getElementById('primaryNav');
+  const scrim = document.getElementById('navScrim');
+  if (!t) return;
+  function setOpen(open) {
+    nav.classList.toggle('open', open); scrim.classList.toggle('show', open);
+    t.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  t.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+  scrim.addEventListener('click', () => setOpen(false));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+})();
+
+/* ── theme toggle (optional — add button to nav if needed) ── */
+/* Copy theme-btn markup + script from index.html */
+
+/* ── page data fetch (if data-driven) ── */
+/*
+async function boot() {
+  const d = await fetch('/data/PAGE-SLUG.json').then(r => r.json());
+  // inject into #page-content
+}
+boot();
+*/
+</script>
+</body>
+</html>

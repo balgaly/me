@@ -1,400 +1,654 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Snir Balgaly</title>
-<meta name="description" content="DevOps engineer building AI-native platforms. I make tools that monitor loops instead of running in them.">
+<meta name="description" content="devops manager at palo alto networks. i build the tools that make me unnecessary — that's the whole job, basically.">
+<link rel="canonical" href="https://balgaly.com/">
+<meta name="theme-color" content="#e5e9f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a111c" media="(prefers-color-scheme: dark)">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://balgaly.com/">
+<meta property="og:title" content="Snir Balgaly">
+<meta property="og:description" content="devops manager at palo alto networks. i build the tools that make me unnecessary — that's the whole job, basically.">
+<meta property="og:image" content="https://balgaly.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Snir Balgaly">
+<meta name="twitter:description" content="devops manager at palo alto networks. i build the tools that make me unnecessary — that's the whole job, basically.">
+<meta name="twitter:image" content="https://balgaly.com/assets/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<!-- JSON-LD Person schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Snir Balgaly",
+  "url": "https://balgaly.com",
+  "sameAs": [
+    "https://github.com/balgaly",
+    "https://words.balgaly.com"
+  ],
+  "jobTitle": "DevOps Manager",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Palo Alto Networks"
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/components.css">
+
+<!-- no-flash theme init — must run before first paint -->
+<script>(function(){try{var t=localStorage.getItem('balgaly-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}})()</script>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* skip link */
+.skip-link { position: absolute; top: -100%; left: 8px; z-index: 999; background: var(--invert-bg); color: var(--invert-text); padding: 10px 18px; border-radius: 0 0 var(--r-sm) var(--r-sm); font-family: var(--font-mono); font-size: 13px; font-weight: 600; text-decoration: none; transition: top var(--dur-fast); }
+.skip-link:focus { top: 0; }
 
-  :root {
-    --bg:        #0b0b0e;
-    --panel:     rgba(255,255,255,.04);
-    --border:    rgba(255,255,255,.07);
-    --ink:       #f0f0f4;
-    --muted:     rgba(240,240,244,.55);
-    --dim:       rgba(240,240,244,.35);
-    --purple:    #7c51ff;
-    --purple-lo: rgba(124,81,255,.18);
-    --violet:    #b3a4ff;
-    --cyan:      #38bdf8;
-    --green:     #34d399;
-    --orange:    #f97316;
-    --pink:      #ec4899;
-    --glow-p:    radial-gradient(circle at 80% 10%, rgba(124,81,255,.28) 0%, transparent 55%);
-    --glow-c:    radial-gradient(circle at 10% 90%, rgba(56,189,248,.18) 0%, transparent 50%);
-  }
+/* ── page-specific styles only — no token overrides ── */
 
-  html { scroll-behavior: smooth; }
+/* mobile nav */
+.nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 6px; z-index: 70; position: relative; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--text-primary); margin: 4px 0; transition: transform var(--dur-base) var(--ease-smooth), opacity var(--dur-fast); }
+.nav-scrim { position: fixed; inset: 0; z-index: 55; background: color-mix(in srgb, var(--invert-bg) 45%, transparent); opacity: 0; visibility: hidden; transition: opacity var(--dur-base) var(--ease-smooth), visibility var(--dur-base); }
+@media (max-width: 768px) {
+  .topnav { backdrop-filter: none; background: var(--bg-base); }
+  .nav-toggle { display: block; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .nav-scrim.show { opacity: 1; visibility: visible; }
+  .topnav nav { position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 340px); flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 88px 28px 32px; background: var(--bg-paper); border-left: 1px solid var(--line-base); box-shadow: -16px 0 48px color-mix(in srgb, var(--invert-bg) 18%, transparent); transform: translateX(100%); transition: transform var(--dur-base) var(--ease-smooth); z-index: 60; overflow-y: auto; }
+  .topnav nav.open { transform: translateX(0); }
+  .topnav nav a { font-size: 19px; font-weight: 600; padding: 16px 4px; border-bottom: 1px solid var(--line-soft); }
+  .caveman-btn { font-size: 15px; margin-top: 22px; align-self: flex-start; padding: 10px 16px; }
+}
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Inter", -apple-system, system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* constellation canvas */
+.session-art { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1; margin: 0 auto; }
+.session-art canvas { display: block; width: 100%; height: 100%; }
 
-  /* Ambient glows */
-  body::before {
-    content: "";
-    position: fixed; inset: 0;
-    background: var(--glow-p), var(--glow-c);
-    pointer-events: none;
-    z-index: 0;
-  }
+/* horizontal strip */
+.h-strip-wrap { border-top: 1px solid var(--line-base); border-bottom: 1px solid var(--line-base); background: var(--bg-deep); padding: 22px 0 28px; }
+.h-strip-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 var(--pad-x) 18px; max-width: var(--maxw); margin: 0 auto; }
+.h-strip-head .label { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: .14em; color: var(--text-muted); font-weight: 500; }
+.h-strip-head .arrow { font-family: var(--font-mono); font-size: 13px; color: var(--text-soft); text-decoration: none; font-weight: 500; }
+.h-strip-head .arrow:hover { color: var(--accent); }
+.h-strip { display: flex; gap: 16px; padding: 0 var(--pad-x) 8px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+.h-strip::-webkit-scrollbar { height: 6px; }
+.h-strip::-webkit-scrollbar-thumb { background: var(--line-base); border-radius: 3px; }
+.h-strip .post-card { flex: 0 0 320px; scroll-snap-align: start; }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 48px;
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(24px);
-    background: rgba(11,11,14,.75);
-  }
-  .nav-brand {
-    font-size: 15px; font-weight: 600; letter-spacing: -.015em;
-    color: var(--ink); text-decoration: none;
-  }
-  .nav-brand em { font-style: normal; color: var(--violet); }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { color: var(--muted); font-size: 13.5px; text-decoration: none; transition: color .15s; }
-  .nav-links a:hover { color: var(--ink); }
-  .nav-cta {
-    font-size: 12.5px; font-weight: 600; padding: 7px 16px;
-    border-radius: 8px; text-decoration: none;
-    background: var(--purple); color: #fff;
-    transition: background .15s, transform .1s;
-  }
-  .nav-cta:hover { background: #9070ff; transform: translateY(-1px); }
+/* sections */
+section.s { max-width: var(--maxw); margin: 0 auto; padding: 88px var(--pad-x); }
+@media (max-width: 600px) { section.s { padding: 56px 20px; } }
 
-  /* ── LAYOUT ── */
-  main { max-width: 960px; margin: 0 auto; padding: 80px 48px 120px; position: relative; z-index: 1; }
-  section { margin-bottom: 80px; }
-  .section-label {
-    font-size: 10.5px; text-transform: uppercase; letter-spacing: .15em;
-    color: var(--dim); font-weight: 600; margin-bottom: 24px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+/* now block */
+.now-block { display: grid; grid-template-columns: 200px 1fr; gap: 36px; }
+@media (max-width: 800px) { .now-block { grid-template-columns: 1fr; gap: 18px; } }
+.now-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); line-height: 1.7; font-weight: 500; }
+.now-meta .week { color: var(--text-primary); font-weight: 700; font-size: 14px; }
 
-  /* ── HERO ── */
-  .hero { padding-top: 20px; }
-  .hero-eyebrow {
-    font-size: 12px; font-family: ui-monospace, monospace;
-    color: var(--purple); letter-spacing: .08em; margin-bottom: 20px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .hero-eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--purple); }
-  .hero h1 {
-    font-size: clamp(36px, 5.5vw, 62px);
-    font-weight: 700; letter-spacing: -.035em; line-height: 1.04;
-    margin-bottom: 22px;
-    background: linear-gradient(135deg, #fff 0%, var(--violet) 55%, var(--purple) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .hero h1 em { font-style: italic; }
-  .hero-sub {
-    font-size: 17px; color: var(--muted); max-width: 520px;
-    line-height: 1.65; margin-bottom: 32px;
-  }
-  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-  .btn {
-    font-size: 13.5px; font-weight: 600; padding: 10px 22px;
-    border-radius: 9px; text-decoration: none; transition: all .15s; cursor: pointer; border: none;
-  }
-  .btn-primary { background: var(--purple); color: #fff; }
-  .btn-primary:hover { background: #9070ff; transform: translateY(-1px); }
-  .btn-ghost { background: var(--panel); border: 1px solid var(--border); color: rgba(240,240,244,.8); }
-  .btn-ghost:hover { background: rgba(255,255,255,.07); transform: translateY(-1px); }
+/* work grid */
+.work-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 28px; }
+@media (max-width: 920px) { .work-grid { grid-template-columns: 1fr; } }
+.work-card.col-2 { display: flex; flex-direction: column; gap: 28px; background: transparent; border: 0; padding: 0; transition: none; max-width: unset; }
+.work-card.col-2:hover { transform: none; border: 0; }
+.work-card.col-2 > .work-card { border: 1px solid var(--line-base); border-radius: var(--r-lg); background: var(--bg-paper); max-width: unset; }
+.work-card.col-2 > .work-card .visual { height: 160px; }
 
-  /* ── NOW ── */
-  .now-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;
-  }
-  .now-item {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 10px; padding: 16px 18px;
-  }
-  .now-key { font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--dim); margin-bottom: 6px; font-weight: 600; }
-  .now-val { font-size: 13.5px; color: var(--ink); line-height: 1.45; }
+/* cta blob */
+.cta-blob { background: var(--invert-bg); color: var(--invert-text); padding: 56px; border-radius: var(--r-xl); display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; margin-top: 28px; }
+@media (max-width: 700px) { .cta-blob { grid-template-columns: 1fr; padding: 36px; } }
+.cta-blob h3 { font-family: var(--font-display); font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -.028em; line-height: 1.15; }
+.cta-blob h3 em { color: var(--accent); font-style: normal; }
+.cta-blob h3 .underline { text-decoration: underline; text-decoration-color: var(--accent-2); text-decoration-thickness: 4px; text-underline-offset: 4px; }
+.cta-blob .arrow-link { font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--invert-text); text-decoration: none; border: 1.5px solid var(--invert-text); padding: 14px 22px; border-radius: var(--r-sm); transition: all var(--dur-base); white-space: nowrap; }
+.cta-blob .arrow-link:hover { background: var(--accent); border-color: var(--accent); }
 
-  /* ── PROJECTS ── */
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;
-  }
-  .project-card {
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 14px; padding: 22px 24px;
-    transition: border-color .2s, background .2s;
-    text-decoration: none; display: flex; flex-direction: column;
-  }
-  .project-card:hover { border-color: rgba(124,81,255,.4); background: rgba(124,81,255,.06); }
-  .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .project-name { font-size: 15px; font-weight: 600; color: var(--ink); font-family: ui-monospace, monospace; }
-  .project-status {
-    font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
-    text-transform: uppercase; letter-spacing: .06em;
-  }
-  .status-prod   { background: rgba(52,211,153,.15); color: #34d399; }
-  .status-building { background: rgba(249,115,22,.15); color: #f97316; }
-  .status-v1     { background: rgba(124,81,255,.2); color: var(--violet); }
-  .status-phase1 { background: rgba(56,189,248,.15); color: var(--cyan); }
-  .status-running { background: rgba(255,255,255,.08); color: var(--muted); }
-  .project-desc { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin-bottom: 14px; flex: 1; }
-  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
-  .tag {
-    font-size: 10.5px; padding: 2px 8px; border-radius: 4px;
-    background: rgba(255,255,255,.05); color: var(--dim);
-    font-family: ui-monospace, monospace;
-  }
+/* stack */
+.uses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+@media (max-width: 800px) { .uses-grid { grid-template-columns: 1fr; } }
+.uses-cell { background: var(--bg-paper); border: 1px solid var(--line-base); border-radius: var(--r-lg); padding: 22px 24px; }
+.uses-cell h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin: 0 0 14px; letter-spacing: -.015em; }
+.uses-cell ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.uses-cell li { font-size: 14.5px; color: var(--text-soft); display: flex; gap: 10px; align-items: baseline; }
+.uses-cell li:before { content: "\2192"; color: var(--accent); font-family: var(--font-mono); font-size: 13px; flex-shrink: 0; }
+.uses-cell li b { color: var(--text-primary); font-weight: 600; }
 
-  /* ── WRITING ── */
-  .post {
-    display: flex; justify-content: space-between; align-items: baseline;
-    padding: 15px 0; border-bottom: 1px solid var(--border);
-    text-decoration: none; gap: 16px;
-    transition: color .15s;
-  }
-  .post:first-of-type { border-top: 1px solid var(--border); }
-  .post:hover .post-title { color: var(--violet); }
-  .post-title { font-size: 15px; color: var(--ink); transition: color .15s; }
-  .post-meta { font-size: 11.5px; color: var(--dim); white-space: nowrap; font-family: ui-monospace, monospace; }
+/* footer */
+footer.f { border-top: 1px solid var(--line-base); padding: 36px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 12.5px; color: var(--text-muted); max-width: var(--maxw); margin: 0 auto; font-weight: 500; gap: 16px; flex-wrap: wrap; }
+footer.f a { color: var(--text-soft); text-decoration: none; margin-left: 16px; }
+footer.f a:hover { color: var(--accent); }
 
-  /* ── STATS ── */
-  .stats { display: flex; gap: 40px; flex-wrap: wrap; }
-  .stat .num { font-size: 38px; font-weight: 700; letter-spacing: -.04em; color: var(--ink); line-height: 1; }
-  .stat .num span { color: var(--violet); }
-  .stat .lbl { font-size: 12px; color: var(--dim); margin-top: 4px; }
-
-  /* ── CO-AUTHORED ── */
-  .coauthored {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--purple-lo); border: 1px solid rgba(124,81,255,.25);
-    border-radius: 8px; padding: 8px 14px; font-size: 12.5px; color: var(--violet);
-    text-decoration: none; transition: all .15s;
-  }
-  .coauthored:hover { background: rgba(124,81,255,.25); }
-  .coauthored svg { width: 14px; height: 14px; flex-shrink: 0; }
-
-  /* ── FOOTER ── */
-  footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 24px 48px;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-left { display: flex; align-items: center; gap: 20px; }
-  .footer-copy { font-size: 12px; color: var(--dim); }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 12.5px; color: var(--dim); text-decoration: none; transition: color .15s; }
-  .footer-links a:hover { color: var(--ink); }
-
-  /* ── BADGE ── */
-  #loading-overlay {
-    position: fixed; inset: 0; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 999; transition: opacity .4s;
-  }
-  #loading-overlay.fade { opacity: 0; pointer-events: none; }
-  .loader-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple); animation: pulse 1s ease-in-out infinite; }
-  @keyframes pulse { 0%,100% { opacity: .3; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.2); } }
-
-  @media (max-width: 680px) {
-    nav { padding: 14px 20px; }
-    .nav-links { display: none; }
-    main { padding: 52px 20px 80px; }
-    footer { padding: 20px; flex-direction: column; align-items: flex-start; }
-    .stats { gap: 24px; }
-  }
+/* loading overlay */
+#loading-overlay { position: fixed; inset: 0; background: var(--bg-base); display: flex; align-items: center; justify-content: center; z-index: 999; transition: opacity .4s; }
+#loading-overlay.fade { opacity: 0; pointer-events: none; }
+.loader-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: tally 1.8s ease-in-out infinite; }
 </style>
 </head>
 <body>
+<a href="#maincontent" class="skip-link">skip to content</a>
 
 <div id="loading-overlay"><div class="loader-dot"></div></div>
 
-<nav>
-  <a class="nav-brand" href="/">balgaly<em>.com</em></a>
-  <ul class="nav-links">
-    <li><a href="#now">now</a></li>
-    <li><a href="#work">work</a></li>
-    <li><a href="#writing">writing</a></li>
-  </ul>
-  <a class="nav-cta" href="mailto:snir@balgaly.com">get in touch</a>
-</nav>
+<header class="topnav">
+  <a href="/" class="brand">balgaly<span class="dot">.</span>com <span class="tag">// co-authored-by: me.</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="menu" aria-expanded="false" aria-controls="primaryNav">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="primaryNav">
+    <a href="#now" class="now-link"><span class="on-air"><span class="lamp"></span><span class="txt">ON AIR</span></span> now</a>
+    <a href="#work">stuff i built</a>
+    <a href="#writing">writing</a>
+    <a href="#stack">stack</a>
+    <a href="https://words.balgaly.com" target="_blank" rel="noopener">words &#8599;</a>
+    <button class="caveman-btn" id="cavemanBtn" aria-pressed="false" title="strip the words down to caveman">
+      <span class="bone">&#129460;</span> /caveman
+    </button>
+    <button class="theme-btn" id="themeBtn" title="toggle theme">
+      <span class="glyph" id="themeGlyph">&#9789;</span>
+    </button>
+  </nav>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
 
-<main>
-
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <p class="hero-eyebrow">Snir Balgaly</p>
-    <h1 id="hero-headline">I build tools that<br><em>watch loops.</em></h1>
-    <p class="hero-sub" id="hero-sub">Loading…</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#work">See the work →</a>
-      <a class="btn btn-ghost" href="https://words.balgaly.com" target="_blank" rel="noopener">Read the writing</a>
+<section class="hero" id="maincontent">
+  <div class="hero-grid">
+    <div>
+      <p class="kicker" id="hero-kicker">&mdash; on my way to become obsolete</p>
+      <h1 id="hero-h1">I am a <span class="em">strange</span> <span class="underline">loop</span>.</h1>
+      <p class="lede" id="hero-lede">Loading&hellip;</p>
+      <div class="hero-cta">
+        <a href="#work" class="primary">stuff i built &rarr;</a>
+        <a href="https://words.balgaly.com" target="_blank" rel="noopener" class="ghost">read the writing &#8599;</a>
+      </div>
     </div>
-  </section>
 
-  <!-- NOW -->
-  <section id="now">
-    <p class="section-label">/ now</p>
-    <div class="now-grid" id="now-grid"><!-- injected --></div>
-  </section>
-
-  <!-- STATS -->
-  <section id="stats">
-    <div class="stats" id="stats-row"><!-- injected --></div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <p class="section-label">/ selected work</p>
-    <div class="projects-grid" id="projects-grid"><!-- injected --></div>
-  </section>
-
-  <!-- WRITING -->
-  <section id="writing">
-    <p class="section-label">/ writing</p>
-    <div id="writing-list"><!-- injected --></div>
-    <div style="margin-top: 20px;">
-      <a class="btn btn-ghost" href="https://words.balgaly.com" target="_blank" rel="noopener">all posts at words.balgaly.com →</a>
+    <div class="session-art" aria-hidden="true">
+      <canvas id="constellation"></canvas>
     </div>
-  </section>
-
-  <!-- CO-AUTHORED -->
-  <section style="margin-bottom: 0;">
-    <a class="coauthored" href="https://claude.ai" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-      </svg>
-      co-authored by me &amp; Claude
-    </a>
-    <p style="font-size: 11.5px; color: var(--dim); margin-top: 10px;" id="last-updated"></p>
-  </section>
-
-</main>
-
-<footer>
-  <div class="footer-left">
-    <span class="footer-copy">© 2026 Snir Balgaly · written by a human, quite into machines</span>
   </div>
-  <div class="footer-links">
+</section>
+
+<!-- writing strip -->
+<section class="h-strip-wrap" id="writing">
+  <div class="h-strip-head">
+    <span class="label">&mdash; what i've been writing about</span>
+    <a href="https://words.balgaly.com" class="arrow" target="_blank" rel="noopener">all writing &#8599;</a>
+  </div>
+  <div class="h-strip" id="writing-strip"><!-- injected --></div>
+</section>
+
+<!-- /now -->
+<section class="s" id="now">
+  <div class="s-head">
+    <div class="label">/ now</div>
+    <h2>what i'm <em>actually</em> doing this week.</h2>
+  </div>
+  <div class="now-block">
+    <div class="now-meta">
+      pulled from my obsidian vault<br>
+      <span class="week" id="now-week">2026-W26</span><br><br>
+      every monday: did last week go anywhere?
+    </div>
+    <div>
+      <div class="now-list" id="now-list"><!-- injected --></div>
+      <div class="commit-banner" data-caveman="off" id="commit-banner" style="margin-top:30px;"><!-- injected --></div>
+    </div>
+  </div>
+</section>
+
+<!-- work -->
+<section class="s" id="work">
+  <div class="s-head">
+    <div class="label">/ stuff i built</div>
+    <h2>tools that <em>monitor</em> the loop, instead of running inside it.</h2>
+  </div>
+  <div class="work-grid" id="work-grid"><!-- injected --></div>
+  <div class="cta-blob">
+    <h3>i write at <em>words.balgaly.com</em>. six posts. all opinions, no <span class="underline">listicles</span>. mostly about why working with agents feels nothing like the demos.</h3>
+    <a href="https://words.balgaly.com" class="arrow-link" target="_blank" rel="noopener">go read it &rarr;</a>
+  </div>
+</section>
+
+<!-- stack -->
+<section class="s" id="stack">
+  <div class="s-head">
+    <div class="label">/ stack</div>
+    <h2>what's <em>actually</em> on my dock.</h2>
+  </div>
+  <div class="uses-grid" id="stack-grid"><!-- injected --></div>
+</section>
+
+<footer class="f">
+  <span>&copy; 2026 &mdash; snir balgaly. <span style="color:var(--accent);">co-authored-by: me.</span>
+    <span class="stamp" id="deployStamp" data-caveman="off" style="display:block; margin-top:6px; color:var(--text-muted); font-size:11px;">// last updated &hellip;</span>
+  </span>
+  <span>
     <a href="https://github.com/balgaly" target="_blank" rel="noopener">github</a>
     <a href="https://words.balgaly.com" target="_blank" rel="noopener">words</a>
     <a href="mailto:snir@balgaly.com">mail</a>
-  </div>
+  </span>
 </footer>
 
 <script>
-  const STATUS_LABELS = {
-    prod:     { text: 'prod',      cls: 'status-prod' },
-    building: { text: 'building',  cls: 'status-building' },
-    v1:       { text: 'v1',        cls: 'status-v1' },
-    phase1:   { text: 'phase 1',   cls: 'status-phase1' },
-    running:  { text: 'running',   cls: 'status-running' },
-  };
+/* ── data fetch + render ──────────────────────────────────────────────── */
+async function boot() {
+  let d;
+  try {
+    const r = await fetch('data/state.json?v=' + Date.now());
+    d = await r.json();
+  } catch(e) {
+    console.error('state.json failed', e);
+    dismiss(); initConstellation(null); return;
+  }
 
-  const NOW_KEYS = { dayJob: 'day job', building: 'building', shipping: 'shipping', reading: 'reading', talking: 'talking' };
+  // hero
+  if (d.hero) {
+    if (d.hero.kicker) document.getElementById('hero-kicker').textContent = d.hero.kicker;
+    if (d.hero.h1)     document.getElementById('hero-h1').innerHTML = d.hero.h1;
+    if (d.hero.lede)   document.getElementById('hero-lede').innerHTML = d.hero.lede;
+  }
 
-  async function load() {
-    let data;
-    try {
-      const r = await fetch('data/state.json?v=' + Date.now());
-      data = await r.json();
-    } catch(e) {
-      console.error('Failed to load state.json', e);
-      document.getElementById('hero-sub').textContent = 'DevOps engineer · AI-native platform builder.';
-      dismiss();
-      return;
+  // now week
+  if (d.now?.week) document.getElementById('now-week').textContent = d.now.week;
+
+  // now rows
+  if (d.now?.rows) {
+    document.getElementById('now-list').innerHTML = d.now.rows.map(r =>
+      `<div class="now-row"><span class="lbl">${esc(r.lbl)}</span><span class="val">${r.val}</span></div>`
+    ).join('');
+  }
+
+  // commit banner
+  if (d.commits) {
+    const c = d.commits;
+    const tiles = (c.days || []).map(day =>
+      `<div class="tile-day" data-detail="${esc(day.detail)}">
+        <span class="tile l${day.l}"></span>
+        <span class="c">${day.c}</span>
+        <span class="d">${esc(day.d)}</span>
+      </div>`
+    ).join('');
+    document.getElementById('commit-banner').innerHTML = `
+      <div>
+        <div class="ttl">// LAST 7 DAYS</div>
+        <div class="tile-row">${tiles}</div>
+        <div class="tile-hint" id="tileHint">// hover a day &mdash; real numbers, pulled from the vault</div>
+      </div>
+      <div class="commit-sum">
+        <span class="n">${c.total}</span> commits<br>
+        <span class="n">${c.repos}</span> repos &middot; <span class="n">${c.sessions}</span> sessions
+        <span class="src">// auto-pulled from whetstone vault &mdash; <b>gather-commits-for-date.ps1</b>. yes really.</span>
+      </div>`;
+    initTileHover();
+  }
+
+  // work grid
+  if (d.projects) {
+    const featured = d.projects.find(p => p.featured);
+    const rest = d.projects.filter(p => !p.featured);
+    let html = '';
+    if (featured) {
+      const href = featured.url ? `href="${esc(featured.url)}" target="_blank" rel="noopener"` : '';
+      html += `<a ${href} class="work-card featured">
+        <div class="visual"></div>
+        <div class="body">
+          <span class="kicker">${esc(featured.kicker)}</span>
+          <h3>${esc(featured.name)}</h3>
+          <p>${featured.desc}</p>
+          <div class="tags">${featured.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+        </div>
+      </a>`;
     }
-
-    // hero
-    if (data.hero) {
-      if (data.hero.tagline) document.getElementById('hero-headline').innerHTML = data.hero.tagline.replace('watch loops.', '<em>watch loops.</em>').replace('watching a loop.', '<em>watching a loop.</em>');
-      if (data.hero.sub) document.getElementById('hero-sub').textContent = data.hero.sub;
-    }
-
-    // now
-    if (data.now) {
-      const g = document.getElementById('now-grid');
-      g.innerHTML = Object.entries(NOW_KEYS).map(([k, label]) => data.now[k] ? `
-        <div class="now-item">
-          <div class="now-key">${label}</div>
-          <div class="now-val">${esc(data.now[k])}</div>
-        </div>` : '').join('');
-    }
-
-    // stats
-    if (data.stats) {
-      const s = data.stats;
-      document.getElementById('stats-row').innerHTML = `
-        <div class="stat"><div class="num">${s.yearsManaging}<span>yrs</span></div><div class="lbl">managing PAMonCloud team</div></div>
-        <div class="stat"><div class="num">${s.prodServices} <span>prod</span></div><div class="lbl">live AI service inside CyberArk</div></div>
-        <div class="stat"><div class="num">${s.kickoffAttendees}</div><div class="lbl">attendees · AI Kickoff series</div></div>
-        <div class="stat"><div class="num">${s.posts} <span>posts</span></div><div class="lbl">published philosophy</div></div>
-      `;
-    }
-
-    // projects
-    if (data.projects) {
-      document.getElementById('projects-grid').innerHTML = data.projects.map(p => {
-        const s = STATUS_LABELS[p.status] || { text: p.status, cls: 'status-running' };
-        const wrap = p.url ? `<a class="project-card" href="${esc(p.url)}" target="_blank" rel="noopener">` : `<div class="project-card">`;
-        const close = p.url ? `</a>` : `</div>`;
-        return `${wrap}
-          <div class="project-header">
-            <span class="project-name">${esc(p.name)}</span>
-            <span class="project-status ${s.cls}">${s.text}</span>
+    if (rest.length) {
+      html += `<div class="work-card col-2">`;
+      for (const p of rest) {
+        const href = p.url ? `href="${esc(p.url)}" target="_blank" rel="noopener"` : '';
+        html += `<a ${href} class="work-card">
+          <div class="visual"></div>
+          <div class="body">
+            <span class="kicker">${esc(p.kicker)}</span>
+            <h3>${esc(p.name)}</h3>
+            <p>${p.desc}</p>
+            <div class="tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
           </div>
-          <p class="project-desc">${esc(p.desc)}</p>
-          <div class="project-tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-        ${close}`;
-      }).join('');
+        </a>`;
+      }
+      html += `</div>`;
+    }
+    document.getElementById('work-grid').innerHTML = html;
+  }
+
+  // writing strip
+  if (d.writing) {
+    document.getElementById('writing-strip').innerHTML = d.writing.map(w =>
+      `<a class="post-card" href="${esc(w.url)}" target="_blank" rel="noopener">
+        <span class="date">${esc(w.date)} &middot; ~${w.mins} MIN</span>
+        <h3>${esc(w.title)}</h3>
+        <p class="excerpt">${w.excerpt}</p>
+        <span class="read">/ ${esc(w.tag)}</span>
+      </a>`
+    ).join('');
+  }
+
+  // stack
+  if (d.stack) {
+    const sections = [
+      { key: 'typing', title: 'where i type' },
+      { key: 'bills',  title: 'what runs the bills' },
+      { key: 'built',  title: 'tools i built so i\'d use them' },
+    ];
+    document.getElementById('stack-grid').innerHTML = sections.map(s =>
+      `<div class="uses-cell">
+        <h4>${s.title}</h4>
+        <ul>${(d.stack[s.key]||[]).map(i=>`<li><b>${esc(i.name)}</b> &mdash; ${esc(i.note)}</li>`).join('')}</ul>
+      </div>`
+    ).join('');
+  }
+
+  // last updated stamp
+  if (d.meta?.buildDate) {
+    const el = document.getElementById('deployStamp');
+    const then = new Date(d.meta.buildDate + 'T12:00:00');
+    const days = Math.max(0, Math.round((Date.now() - then.getTime()) / 86400000));
+    const ago = days === 0 ? 'today' : days === 1 ? 'yesterday' : days + ' days ago';
+    el.textContent = '// last updated ' + ago;
+  }
+
+  dismiss();
+  initConstellation(d.projects?.map(p => p.slug) || null);
+}
+
+function dismiss() {
+  const o = document.getElementById('loading-overlay');
+  o.classList.add('fade');
+  setTimeout(() => o.remove(), 500);
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function initTileHover() {
+  const hint = document.getElementById('tileHint');
+  if (!hint) return;
+  const base = hint.textContent;
+  document.querySelectorAll('.tile-day[data-detail]').forEach(day => {
+    day.addEventListener('pointerenter', () => { hint.textContent = '// ' + day.dataset.detail; hint.classList.add('active'); });
+    day.addEventListener('pointerleave', () => { hint.textContent = base; hint.classList.remove('active'); });
+  });
+}
+
+/* ── session constellation ─────────────────────────────────────────────
+   Hub emits command pulses to session-dots arranged in an arc.
+   Each dot pulses independently — nothing "touches" them; they respond.
+   Uses design-language tokens via CSS variable reads on first frame.     */
+function initConstellation(sessions) {
+  const canvas = document.getElementById('constellation');
+  if (!canvas) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // read tokens from computed style so they respect dark mode
+  function tok(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  const NODES = sessions && sessions.length
+    ? sessions
+    : ['code-koala','skit','brif','workwright','amit-hub'];
+
+  const N = NODES.length;
+  let W, H, cx, cy;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    canvas.getContext('2d').scale(dpr, dpr);
+    cx = W * 0.22; cy = H * 0.5;
+  }
+
+  function nodePos(i) {
+    const spread = Math.min(0.65, 0.3 + N * 0.06);
+    const t = N === 1 ? 0.5 : i / (N - 1);
+    const angle = (-spread + t * 2 * spread) * Math.PI;
+    return {
+      x: cx + W * 0.28 + W * 0.22 * Math.cos(angle),
+      y: cy + H * 0.38 * Math.sin(angle),
+      label: NODES[i],
+    };
+  }
+
+  const pulses = [];
+  let lastPulse = 0;
+  const PULSE_INTERVAL = 2200;
+  const litState = new Array(N).fill(0);
+  let nextTarget = 0;
+
+  function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+  function draw(ts) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, W, H);
+    const accent  = tok('--accent');
+    const accent2 = tok('--accent-2');
+    const lineCl  = tok('--line-base');
+    const textMut = tok('--text-muted');
+    const nodes = Array.from({length: N}, (_, i) => nodePos(i));
+
+    // links
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
+      ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.35; ctx.lineWidth = 1; ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
+
+    // hub
+    const hb = 0.85 + 0.15 * Math.sin((ts % 1800) / 1800 * Math.PI * 2);
+    const gr = ctx.createRadialGradient(cx, cy, 0, cx, cy, 26 * hb);
+    gr.addColorStop(0, accent.replace(')', ',0.2)').replace('rgb','rgba'));
+    gr.addColorStop(1, accent.replace(')', ',0)').replace('rgb','rgba'));
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(cx, cy, 26 * hb, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, 5.5 * hb, 0, Math.PI * 2);
+    ctx.fillStyle = accent; ctx.fill();
+
+    // nodes
+    nodes.forEach((n, i) => {
+      const ph = ((ts + i * 420) % 1800) / 1800;
+      const s = 0.7 + 0.3 * Math.sin(ph * Math.PI * 2);
+      const lit = litState[i];
+      if (lit > 0) {
+        const g2 = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22);
+        g2.addColorStop(0, `rgba(225,29,116,${0.2 * lit})`);
+        g2.addColorStop(1, 'rgba(225,29,116,0)');
+        ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(n.x, n.y, 22, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.beginPath(); ctx.arc(n.x, n.y, 4 * s, 0, Math.PI * 2);
+      ctx.fillStyle = accent; ctx.globalAlpha = 0.5 + 0.5 * s + lit * 0.4; ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.font = '10px ' + tok('--font-mono'); ctx.fillStyle = textMut;
+      ctx.textAlign = 'left'; ctx.fillText(n.label, n.x + 9, n.y + 4);
+    });
+
+    // spawn pulse
+    if (ts - lastPulse > PULSE_INTERVAL) {
+      pulses.push({from:'hub', to:nextTarget, t:0, speed:0.0007 + Math.random()*0.0003, isReply:false});
+      nextTarget = (nextTarget + 1) % N; lastPulse = ts;
     }
 
-    // writing
-    if (data.writing) {
-      document.getElementById('writing-list').innerHTML = data.writing.map(w => `
-        <a class="post" href="${esc(w.url)}" target="_blank" rel="noopener">
-          <span class="post-title">${esc(w.title)}</span>
-          <span class="post-meta">${fmtDate(w.date)} · ~${w.mins} min</span>
-        </a>`).join('');
+    // advance + draw pulses
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      p.t += p.speed * 16;
+      if (p.t >= 1) {
+        if (!p.isReply) {
+          litState[p.to] = 1;
+          const cap = p;
+          setTimeout(() => pulses.push({from:cap.to, to:'hub', t:0, speed:cap.speed*0.85, isReply:true}), 200);
+        }
+        pulses.splice(i, 1); continue;
+      }
+      const from = p.from === 'hub' ? {x:cx,y:cy} : nodes[p.from];
+      const to   = p.to   === 'hub' ? {x:cx,y:cy} : nodes[p.to];
+      const et = easeInOut(p.t);
+      ctx.beginPath(); ctx.arc(from.x+(to.x-from.x)*et, from.y+(to.y-from.y)*et, 3, 0, Math.PI*2);
+      ctx.fillStyle = p.isReply ? accent2 : accent;
+      ctx.globalAlpha = 0.9 * (1 - Math.abs(p.t - 0.5) * 0.5); ctx.fill(); ctx.globalAlpha = 1;
     }
 
-    // last updated
-    if (data.meta?.updated) {
-      document.getElementById('last-updated').textContent = `last updated ${data.meta.updated}${data.meta.updatedBy ? ' · ' + data.meta.updatedBy : ''}`;
+    // decay lit
+    for (let i = 0; i < N; i++) litState[i] = Math.max(0, litState[i] - 0.016);
+
+    requestAnimationFrame(draw);
+  }
+
+  function drawStatic() {
+    const ctx = canvas.getContext('2d');
+    const accent = tok('--accent'); const lineCl = tok('--line-base'); const textMut = tok('--text-muted');
+    const nodes = Array.from({length:N}, (_,i) => nodePos(i));
+    nodes.forEach(n => {
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
+      ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.35; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1;
+    });
+    ctx.beginPath(); ctx.arc(cx, cy, 5.5, 0, Math.PI*2); ctx.fillStyle = accent; ctx.fill();
+    nodes.forEach((n, i) => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, 4, 0, Math.PI*2); ctx.fillStyle = accent; ctx.globalAlpha = 0.6; ctx.fill(); ctx.globalAlpha = 1;
+      ctx.font = '10px ' + tok('--font-mono'); ctx.fillStyle = textMut; ctx.textAlign = 'left'; ctx.fillText(n.label, n.x+9, n.y+4);
+    });
+  }
+
+  resize();
+  window.addEventListener('resize', () => { resize(); if (reduced) drawStatic(); });
+  reduced ? drawStatic() : requestAnimationFrame(draw);
+
+  // cursor-reactive nudge (identity principle: one element reacts to visitor)
+  if (!reduced) {
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('pointermove', e => {
+        const r = hero.getBoundingClientRect();
+        const dx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const dy = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        canvas.parentElement.style.transform = `translate(${dx*8}px, ${dy*6}px)`;
+        canvas.parentElement.style.transition = 'transform 120ms ease-out';
+      });
+      hero.addEventListener('pointerleave', () => {
+        canvas.parentElement.style.transform = 'translate(0,0)';
+      });
     }
+  }
+}
 
-    dismiss();
+/* ── caveman mode ─────────────────────────────────────────────────────── */
+(function () {
+  const ARTICLES = /^(a|an|the)$/i;
+  const FILLER   = /^(just|really|basically|actually|simply|very|quite|that|so|some|kind|sort)$/i;
+  const HEDGE    = /^(maybe|perhaps|possibly|probably)$/i;
+  const SKIP_SEL = 'code, pre, svg, .mono, .brand, .kicker, .nav-toggle, .caveman-btn, .theme-btn, .now-meta, .commit-banner, .tile-hint, .stamp, .read, .date, .tags, script, style, [data-caveman="off"]';
+
+  function cavemanize(text) {
+    const lead = text.match(/^\s*/)[0], trail = text.match(/\s*$/)[0], core = text.trim();
+    if (!core) return text;
+    const words = core.split(/\s+/), out = [];
+    for (const w of words) {
+      const m = w.match(/^([\w']*)([^\w']*)$/);
+      const bare = m ? m[1] : w, punct = m ? m[2] : '';
+      if (bare && (ARTICLES.test(bare)||FILLER.test(bare)||HEDGE.test(bare))) {
+        if (punct && out.length) {
+          const prev = out[out.length-1], prevPunct = (prev.match(/[^\w']*$/)||[''])[0];
+          const rank = p => (/[.!?]/.test(p)?2:/[,;:]/.test(p)?1:0);
+          if (rank(punct)>rank(prevPunct)) out[out.length-1] = prev.replace(/[^\w']*$/,'')+punct;
+        }
+        continue;
+      }
+      out.push(w);
+    }
+    return lead + out.join(' ') + trail;
   }
 
-  function dismiss() {
-    const o = document.getElementById('loading-overlay');
-    o.classList.add('fade');
-    setTimeout(() => o.remove(), 500);
+  function collect(root) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) { return node.parentElement.closest(SKIP_SEL) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; }
+    });
+    const nodes = []; let n; while ((n=walker.nextNode())) nodes.push(n); return nodes;
   }
 
-  function esc(s) {
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+  let on = false, cache = null;
+  const btn = document.getElementById('cavemanBtn');
+  if (btn) btn.addEventListener('click', () => {
+    on = !on; btn.setAttribute('aria-pressed', String(on));
+    if (!cache) cache = collect(document.body);
+    cache.forEach(node => {
+      if (on) { if (node.__orig==null) node.__orig=node.nodeValue; node.nodeValue=cavemanize(node.__orig); }
+      else if (node.__orig!=null) node.nodeValue=node.__orig;
+    });
+    btn.querySelector('.bone').textContent = on ? '\u{1F525}' : '\u{1F9B4}';
+  });
+})();
 
-  function fmtDate(d) {
-    try {
-      const dt = new Date(d + 'T00:00:00');
-      return dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit' }).toLowerCase();
-    } catch { return d; }
+/* ── theme toggle ─────────────────────────────────────────────────────── */
+(function () {
+  const btn = document.getElementById('themeBtn');
+  const glyph = document.getElementById('themeGlyph');
+  if (!btn) return;
+  function update() {
+    const dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme:dark)').matches);
+    glyph.textContent = dark ? '☀' : '☽';
   }
+  btn.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    const dark = cur === 'dark' || (!cur && window.matchMedia('(prefers-color-scheme:dark)').matches);
+    const next = dark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('balgaly-theme', next); } catch(e) {}
+    update();
+  });
+  update();
+})();
 
-  load();
+/* ── hamburger + scrim ──────────────────────────────────────────────────  */
+(function () {
+  const t = document.getElementById('navToggle');
+  const nav = document.getElementById('primaryNav');
+  const scrim = document.getElementById('navScrim');
+  if (!t) return;
+  function setOpen(open) {
+    nav.classList.toggle('open', open); scrim.classList.toggle('show', open);
+    t.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  t.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+  scrim.addEventListener('click', () => setOpen(false));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+})();
+
+boot();
 </script>
 </body>
 </html>

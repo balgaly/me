@@ -1,79 +1,108 @@
 {
   "meta": {
-    "updated": "2026-06-14",
-    "updatedBy": "whetstone@work-pc"
+    "updated": "2026-06-23",
+    "updatedBy": "whetstone@work-pc",
+    "buildDate": "2026-06-23"
   },
   "hero": {
-    "tagline": "I build tools that watch loops.",
-    "sub": "DevOps engineer · AI-native platform builder · CyberArk. I make infrastructure that monitors agents instead of running in them."
+    "kicker": "— on my way to become obsolete",
+    "h1": "I am a <span class=\"em\">strange</span> <span class=\"underline\">loop</span>.",
+    "lede": "<strong>devops manager at palo alto networks.</strong> 4 years running the pamoncloud team. i build the tools that make me unnecessary — that's the whole job, basically. <span class=\"dim\">i love to code. ish.</span>"
   },
   "now": {
-    "dayJob": "Code Koala 2.0 — contributor-readiness pass",
-    "building": "amit-hub — AI-agent-native worktree orchestrator",
-    "shipping": "skit MVP — AIC distribution platform demo",
-    "reading": "Anthropic agent papers, Strands SDK source",
-    "talking": "Self-Hosted AI Kickoff series · weekly · CyberArk R&D"
+    "week": "2026-W26",
+    "rows": [
+      { "lbl": "paying-the-bills",  "val": "CodeKoala 2.0 — handing off to the DevOps team. <em>finally.</em>" },
+      { "lbl": "obsessing-over",    "val": "amit-hub. worktrees an agent can drive." },
+      { "lbl": "about-to-demo",     "val": "skit. an npm for AI capabilities." },
+      { "lbl": "reading",           "val": "anthropic agent papers · strands sdk source." },
+      { "lbl": "meetings-about",    "val": "the weekly self-hosted AI kickoff i started." }
+    ]
+  },
+  "commits": {
+    "total": 101,
+    "repos": 10,
+    "sessions": 58,
+    "week": "2026-W25",
+    "days": [
+      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · code-koala, hq-work" },
+      { "d": "TUE", "c": 12, "l": 3, "detail": "12 commits · code-koala #98+#101, hq-work W13" },
+      { "d": "WED", "c": 6,  "l": 2, "detail": "6 commits · Philanthropist merges" },
+      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · code-koala, 50-first-sessions" },
+      { "d": "FRI", "c": 0,  "l": 0, "detail": "0 commits · in-flight on NG, out of root" },
+      { "d": "SAT", "c": 34, "l": 4, "detail": "34 commits · hq-work sprint" },
+      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · hq-work, code-koala, me" }
+    ]
   },
   "projects": [
     {
-      "slug": "code-koala",
-      "name": "code-koala",
-      "desc": "AI code reviewer running inside CyberArk's GitHub Enterprise. Lambda + Bedrock + Claude Opus 4.7. Self-serve install, multi-org adoption.",
-      "tags": ["python", "aws", "internal"],
+      "slug": "codekoala",
+      "name": "CodeKoala",
+      "kicker": "live in PANW · since 2025",
+      "desc": "add a label to a PR. 30 seconds later, koala posts a structured review. running quietly inside palo alto networks' github enterprise — <strong>194 reviews last week across 56 repos</strong>. strips sycophancy on parse, so it never tells you your code is &ldquo;great&rdquo;.",
+      "tags": ["python", "aws lambda", "bedrock", "cdk"],
       "status": "prod",
+      "featured": true,
       "url": "https://github.cyberng.com/snir/code-koala"
-    },
-    {
-      "slug": "skit",
-      "name": "skit",
-      "desc": "Package manager for AI capabilities — skills, subagents, rules — across Claude Code, Cursor, Windsurf. The npm of AICs.",
-      "tags": ["typescript", "cli", "oss"],
-      "status": "building",
-      "url": "https://github.com/balgaly/skit"
     },
     {
       "slug": "brif",
       "name": "brif",
-      "desc": "Mission-aware statusline and dashboard for Claude Code. Real-time ctx%, cost, model, branch.",
-      "tags": ["node", "tui", "oss"],
+      "kicker": "v1.1 · oss",
+      "desc": "a mission-aware statusline for claude code. tells you when context is dying. shows goal, cost, model. asks before it does anything irreversible — that APPROVE button is the only feature i actually care about.",
+      "tags": ["bash", "powershell", "tui"],
       "status": "v1",
       "url": "https://github.com/balgaly/brif"
     },
     {
+      "slug": "skit",
+      "name": "skit",
+      "kicker": "v1.2 · oss + enterprise",
+      "desc": "the npm of AICs. install once, works in claude code AND cursor AND windsurf. started on a tuesday afternoon when i should have been doing something else.",
+      "tags": ["node", "cli"],
+      "status": "building",
+      "url": "https://github.com/balgaly/skit"
+    },
+    {
       "slug": "amit-hub",
       "name": "amit-hub",
-      "desc": "AI-agent-native worktree orchestrator. CLI + VS Code ext + Claude Code MCP plugin, one TS core.",
-      "tags": ["typescript", "monorepo"],
+      "kicker": "phase 1 · oss",
+      "desc": "git worktrees an agent can drive without losing its mind. CLI + VS Code ext + claude code MCP plugin — one TS core, three surfaces. a colleague built the same thing privately before i shipped. that's how i knew it was real.",
+      "tags": ["typescript", "monorepo", "mcp"],
       "status": "phase1",
       "url": null
     },
     {
       "slug": "workwright",
       "name": "workwright",
-      "desc": "Playwright for terminals — MCP server for visible, AI-driveable PTY sessions with live browser viewer.",
-      "tags": ["node", "mcp", "oss"],
+      "kicker": "v1 · oss",
+      "desc": "playwright, but for terminals. an MCP server that lets an agent drive a real PTY — run a command, watch the output stream, react. the thing claude code couldn't do until it could.",
+      "tags": ["typescript", "mcp", "pty"],
       "status": "v1",
       "url": "https://github.com/balgaly/workwright"
-    },
-    {
-      "slug": "whetstone",
-      "name": "whetstone",
-      "desc": "Mentor AI system for continuity and drift control. Session notes, daily/weekly history, scope hooks.",
-      "tags": ["node", "obsidian"],
-      "status": "running",
-      "url": null
     }
   ],
   "writing": [
-    { "title": "short memory.", "slug": "short-memory", "date": "2026-04-05", "mins": 6, "url": "https://words.balgaly.com/blog/short-memory" },
-    { "title": "the context bar.", "slug": "the-context-bar", "date": "2026-04-03", "mins": 5, "url": "https://words.balgaly.com/blog/the-context-bar" },
-    { "title": "the package manager nobody asked for.", "slug": "the-package-manager-nobody-asked-for", "date": "2026-03-31", "mins": 4, "url": "https://words.balgaly.com/blog/the-package-manager-nobody-asked-for" },
-    { "title": "things i didn't know.", "slug": "things-i-didnt-know", "date": "2026-03-28", "mins": 12, "url": "https://words.balgaly.com/blog/things-i-didnt-know" }
+    { "title": "short memory.",                         "date": "09 APR 2026", "mins": 6,  "tag": "thinking out loud", "excerpt": "&ldquo;Too dangerous to release&rdquo; is a press release, not a safety decision. The fact stays. The feeling wipes clean.",                                        "url": "https://words.balgaly.com/blog/short-memory" },
+    { "title": "the context bar.",                      "date": "03 APR 2026", "mins": 5,  "tag": "code",              "excerpt": "Context window saturation is silent degradation. I built a monitoring system for a machine that does my work.",                                                "url": "https://words.balgaly.com/blog/the-context-bar" },
+    { "title": "the package manager nobody asked for.", "date": "31 MAR 2026", "mins": 4,  "tag": "code",              "excerpt": "AI assistants quietly became a runtime. Runtimes always get a package manager. Someone always gets annoyed enough.",                                             "url": "https://words.balgaly.com/blog/the-package-manager-nobody-asked-for" },
+    { "title": "things i didn't know.",                 "date": "28 MAR 2026", "mins": 12, "tag": "thinking out loud", "excerpt": "Working effectively with AI coding agents is not a coding skill. It is an architectural, process, and delegation skill.",                                         "url": "https://words.balgaly.com/blog/things-i-didnt-know" }
   ],
-  "stats": {
-    "yearsManaging": "4",
-    "prodServices": "1",
-    "kickoffAttendees": "20+",
-    "posts": "6"
+  "stack": {
+    "typing": [
+      { "name": "claude code", "note": "opus 4.8, all day" },
+      { "name": "cursor",      "note": "for the side projects" },
+      { "name": "obsidian",    "note": "vault is my second brain" }
+    ],
+    "bills": [
+      { "name": "aws bedrock",        "note": "claude inference at work" },
+      { "name": "github enterprise",  "note": "internal repos" },
+      { "name": "jenkins + cdk",      "note": "koala's pipeline" }
+    ],
+    "built": [
+      { "name": "brif",      "note": "my own statusline" },
+      { "name": "skit",      "note": "installs my own skills" },
+      { "name": "whetstone", "note": "keeps me on scope" }
+    ]
   }
 }

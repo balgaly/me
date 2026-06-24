@@ -1,0 +1,131 @@
+/* ============================================================
+   tokens.css — GENERATED from 03-tokens.json v1.4.0
+   Do not hand-edit values. Edit 03-tokens.json, run `npm run tokens`.
+   ============================================================ */
+:root {
+  /* color */
+  --bg-base: #e5e9f1;
+  --bg-deep: #d3dae8;
+  --bg-paper: #f0f3fa;
+  --text-primary: #0a111c;
+  --text-soft: #2b3847;
+  --text-muted: #5d6a7b;
+  --line-base: #b1bcce;
+  --line-soft: #c6cedd;
+  --accent: #e11d74;
+  --accent-deep: #be1664;
+  --accent-2: #fbbf24;
+  --good: #16a34a;
+  --invert-bg: #0a111c;
+  --invert-text: #f0f3fa;
+  /* type */
+  --font-display: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+  --font-body: 'Space Grotesk', -apple-system, system-ui, sans-serif;
+  --font-mono: 'Space Mono', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  --size-base: 17px;
+  --size-lede: 19px;
+  --size-hero: clamp(52px, 8.5vw, 108px);
+  --size-h2: 52px;
+  --size-card-h3: 22px;
+  --size-work-h3: 28px;
+  --size-nav: 15px;
+  --size-kicker: 13.5px;
+  --size-meta: 12.5px;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-brand: 800;
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 22px;
+  --space-6: 26px;
+  --space-8: 36px;
+  --space-11: 48px;
+  --space-12: 72px;
+  --space-14: 88px;
+  --space-16: 96px;
+  /* radius */
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 10px;
+  --r-xl: 14px;
+  --r-full: 9999px;
+  /* layout */
+  --maxw: 1320px;
+  --pad-x: 36px;
+  /* motion */
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 600ms;
+  --dur-orbit: 6s;
+  --ease-ease: ease;
+  --ease-smooth: cubic-bezier(0.16,1,0.3,1);
+  --ease-spring: cubic-bezier(0.34,1.56,0.64,1);
+  /* github-tile dark-bg intensity ramp (hand-tuned, not in tokens.json) */
+  --tile-0: #1c2733;
+  --tile-1: rgba(225,29,116,.32);
+  --tile-2: rgba(225,29,116,.55);
+  --tile-3: rgba(225,29,116,.80);
+  --tile-4: #e11d74;
+}
+
+/* ============================================================
+   DARK THEME — generated from 03-tokens.json color_dark.
+   Two triggers: explicit [data-theme="dark"] (toggle) wins;
+   otherwise prefers-color-scheme:dark follows the OS, unless
+   [data-theme="light"] is set to force light. Set data-theme
+   on <html> to pin a choice.
+   ============================================================ */
+[data-theme="dark"] {
+  --bg-base: #0d1420;
+  --bg-deep: #090f1a;
+  --bg-paper: #15202f;
+  --text-primary: #eef2f9;
+  --text-soft: #b8c4d4;
+  --text-muted: #94a3b8;
+  --line-base: #2a3850;
+  --line-soft: #1c2738;
+  --accent: #e11d74;
+  --accent-deep: #be1664;
+  --accent-2: #fbbf24;
+  --good: #22c55e;
+  --invert-bg: #05090f;
+  --invert-text: #eef2f9;
+  --tile-0: #1a2942;
+  --tile-1: rgba(225,29,116,.30);
+  --tile-2: rgba(225,29,116,.52);
+  --tile-3: rgba(225,29,116,.78);
+  --tile-4: #e11d74;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-base: #0d1420;
+    --bg-deep: #090f1a;
+    --bg-paper: #15202f;
+    --text-primary: #eef2f9;
+    --text-soft: #b8c4d4;
+    --text-muted: #94a3b8;
+    --line-base: #2a3850;
+    --line-soft: #1c2738;
+    --accent: #e11d74;
+    --accent-deep: #be1664;
+    --accent-2: #fbbf24;
+    --good: #22c55e;
+    --invert-bg: #05090f;
+    --invert-text: #eef2f9;
+    --tile-0: #1a2942;
+    --tile-1: rgba(225,29,116,.30);
+    --tile-2: rgba(225,29,116,.52);
+    --tile-3: rgba(225,29,116,.78);
+    --tile-4: #e11d74;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

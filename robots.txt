@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://balgaly.com/sitemap.xml
+Sitemap: https://me.balgaly.com/sitemap.xml

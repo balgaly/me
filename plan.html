@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>balgaly/me — plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #e5e9f1;
+  --bg-deep:  #d3dae8;
+  --bg-card:  #f0f3fa;
+  --text:     #0a111c;
+  --soft:     #2b3847;
+  --muted:    #5d6a7b;
+  --line:     #b1bcce;
+  --accent:   #e11d74;
+  --accent2:  #fbbf24;
+  --good:     #16a34a;
+  --pending:  #9ca3af;
+  --mono:     'Space Mono', monospace;
+  --sans:     'Space Grotesk', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; padding: 40px 24px 80px; }
+
+/* header */
+.hd { max-width: 900px; margin: 0 auto 48px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+.hd h1 { font-size: 26px; font-weight: 700; letter-spacing: -.03em; }
+.hd h1 em { color: var(--accent); font-style: normal; }
+.hd .meta { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-align: right; line-height: 1.8; }
+.hd .meta a { color: var(--soft); text-decoration: none; }
+.hd .meta a:hover { color: var(--accent); }
+
+/* progress bar */
+.progress-wrap { max-width: 900px; margin: 0 auto 40px; }
+.progress-bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; width: 100%; background: var(--accent); border-radius: 3px; transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(0.16,1,0.3,1); }
+.progress-label { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 8px; display: flex; justify-content: space-between; }
+
+/* pipeline */
+.pipeline { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+
+/* connector line */
+.connector { width: 2px; height: 28px; background: var(--line); margin-left: 22px; flex-shrink: 0; }
+.connector.done { background: var(--accent); }
+
+/* phase card */
+.phase { display: grid; grid-template-columns: 46px 1fr; gap: 0 16px; }
+.phase-icon { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.node { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; font-weight: 700; flex-shrink: 0; border: 2px solid var(--line); color: var(--muted); background: var(--bg-card); letter-spacing: -.02em; transition: all .3s; }
+.node.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+.node.partial { background: var(--bg-card); border-color: var(--accent); color: var(--accent); }
+.node.pending { opacity: 0.55; }
+
+.phase-body { background: var(--bg-card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px 20px; margin-bottom: 0; }
+.phase-body.done { border-color: color-mix(in srgb, var(--accent) 22%, var(--line)); }
+.phase-body.partial { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+
+.phase-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
+.phase-label { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
+.phase-title { font-size: 16px; font-weight: 700; letter-spacing: -.02em; margin-top: 2px; }
+.phase-badge { font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: .08em; }
+.badge-done    { background: color-mix(in srgb, var(--good) 12%, transparent); color: var(--good); border: 1px solid color-mix(in srgb, var(--good) 25%, transparent); }
+.badge-partial { background: color-mix(in srgb, var(--accent2) 15%, transparent); color: #b45309; border: 1px solid color-mix(in srgb, var(--accent2) 30%, transparent); }
+.badge-pending { background: color-mix(in srgb, var(--pending) 15%, transparent); color: var(--muted); border: 1px solid var(--line); }
+
+.phase-note { font-family: var(--mono); font-size: 11px; color: #b45309; background: color-mix(in srgb, var(--accent2) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent2) 28%, transparent); border-radius: 6px; padding: 6px 10px; margin-bottom: 12px; }
+
+.tasks { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.tasks li { display: flex; align-items: flex-start; gap: 8px; font-size: 13.5px; color: var(--soft); line-height: 1.5; }
+.tasks li .chk { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+.chk.t { background: var(--accent); }
+.chk.f { border: 1.5px solid var(--line); background: transparent; }
+.chk.t::after { content: ''; display: block; width: 5px; height: 8px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg) translate(-1px,-1px); }
+.tasks li.undone { color: var(--muted); }
+
+/* footer */
+.foot { max-width: 900px; margin: 48px auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-family: var(--mono); font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
+.refresh-btn { background: none; border: 1px solid var(--line); border-radius: 6px; padding: 5px 12px; font-family: var(--mono); font-size: 11px; color: var(--soft); cursor: pointer; transition: all .2s; }
+.refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+#last-fetch { color: var(--muted); }
+.pulse { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); vertical-align: middle; margin-left: 4px; animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.7)} }
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div>
+    <h1>balgaly/<em>me</em> — plan</h1>
+  </div>
+  <div class="meta" id="meta-block">loading&hellip;</div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+  <div class="progress-label"><span id="prog-text">—</span><span id="prog-pct">—</span></div>
+</div>
+
+<div class="pipeline" id="pipeline">
+  <div style="text-align:center;padding:40px;font-family:var(--mono);color:var(--muted);font-size:12px;">loading plan.json&hellip;</div>
+</div>
+
+<div class="foot">
+  <span>auto-refresh every 15s <span class="pulse"></span> <span id="last-fetch"></span></span>
+  <button class="refresh-btn" id="rfBtn">↺ refresh now</button>
+</div>
+
+<script>
+const DATA_URL = 'plan.json';
+const REFRESH_MS = 15000;
+let timer;
+
+function statusClass(phase) {
+  const total = phase.tasks.length;
+  const done  = phase.tasks.filter(t => t.done).length;
+  if (done === total) return 'done';
+  if (done > 0)       return 'partial';
+  return 'pending';
+}
+
+function badgeHtml(sc) {
+  const map = { done: ['done','badge-done'], partial: ['in progress','badge-partial'], pending: ['pending','badge-pending'] };
+  const [label, cls] = map[sc];
+  return `<span class="phase-badge ${cls}">${label}</span>`;
+}
+
+function nodeLabel(index) {
+  return String(index).padStart(2,'0');
+}
+
+function render(data) {
+  // meta
+  document.getElementById('meta-block').innerHTML =
+    `<a href="${data.repo}" target="_blank" rel="noopener">${data.repo.replace('https://','')}</a><br>` +
+    `<a href="${data.live}" target="_blank" rel="noopener">${data.live}</a><br>` +
+    `updated ${data.updated}`;
+
+  // progress
+  const allTasks = data.phases.flatMap(p => p.tasks);
+  const doneCount = allTasks.filter(t => t.done).length;
+  const pct = Math.round(doneCount / allTasks.length * 100);
+  document.getElementById('prog-fill').style.transform = `scaleX(${pct / 100})`;
+  document.getElementById('prog-text').textContent = `${doneCount} / ${allTasks.length} tasks done`;
+  document.getElementById('prog-pct').textContent = pct + '%';
+
+  // pipeline
+  const pipe = document.getElementById('pipeline');
+  pipe.innerHTML = '';
+  data.phases.forEach((phase, i) => {
+    const sc = statusClass(phase);
+
+    // connector above (except first)
+    if (i > 0) {
+      const conn = document.createElement('div');
+      conn.className = 'connector' + (data.phases[i-1] && statusClass(data.phases[i-1]) === 'done' ? ' done' : '');
+      pipe.appendChild(conn);
+    }
+
+    const wrap = document.createElement('div');
+    wrap.className = 'phase';
+    wrap.innerHTML = `
+      <div class="phase-icon">
+        <div class="node ${sc}">${nodeLabel(i+1)}</div>
+      </div>
+      <div class="phase-body ${sc}">
+        <div class="phase-head">
+          <div>
+            <div class="phase-label">${phase.label}</div>
+            <div class="phase-title">${phase.title}</div>
+          </div>
+          ${badgeHtml(sc)}
+        </div>
+        ${phase.notes ? `<div class="phase-note">⚠ ${phase.notes}</div>` : ''}
+        <ul class="tasks">
+          ${phase.tasks.map(t => `
+            <li class="${t.done ? '' : 'undone'}">
+              <span class="chk ${t.done ? 't' : 'f'}"></span>
+              <span>${t.text}</span>
+            </li>`).join('')}
+        </ul>
+      </div>`;
+    pipe.appendChild(wrap);
+  });
+
+  // timestamp
+  const now = new Date();
+  document.getElementById('last-fetch').textContent =
+    `// fetched ${now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',second:'2-digit'})}`;
+}
+
+async function load() {
+  try {
+    const r = await fetch(DATA_URL + '?v=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    render(data);
+  } catch(e) {
+    document.getElementById('last-fetch').textContent = '// fetch failed: ' + e.message;
+  }
+  clearTimeout(timer);
+  timer = setTimeout(load, REFRESH_MS);
+}
+
+document.getElementById('rfBtn').addEventListener('click', () => { clearTimeout(timer); load(); });
+
+load();
+</script>
+</body>
+</html>

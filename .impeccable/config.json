@@ -1,0 +1,29 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [
+      ".worktrees/site-online/index.html",
+      "plan.html"
+    ],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "reason": "User confirmed Inter is intentional — existing site design language",
+        "createdAt": "2026-06-23T10:27:50.596Z"
+      },
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "reason": "Canonical design language font from design-language-balgaly repo",
+        "createdAt": "2026-06-24T04:55:25.872Z"
+      },
+      {
+        "rule": "overused-font",
+        "value": "space mono",
+        "reason": "Canonical design language font from design-language-balgaly repo",
+        "createdAt": "2026-06-24T04:58:51.871Z"
+      }
+    ]
+  }
+}

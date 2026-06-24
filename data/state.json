@@ -14,11 +14,13 @@
   "now": {
     "week": "2026-W26",
     "rows": [
-      { "lbl": "paying-the-bills",  "val": "CodeKoala 2.0 — handing off to the DevOps team. <em>finally.</em>",       "cv": "koala 2.0. gave it away. free at last." },
-      { "lbl": "obsessing-over",    "val": "amit-hub. worktrees an agent can drive.",                                   "cv": "agent get own folder. agent happy." },
-      { "lbl": "about-to-demo",     "val": "skit. the npm for AI capabilities.",                                        "cv": "npm but for robots. demo friday." },
-      { "lbl": "reading",           "val": "anthropic agent papers. strands sdk source.",                               "cv": "reading. big words. brain hurt." },
-      { "lbl": "meetings-about",    "val": "the weekly self-hosted AI kickoff i started.",                              "cv": "meeting. me start it. now stuck in it." }
+      { "lbl": "paying-the-bills", "val": "CodeKoala 2.0 shipped to prod. 5 JIRA transitions queued.",                    "cv": "koala 2.0. prod. still 5 things on list." },
+      { "lbl": "building",         "val": "amit-hub. worktrees an agent can drive. pre-build.",                            "cv": "agent get own folder. agent not confused." },
+      { "lbl": "building",         "val": "skit v1.2. the npm for AI capabilities.",                                       "cv": "npm but robot. building." },
+      { "lbl": "closing-out",      "val": "eventic. AI for a clean calendar. phase 1 at 90%.",                             "cv": "calendar app. 90% done. 90% always lies." },
+      { "lbl": "watching",         "val": "philanthrogist-. autonomous OSS bot. v1.0 built. dry-run owed.",                "cv": "robot send PR. not pressed go yet. scared." },
+      { "lbl": "reading",          "val": "anthropic agent papers. strands sdk source.",                                   "cv": "reading. big words. brain hurt." },
+      { "lbl": "meetings-about",   "val": "the weekly self-hosted AI kickoff i started.",                                  "cv": "meeting. me start it. now stuck in it." }
     ]
   },
   "commits": {
@@ -27,13 +29,13 @@
     "sessions": 58,
     "week": "2026-W25",
     "days": [
-      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · code-koala + for the real bosses" },
+      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · code-koala + undisclosed projects" },
       { "d": "TUE", "c": 12, "l": 3, "detail": "12 commits · code-koala (the reviews never stop)" },
-      { "d": "WED", "c": 6,  "l": 2, "detail": "6 commits · classified, need-to-know basis" },
-      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · code-koala + personal R&D" },
-      { "d": "FRI", "c": 0,  "l": 0, "detail": "0 commits · in-flight, serving the real bosses" },
-      { "d": "SAT", "c": 34, "l": 4, "detail": "34 commits · heavy day for the real bosses" },
-      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · code-koala + the real bosses again" }
+      { "d": "WED", "c": 6,  "l": 2, "detail": "6 commits · ask my lawyer" },
+      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · code-koala + side quests" },
+      { "d": "FRI", "c": 0,  "l": 0, "detail": "0 commits · nothing to declare" },
+      { "d": "SAT", "c": 34, "l": 4, "detail": "34 commits · [redacted by request]" },
+      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · code-koala + classified" }
     ]
   },
   "projects": [

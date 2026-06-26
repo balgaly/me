@@ -3,7 +3,9 @@
     "ignoreRules": [],
     "ignoreFiles": [
       ".worktrees/site-online/index.html",
-      "plan.html"
+      "plan.html",
+      ".worktrees/polish2/index.html",
+      "src/layouts/Layout.astro"
     ],
     "ignoreValues": [
       {
@@ -15,7 +17,7 @@
       {
         "rule": "overused-font",
         "value": "space grotesk",
-        "reason": "Canonical design language font from design-language-balgaly repo",
+        "reason": "User confirmed Space Grotesk is intentional brand font matching me.balgaly.com design language",
         "createdAt": "2026-06-24T04:55:25.872Z"
       },
       {

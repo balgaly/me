@@ -1,5 +1,5 @@
 /* ============================================================
-   tokens.css — GENERATED from 03-tokens.json v1.4.0
+   tokens.css — GENERATED from 03-tokens.json v1.5.0
    Do not hand-edit values. Edit 03-tokens.json, run `npm run tokens`.
    ============================================================ */
 :root {
@@ -89,8 +89,8 @@
   --text-muted: #94a3b8;
   --line-base: #2a3850;
   --line-soft: #1c2738;
-  --accent: #e11d74;
-  --accent-deep: #be1664;
+  --accent: #db5c8e;
+  --accent-deep: #c44a7c;
   --accent-2: #fbbf24;
   --good: #22c55e;
   --invert-bg: #05090f;
@@ -112,8 +112,8 @@
     --text-muted: #94a3b8;
     --line-base: #2a3850;
     --line-soft: #1c2738;
-    --accent: #e11d74;
-    --accent-deep: #be1664;
+    --accent: #db5c8e;
+    --accent-deep: #c44a7c;
     --accent-2: #fbbf24;
     --good: #22c55e;
     --invert-bg: #05090f;

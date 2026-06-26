@@ -5,6 +5,7 @@
       ".worktrees/site-online/index.html",
       "plan.html",
       ".worktrees/polish2/index.html",
+      ".worktrees/content-scrub/index.html",
       "src/layouts/Layout.astro"
     ],
     "ignoreValues": [

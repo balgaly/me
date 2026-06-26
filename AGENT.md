@@ -103,7 +103,8 @@ Page URL convention: `balgaly.com/<slug>/` — slug is lowercase, hyphenated.
 
 ## Rules
 
-- Never commit secrets, keys, or internal URLs (CyberArk GHE links are OK in `url` fields — they just won't be clickable externally)
+- Never commit secrets, keys, or internal/self-hosted URLs. This includes any `github.cyberng.com` or other self-hosted GHE links — even in `url` fields. Set `url: null` for work projects without a public URL.
+- Never name specific work projects in any field. A generic at-work card is fine; project names are not.
 - Keep `index.html` untouched unless you're changing the presentation layer itself
 - `data/state.json` must always be valid JSON — validate before pushing
 - Both agents can push to `main` directly; no PR needed for state updates

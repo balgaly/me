@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updated": "2026-06-24",
+    "updated": "2026-06-27",
     "updatedBy": "whetstone@work-pc",
     "buildDate": "2026-06-24"
   },
@@ -9,18 +9,18 @@
     "h1": "I am a <span class=\"em\">strange</span> <span class=\"underline\">loop</span>.",
     "lede": "<strong>devops manager at palo alto networks.</strong> i build agents that do my job, so i can go build the next one. <span class=\"dim\">the goal is to make myself unnecessary. that is the whole job.</span>",
     "lede_cv": "boss at palo alto networks. build robot. robot do job. build next robot.",
-    "sessions": ["code-koala", "brif", "skit", "amit-hub", "workwright", "whetstone", "whetstone-agents", "me"]
+    "sessions": ["$dayjob", "brif", "skit", "amit-hub", "workwright", "whetstone", "whetstone-agents", "me"]
   },
   "now": {
     "week": "2026-W26",
     "rows": [
-      { "lbl": "paying-the-bills", "val": "CodeKoala 2.0 shipped to prod. 5 JIRA transitions queued.",                    "cv": "koala 2.0. prod. still 5 things on list." },
-      { "lbl": "building",         "val": "amit-hub. worktrees an agent can drive. pre-build.",                            "cv": "agent get own folder. agent not confused." },
-      { "lbl": "building",         "val": "skit v1.2. the npm for AI capabilities.",                                       "cv": "npm but robot. building." },
-      { "lbl": "closing-out",      "val": "eventic. AI for a clean calendar. phase 1 at 90%.",                             "cv": "calendar app. 90% done. 90% always lies." },
-      { "lbl": "watching",         "val": "philanthrogist-. autonomous OSS bot. v1.0 built. dry-run owed.",                "cv": "robot send PR. not pressed go yet. scared." },
-      { "lbl": "reading",          "val": "anthropic agent papers. strands sdk source.",                                   "cv": "reading. big words. brain hurt." },
-      { "lbl": "meetings-about",   "val": "the weekly self-hosted AI kickoff i started.",                                  "cv": "meeting. me start it. now stuck in it." }
+      { "lbl": "paying-the-bills", "val": "the work agent shipped 2.0 to prod. 5 JIRA transitions queued.",             "cv": "$dayjob 2.0. prod. still 5 things on list." },
+      { "lbl": "building",         "val": "amit-hub. worktrees an agent can drive. pre-build.",                          "cv": "agent get own folder. agent not confused." },
+      { "lbl": "building",         "val": "skit v1.2. the npm for AI capabilities.",                                     "cv": "npm but robot. building." },
+      { "lbl": "closing-out",      "val": "eventic. AI for a clean calendar. phase 1 at 90%.",                           "cv": "calendar app. 90% done. 90% always lies." },
+      { "lbl": "watching",         "val": "philanthrogist-. autonomous OSS bot. v1.0 built. dry-run owed.",              "cv": "robot send PR. not pressed go yet. scared." },
+      { "lbl": "reading",          "val": "anthropic agent papers. strands sdk source.",                                 "cv": "reading. big words. brain hurt." },
+      { "lbl": "meetings-about",   "val": "a weekly internal thing i started.",                                          "cv": "meeting. me start it. now stuck in it." }
     ]
   },
   "commits": {
@@ -29,26 +29,26 @@
     "sessions": 58,
     "week": "2026-W25",
     "days": [
-      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · code-koala + undisclosed projects" },
-      { "d": "TUE", "c": 12, "l": 3, "detail": "12 commits · code-koala (the reviews never stop)" },
+      { "d": "MON", "c": 10, "l": 3, "detail": "10 commits · the work repo + undisclosed projects" },
+      { "d": "TUE", "c": 12, "l": 3, "detail": "12 commits · the work repo (the reviews never stop)" },
       { "d": "WED", "c": 6,  "l": 2, "detail": "6 commits · ask my lawyer" },
-      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · code-koala + side quests" },
+      { "d": "THU", "c": 11, "l": 3, "detail": "11 commits · the work repo + side quests" },
       { "d": "FRI", "c": 0,  "l": 0, "detail": "0 commits · nothing to declare" },
       { "d": "SAT", "c": 34, "l": 4, "detail": "34 commits · [redacted by request]" },
-      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · code-koala + classified" }
+      { "d": "SUN", "c": 28, "l": 4, "detail": "28 commits · the work repo + classified" }
     ]
   },
   "projects": [
     {
-      "slug": "codekoala",
-      "name": "CodeKoala",
-      "kicker": "live in PANW · since 2025",
-      "desc": "add a label to a PR. 30 seconds later, koala posts a structured review. running quietly inside palo alto networks' github enterprise — <strong>194 reviews last week across 56 repos</strong>. strips sycophancy on parse, so it never tells you your code is &ldquo;great&rdquo;.",
-      "desc_cv": "put label on PR. koala appear. koala review. koala not compliment. koala honest.",
+      "slug": "$dayjob",
+      "name": "$DAYJOB",
+      "kicker": "live in prod · since 2025",
+      "desc": "add a label to a PR. 30 seconds later, it posts a structured review. running quietly inside a private github enterprise — <strong>194 reviews last week across 56 repos</strong>. strips sycophancy on parse, so it never tells you your code is &ldquo;great&rdquo;.",
+      "desc_cv": "put label on PR. agent appear. agent review. agent not compliment. agent honest.",
       "tags": ["python", "aws lambda", "bedrock", "cdk"],
       "status": "prod",
       "featured": true,
-      "url": "https://github.cyberng.com/snir/code-koala"
+      "url": null
     },
     {
       "slug": "brif",
@@ -106,7 +106,7 @@
     "bills": [
       { "name": "aws bedrock",        "note": "claude inference at work", "glyph": "☁",  "level": 4 },
       { "name": "github enterprise",  "note": "internal repos",            "glyph": "⎇",  "level": 3 },
-      { "name": "jenkins + cdk",      "note": "koala's pipeline",          "glyph": "⚙",  "level": 3 }
+      { "name": "jenkins + cdk",      "note": "the work pipeline",         "glyph": "⚙",  "level": 3 }
     ],
     "built": [
       { "name": "brif",      "note": "my own statusline",    "glyph": "▐", "level": 4 },

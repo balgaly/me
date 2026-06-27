@@ -82,8 +82,9 @@
   .caveman-btn { font-size: 15px; margin-top: 22px; align-self: flex-start; padding: 10px 16px; }
 }
 
-/* constellation canvas */
-.session-art { position: relative; width: 100%; max-width: 520px; aspect-ratio: 4/3; margin: 0 auto; }
+/* constellation canvas — wider column + larger canvas to fill the hero */
+.hero-grid { grid-template-columns: minmax(0,1fr) 460px; }
+.session-art { position: relative; width: 100%; max-width: 620px; aspect-ratio: 5/4; margin: 0 auto; }
 .session-art canvas { display: block; width: 100%; height: 100%; }
 
 /* horizontal strip */
@@ -313,7 +314,7 @@ async function boot() {
       const href = featured.url ? `href="${esc(featured.url)}" target="_blank" rel="noopener"` : '';
       const cvAttr = featured.desc_cv ? ` data-cv="${esc(featured.desc_cv)}"` : '';
       html += `<a ${href} class="work-card featured">
-        <div class="visual"></div>
+        <div class="visual">${featured.visual || ''}</div>
         <div class="body">
           <span class="kicker">${esc(featured.kicker)}</span>
           <h3>${esc(featured.name)}</h3>
@@ -328,7 +329,7 @@ async function boot() {
         const href = p.url ? `href="${esc(p.url)}" target="_blank" rel="noopener"` : '';
         const cvAttr = p.desc_cv ? ` data-cv="${esc(p.desc_cv)}"` : '';
         html += `<a ${href} class="work-card">
-          <div class="visual"></div>
+          <div class="visual">${p.visual || ''}</div>
           <div class="body">
             <span class="kicker">${esc(p.kicker)}</span>
             <h3>${esc(p.name)}</h3>
@@ -441,16 +442,16 @@ function initConstellation(sessions) {
     canvas.style.width  = W + 'px';
     canvas.style.height = H + 'px';
     canvas.getContext('2d').scale(dpr, dpr);
-    cx = W * 0.22; cy = H * 0.5;
+    cx = W * 0.26; cy = H * 0.5;
   }
 
   function nodePos(i) {
-    const spread = Math.min(0.65, 0.28 + N * 0.05);
+    const spread = Math.min(0.68, 0.30 + N * 0.045);
     const t = N === 1 ? 0.5 : i / (N - 1);
     const angle = (-spread + t * 2 * spread) * Math.PI;
     return {
-      x: cx + W * 0.28 + W * 0.20 * Math.cos(angle),
-      y: cy + H * 0.36 * Math.sin(angle),
+      x: cx + W * 0.30 + W * 0.22 * Math.cos(angle),
+      y: cy + H * 0.40 * Math.sin(angle),
       label: NODES[i],
     };
   }
@@ -510,11 +511,11 @@ function initConstellation(sessions) {
 
     // hub breathe
     const hb = 0.85 + 0.15 * Math.sin(ts / 1800 * Math.PI * 2);
-    const gr = ctx.createRadialGradient(cx, cy, 0, cx, cy, 26 * hb);
-    gr.addColorStop(0, `rgba(225,29,116,${0.22*hb})`);
+    const gr = ctx.createRadialGradient(cx, cy, 0, cx, cy, 36 * hb);
+    gr.addColorStop(0, `rgba(225,29,116,${0.25*hb})`);
     gr.addColorStop(1, 'rgba(225,29,116,0)');
-    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(cx, cy, 26 * hb, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(cx, cy, 5.5 * hb, 0, Math.PI * 2);
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(cx, cy, 36 * hb, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, 7 * hb, 0, Math.PI * 2);
     ctx.fillStyle = accent; ctx.fill();
 
     // nodes
@@ -523,25 +524,25 @@ function initConstellation(sessions) {
       const s = 0.7 + 0.3 * Math.sin(ph * Math.PI * 2);
       const lit = litState[i];
       if (lit > 0) {
-        const g2 = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 20);
-        g2.addColorStop(0, `rgba(225,29,116,${0.22 * lit})`);
+        const g2 = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 26);
+        g2.addColorStop(0, `rgba(225,29,116,${0.25 * lit})`);
         g2.addColorStop(1, 'rgba(225,29,116,0)');
-        ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(n.x, n.y, 20, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(n.x, n.y, 26, 0, Math.PI * 2); ctx.fill();
       }
-      ctx.beginPath(); ctx.arc(n.x, n.y, 4 * s, 0, Math.PI * 2);
+      ctx.beginPath(); ctx.arc(n.x, n.y, 5.5 * s, 0, Math.PI * 2);
       ctx.fillStyle = accent; ctx.globalAlpha = 0.5 + 0.5 * s + lit * 0.4; ctx.fill();
       ctx.globalAlpha = 1;
 
       // static label
-      ctx.font = '10px ' + tok('--font-mono'); ctx.fillStyle = textMut;
-      ctx.textAlign = 'left'; ctx.fillText(n.label, n.x + 9, n.y + 4);
+      ctx.font = '11px ' + tok('--font-mono'); ctx.fillStyle = textMut;
+      ctx.textAlign = 'left'; ctx.fillText(n.label, n.x + 11, n.y + 4);
 
       // "· running" fade label
       if (labelAlpha[i] > 0) {
-        ctx.font = '9px ' + tok('--font-mono');
+        ctx.font = '10px ' + tok('--font-mono');
         ctx.fillStyle = accent;
         ctx.globalAlpha = labelAlpha[i] * 0.85;
-        ctx.fillText('· running', n.x + 9, n.y + 15);
+        ctx.fillText('· running', n.x + 11, n.y + 16);
         ctx.globalAlpha = 1;
         labelAlpha[i] = Math.max(0, labelAlpha[i] - dt * 0.0008);
       }
@@ -596,10 +597,10 @@ function initConstellation(sessions) {
       ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(n.x, n.y);
       ctx.strokeStyle = lineCl; ctx.globalAlpha = 0.32; ctx.lineWidth = 1; ctx.stroke(); ctx.globalAlpha = 1;
     });
-    ctx.beginPath(); ctx.arc(cx, cy, 5.5, 0, Math.PI*2); ctx.fillStyle = accent; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, 7, 0, Math.PI*2); ctx.fillStyle = accent; ctx.fill();
     nodes.forEach((n) => {
-      ctx.beginPath(); ctx.arc(n.x, n.y, 4, 0, Math.PI*2); ctx.fillStyle = accent; ctx.globalAlpha = 0.6; ctx.fill(); ctx.globalAlpha = 1;
-      ctx.font = '10px ' + tok('--font-mono'); ctx.fillStyle = textMut; ctx.textAlign = 'left'; ctx.fillText(n.label, n.x+9, n.y+4);
+      ctx.beginPath(); ctx.arc(n.x, n.y, 5.5, 0, Math.PI*2); ctx.fillStyle = accent; ctx.globalAlpha = 0.6; ctx.fill(); ctx.globalAlpha = 1;
+      ctx.font = '11px ' + tok('--font-mono'); ctx.fillStyle = textMut; ctx.textAlign = 'left'; ctx.fillText(n.label, n.x+11, n.y+4);
     });
   }
 

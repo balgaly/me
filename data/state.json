@@ -9,7 +9,7 @@
     "h1": "I am a <span class=\"em\">strange</span> <span class=\"underline\">loop</span>.",
     "lede": "<strong>devops manager at palo alto networks.</strong> i build agents that do my job, so i can go build the next one. <span class=\"dim\">the goal is to make myself unnecessary. that is the whole job.</span>",
     "lede_cv": "boss at palo alto networks. build robot. robot do job. build next robot.",
-    "sessions": ["$dayjob", "brif", "skit", "amit-hub", "workwright", "whetstone", "whetstone-agents", "me"]
+    "sessions": ["$dayjob", "brif", "skit", "amit-hub", "workwright", "whetstone", "$standup", "whetstone-agents", "me"]
   },
   "now": {
     "week": "2026-W26",
@@ -48,7 +48,8 @@
       "tags": ["python", "aws lambda", "bedrock", "cdk"],
       "status": "prod",
       "featured": true,
-      "url": null
+      "url": null,
+      "visual": "<svg viewBox=\"0 0 480 380\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid meet\" style=\"width:100%;height:100%;padding:32px 40px;box-sizing:border-box;\"><g font-family=\"Space Mono, monospace\" font-size=\"12\"><text x=\"0\" y=\"22\" fill=\"var(--text-muted)\" font-size=\"10\">// diff · reviewer/core.py</text><text x=\"0\" y=\"52\" fill=\"var(--text-soft)\">+ def review_pr(diff):</text><text x=\"0\" y=\"74\" fill=\"var(--text-soft)\">+   findings = []</text><text x=\"0\" y=\"96\" fill=\"var(--text-soft)\">+   for hunk in diff.hunks:</text><text x=\"0\" y=\"118\" fill=\"var(--accent)\" font-weight=\"700\">-     issues = check(hunk)</text><text x=\"0\" y=\"140\" fill=\"var(--status-good)\">+     issues = audit(hunk)</text><text x=\"0\" y=\"162\" fill=\"var(--text-soft)\">+     findings += issues</text><text x=\"0\" y=\"184\" fill=\"var(--text-soft)\">+   return findings</text></g><path d=\"M -10 118 L -14 118 L -14 248 L 30 248\" stroke=\"var(--accent)\" stroke-width=\"2\" fill=\"none\" marker-end=\"url(#arr-dj2)\"/><defs><marker id=\"arr-dj2\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\"><path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"var(--accent)\"/></marker></defs><rect x=\"40\" y=\"230\" width=\"340\" height=\"52\" rx=\"8\" fill=\"var(--bg-paper)\" stroke=\"var(--accent)\" stroke-width=\"1.5\"/><text x=\"56\" y=\"251\" font-family=\"Space Mono, monospace\" font-size=\"11\" fill=\"var(--text-primary)\" font-weight=\"700\">$dayjob · L4 severity</text><text x=\"56\" y=\"269\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-soft)\">use audit() — check() ignores context window</text><line x1=\"0\" y1=\"306\" x2=\"480\" y2=\"306\" stroke=\"var(--line-base)\" stroke-width=\"1\" opacity=\"0.6\"/><text x=\"0\" y=\"328\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-muted)\">// last 7 days</text><text x=\"140\" y=\"328\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--accent)\">194 reviews</text><text x=\"260\" y=\"328\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-soft)\" opacity=\"0.7\">56 repos</text><text x=\"0\" y=\"352\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--status-good)\">&#x2713; 0 sycophantic responses</text><text x=\"260\" y=\"352\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-muted)\">never says &quot;great&quot;</text></svg>"
     },
     {
       "slug": "brif",
@@ -58,7 +59,8 @@
       "desc_cv": "bar at bottom. bar say 'context die soon'. bar ask before explode. me like bar.",
       "tags": ["bash", "powershell", "tui"],
       "status": "v1",
-      "url": "https://github.com/balgaly/brif"
+      "url": "https://github.com/balgaly/brif",
+      "visual": "<svg viewBox=\"0 0 280 110\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%;\"><rect x=\"0\" y=\"0\" width=\"280\" height=\"110\" fill=\"var(--invert-bg)\"/><text x=\"14\" y=\"34\" font-family=\"Space Mono, monospace\" font-size=\"11\" fill=\"var(--invert-text)\">opus-4.8 · main · $dayjob</text><text x=\"14\" y=\"55\" font-family=\"Space Mono, monospace\" font-size=\"11\" fill=\"var(--accent)\">ctx 87% ▓▓▓▓▓▓▓▓░░  $0.42  14m</text><text x=\"14\" y=\"75\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--accent-2)\">└─ APPROVE? edit reviewer/app.py:124</text><text x=\"14\" y=\"95\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-muted)\">  [y]es  [n]o  [d]iff</text></svg>"
     },
     {
       "slug": "skit",
@@ -68,7 +70,8 @@
       "desc_cv": "npm but robot. one install. all editor. built on tuesday. should not have.",
       "tags": ["node", "cli"],
       "status": "building",
-      "url": "https://github.com/balgaly/skit"
+      "url": "https://github.com/balgaly/skit",
+      "visual": "<svg viewBox=\"0 0 220 80\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%;padding:14px 18px;box-sizing:border-box;\"><rect x=\"0\" y=\"4\" width=\"36\" height=\"36\" rx=\"6\" fill=\"var(--accent)\"/><text x=\"18\" y=\"28\" text-anchor=\"middle\" font-family=\"Space Mono, monospace\" font-size=\"15\" font-weight=\"700\" fill=\"#fff\">$</text><text x=\"46\" y=\"20\" font-family=\"Space Mono, monospace\" font-size=\"12\" fill=\"var(--text-primary)\" font-weight=\"500\">skit install jira-mcp</text><text x=\"46\" y=\"40\" font-family=\"Space Mono, monospace\" font-size=\"11\" fill=\"var(--status-good)\">✓ verified · 1.2.3 → 1.4.0</text></svg>"
     },
     {
       "slug": "amit-hub",
@@ -78,7 +81,8 @@
       "desc_cv": "agent get own branch. agent not confused. colleague build same. that mean good idea.",
       "tags": ["typescript", "monorepo", "mcp"],
       "status": "phase1",
-      "url": null
+      "url": null,
+      "visual": "<svg viewBox=\"0 0 220 110\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%;padding:14px 18px;box-sizing:border-box;\"><rect x=\"0\" y=\"10\" width=\"52\" height=\"56\" rx=\"4\" fill=\"var(--bg-paper)\" stroke=\"var(--line-base)\" stroke-width=\"1.5\"/><rect x=\"64\" y=\"10\" width=\"52\" height=\"56\" rx=\"4\" fill=\"var(--bg-paper)\" stroke=\"var(--line-base)\" stroke-width=\"1.5\"/><rect x=\"128\" y=\"10\" width=\"52\" height=\"56\" rx=\"4\" fill=\"var(--accent)\" stroke=\"var(--accent-deep)\" stroke-width=\"1.5\"/><text x=\"26\" y=\"43\" text-anchor=\"middle\" font-family=\"Space Mono, monospace\" font-size=\"9\" fill=\"var(--text-primary)\" font-weight=\"600\">main</text><text x=\"90\" y=\"43\" text-anchor=\"middle\" font-family=\"Space Mono, monospace\" font-size=\"9\" fill=\"var(--text-primary)\" font-weight=\"600\">feat-1</text><text x=\"154\" y=\"43\" text-anchor=\"middle\" font-family=\"Space Mono, monospace\" font-size=\"9\" fill=\"#fff\" font-weight=\"600\">agent</text><text x=\"0\" y=\"84\" font-family=\"Space Mono, monospace\" font-size=\"9\" fill=\"var(--text-muted)\">each branch: isolated context</text></svg>"
     },
     {
       "slug": "workwright",
@@ -88,7 +92,30 @@
       "desc_cv": "playwright but terminal. agent type command. agent watch output. agent react. very useful.",
       "tags": ["typescript", "mcp", "pty"],
       "status": "v1",
-      "url": "https://github.com/balgaly/workwright"
+      "url": "https://github.com/balgaly/workwright",
+      "visual": "<svg viewBox=\"0 0 280 110\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%;\"><rect x=\"0\" y=\"0\" width=\"280\" height=\"110\" fill=\"var(--invert-bg)\"/><text x=\"14\" y=\"34\" font-family=\"Space Mono, monospace\" font-size=\"11\" fill=\"var(--status-good)\">$ workwright run &quot;npm test&quot;</text><text x=\"14\" y=\"56\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--invert-text)\">▸ pty spawned · agent attached</text><text x=\"14\" y=\"76\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--accent-2)\">▸ 14 passed · 0 failed</text><text x=\"14\" y=\"96\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-muted)\">└─ streamed back to the model</text></svg>"
+    },
+    {
+      "slug": "$standup",
+      "name": "$STANDUP",
+      "kicker": "internal · since 2026",
+      "desc": "every meeting ends with a transcript, a summary, and a list of action items. runs locally. never touches a cloud you don't control.",
+      "desc_cv": "meeting happen. robot listen. robot write notes. notes accurate. meeting over.",
+      "tags": ["python", "whisper", "bedrock"],
+      "status": "prod",
+      "url": null,
+      "visual": "<svg viewBox=\"0 0 280 110\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%;\"><rect x=\"0\" y=\"0\" width=\"280\" height=\"110\" fill=\"var(--invert-bg)\"/><text x=\"14\" y=\"28\" font-family=\"Space Mono, monospace\" font-size=\"11\" fill=\"var(--invert-text)\">&#x25B8; transcribing standup.m4a</text><rect x=\"14\" y=\"38\" width=\"200\" height=\"6\" rx=\"3\" fill=\"var(--line-base)\" opacity=\"0.4\"/><rect x=\"14\" y=\"38\" width=\"163\" height=\"6\" rx=\"3\" fill=\"var(--accent)\"/><text x=\"220\" y=\"46\" font-family=\"Space Mono, monospace\" font-size=\"9\" fill=\"var(--accent)\">81%</text><text x=\"14\" y=\"68\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--status-good)\">&#x2713; 1,240 words &#xB7; 14 action items</text><text x=\"14\" y=\"90\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-muted)\">&#x2514;&#x2500; written to standup-2026-w26.md</text></svg>"
+    },
+    {
+      "slug": "whetstone",
+      "name": "whetstone",
+      "kicker": "harness · personal",
+      "desc": "the system that keeps me on scope. cron-driven agent jobs, drift detection, session discipline. a mentor that runs on pm2 and never lets me spiral.",
+      "desc_cv": "robot watch me work. robot say 'stay on task'. robot right. me annoyed. me productive.",
+      "tags": ["node", "cron", "sqlite"],
+      "status": "running",
+      "url": null,
+      "visual": "<svg viewBox=\"0 0 280 110\" xmlns=\"http://www.w3.org/2000/svg\" style=\"width:100%;height:100%;\"><rect x=\"0\" y=\"0\" width=\"280\" height=\"110\" fill=\"var(--invert-bg)\"/><text x=\"14\" y=\"28\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--accent-2)\">▸ 3 jobs · pm2 online</text><text x=\"14\" y=\"50\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--status-good)\">✓ 08:00 weekly-review</text><text x=\"14\" y=\"70\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--invert-text)\">└─ MON 09:15 security-sweep</text><text x=\"14\" y=\"92\" font-family=\"Space Mono, monospace\" font-size=\"10\" fill=\"var(--text-muted)\">next: daily-commit-summary · 18:00</text></svg>"
     }
   ],
   "writing": [

@@ -6,6 +6,7 @@
       "plan.html",
       ".worktrees/polish2/index.html",
       ".worktrees/content-scrub/index.html",
+      ".worktrees/visuals/index.html",
       "src/layouts/Layout.astro"
     ],
     "ignoreValues": [

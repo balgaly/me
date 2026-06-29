@@ -7,6 +7,8 @@
       ".worktrees/polish2/index.html",
       ".worktrees/content-scrub/index.html",
       ".worktrees/visuals/index.html",
+      ".worktrees/promo/promo/rebrand-launch.html",
+      "promo/rebrand-launch.html",
       "src/layouts/Layout.astro"
     ],
     "ignoreValues": [

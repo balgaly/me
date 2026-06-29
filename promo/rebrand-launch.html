@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promo: relaunch + design language — balgaly.com</title>
+<style>
+  :root {
+    --indigo-1: #4338ca;
+    --indigo-2: #6366f1;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --soft: #334155;
+    --muted: #64748b;
+    --accent-li: #0a66c2;
+    --accent-x: #000000;
+    --green: #16a34a;
+    --red: #dc2626;
+    --amber: #d97706;
+    --brand: #e11d74;
+    --pill-bg: #f1f5f9;
+    --r: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 16px rgba(0,0,0,.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 20px 80px;
+  }
+
+  /* ─── header ─── */
+  .hdr {
+    background: linear-gradient(135deg, var(--indigo-1) 0%, var(--indigo-2) 100%);
+    border-radius: var(--r);
+    padding: 28px 32px;
+    color: white;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+  }
+  .hdr-kicker { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .hdr h1 { font-size: 22px; font-weight: 700; line-height: 1.2; }
+  .hdr-meta { margin-top: 8px; font-size: 13px; opacity: .7; display: flex; gap: 16px; flex-wrap: wrap; }
+  .hdr-meta span::before { content: '· '; }
+  .hdr-meta span:first-child::before { content: ''; }
+
+  /* ─── callout boxes ─── */
+  .callout {
+    border-radius: var(--r);
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    border: 1px solid;
+  }
+  .callout-title { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .callout.warn  { background: #fefce8; border-color: #fde047; }
+  .callout.warn .callout-title { color: var(--amber); }
+  .callout.action { background: #f0fdf4; border-color: #86efac; }
+  .callout.action .callout-title { color: var(--green); }
+  .callout.info  { background: #f0f9ff; border-color: #7dd3fc; }
+  .callout.info .callout-title  { color: #0284c7; }
+  .callout ol, .callout ul { padding-left: 20px; }
+  .callout li { margin-bottom: 4px; }
+  .callout code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+
+  /* ─── section heading ─── */
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin: 32px 0 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ─── platform card ─── */
+  .platform-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .pc-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .pc-icon {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: white; flex-shrink: 0;
+  }
+  .pc-icon.li { background: var(--accent-li); }
+  .pc-icon.x  { background: var(--accent-x); }
+  .pc-title   { font-weight: 600; font-size: 15px; }
+  .pc-pill    {
+    margin-left: auto; font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 999px;
+    background: var(--pill-bg); color: var(--muted);
+  }
+  .pc-body    { padding: 20px; }
+
+  /* ─── post preview ─── */
+  .post-preview {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .preview-meta {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+  }
+  .preview-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand) 0%, #6366f1 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;
+  }
+  .preview-name  { font-weight: 600; font-size: 14px; }
+  .preview-handle { font-size: 12px; color: var(--muted); }
+  .post-text {
+    font-size: 14px; line-height: 1.65;
+    white-space: pre-wrap; word-break: break-word;
+    color: var(--text);
+  }
+  .post-char-count {
+    font-size: 12px; text-align: right; color: var(--muted); margin-top: 8px;
+  }
+  .post-char-count.over { color: var(--red); font-weight: 600; }
+
+  /* ─── tweet list ─── */
+  .tweet-list { display: flex; flex-direction: column; gap: 10px; }
+  .tweet-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .tweet-num { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 6px; letter-spacing: .04em; }
+  .tweet-text {
+    font-size: 14px; line-height: 1.6;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .tweet-footer {
+    display: flex; align-items: center; justify-content: space-between; margin-top: 8px;
+  }
+  .char-badge {
+    font-size: 11px; font-weight: 600; padding: 2px 7px;
+    border-radius: 999px; background: #f0fdf4; color: var(--green);
+  }
+  .char-badge.over { background: #fef2f2; color: var(--red); }
+
+  /* ─── copy buttons ─── */
+  .copy-row {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px;
+  }
+  .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity .15s, transform .1s;
+    user-select: none;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: var(--indigo-1); color: white; }
+  .btn-primary:hover { opacity: .9; }
+  .btn-ghost   { background: var(--pill-bg); color: var(--soft); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--border); }
+  .btn .ico { font-size: 14px; }
+  .btn.copied { background: var(--green) !important; color: white !important; }
+
+  /* ─── media strip ─── */
+  .media-strip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .media-strip h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .media-strip .sub { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+  .carousel-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .carousel-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .carousel-thumb {
+    aspect-ratio: 4/5;
+    background: linear-gradient(180deg, #e5e9f1 0%, #d3dae8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .carousel-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .carousel-info { padding: 8px 10px; }
+  .carousel-info .cn { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 2px; }
+  .carousel-info .cp { font-size: 11px; color: var(--soft); }
+  .carousel-info code { font-size: 10px; color: var(--muted); display: block; margin-top: 2px; word-break: break-all; }
+  .upload-order {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--soft);
+    background: var(--pill-bg);
+    border-radius: 6px;
+    padding: 10px 14px;
+  }
+  .upload-order strong { color: var(--text); }
+
+  /* ─── website actions ─── */
+  .action-list { list-style: none; padding: 0; }
+  .action-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .action-check {
+    width: 18px; height: 18px; border: 2px solid var(--border);
+    border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .action-check.done { border-color: var(--green); background: var(--green); color: white; font-size: 11px; }
+  .action-text { font-size: 14px; }
+  .action-text strong { font-weight: 600; }
+  .action-text .detail { font-size: 13px; color: var(--muted); }
+
+  /* ─── hidden textarea for fallback copy ─── */
+  #clip-area {
+    position: fixed; left: -9999px; top: -9999px;
+    width: 1px; height: 1px; opacity: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Header ─── -->
+<div class="hdr">
+  <div class="hdr-kicker">promotional post system · me.balgaly.com</div>
+  <h1>Promo: relaunch + design language</h1>
+  <div class="hdr-meta">
+    <span>Post #1</span>
+    <span>LinkedIn + X</span>
+    <span>Carousel (4 cards)</span>
+    <span>June 2026</span>
+  </div>
+</div>
+
+<!-- ─── Pre-post checklist ─── -->
+<div class="callout action">
+  <div class="callout-title">✅ On the website — you do these</div>
+  <ul class="action-list" id="action-list">
+    <li>
+      <div class="action-check" onclick="toggleCheck(this)"></div>
+      <div class="action-text">
+        <strong>DNS: set up the balgaly.com apex 301</strong><br>
+        <span class="detail">Namecheap → balgaly.com → URL Redirect → https://me.balgaly.com. Also add www. Do this before posting so every link click lands correctly. Without it, any reader who types balgaly.com gets a 404.</span>
+      </div>
+    </li>
+    <li>
+      <div class="action-check" onclick="toggleCheck(this)"></div>
+      <div class="action-text">
+        <strong>Quick site sanity check</strong><br>
+        <span class="detail">Open me.balgaly.com: constellation animates, dark-mode toggle works, no console errors. Takes 30 seconds.</span>
+      </div>
+    </li>
+    <li>
+      <div class="action-check" onclick="toggleCheck(this)"></div>
+      <div class="action-text">
+        <strong>Governance grep</strong><br>
+        <span class="detail">Run: <code>grep -ri "cyberng\|code.koala\|cymbal" C:\DEV\local\me\data\ C:\DEV\local\me\index.html</code> → should return 0 hits. Don't post until clean.</span>
+      </div>
+    </li>
+    <li>
+      <div class="action-check" onclick="toggleCheck(this)"></div>
+      <div class="action-text">
+        <strong>Upload carousel images to LinkedIn</strong><br>
+        <span class="detail">Files are in <code>promo/assets/</code>. Upload in order 1→4 (see media strip below). LinkedIn Document posts get more reach than image posts; alternatively use the multi-image post format.</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- ─── LinkedIn ─── -->
+<div class="section-label">LinkedIn</div>
+
+<div class="platform-card">
+  <div class="pc-header">
+    <div class="pc-icon li">in</div>
+    <div class="pc-title">LinkedIn post</div>
+    <div class="pc-pill">~1,400 chars</div>
+  </div>
+  <div class="pc-body">
+    <div class="post-preview">
+      <div class="preview-meta">
+        <div class="preview-avatar">SB</div>
+        <div>
+          <div class="preview-name">Snir Balgaly</div>
+          <div class="preview-handle">DevOps Manager at Palo Alto Networks · Now</div>
+        </div>
+      </div>
+      <div class="post-text" id="li-preview"></div>
+      <div class="post-char-count" id="li-count"></div>
+    </div>
+    <div class="copy-row">
+      <button class="btn btn-primary" onclick="copyPost('li-copy', this)">
+        <span class="ico">📋</span> Copy for LinkedIn
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── X Thread ─── -->
+<div class="section-label">X / Twitter Thread</div>
+
+<div class="platform-card">
+  <div class="pc-header">
+    <div class="pc-icon x">𝕏</div>
+    <div class="pc-title">X thread</div>
+    <div class="pc-pill" id="x-tweet-count">loading…</div>
+  </div>
+  <div class="pc-body">
+    <div class="tweet-list" id="x-thread-list"></div>
+    <div class="copy-row" style="margin-top:14px;">
+      <button class="btn btn-primary" onclick="copyThread(this)">
+        <span class="ico">📋</span> Copy whole thread
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Media strip ─── -->
+<div class="section-label">Carousel media</div>
+
+<div class="media-strip">
+  <h3>4 carousel cards — 1080×1350 (LinkedIn 4:5 portrait)</h3>
+  <div class="sub">Upload in this order. Generated by <code>node scripts/gen-images.mjs --carousel</code></div>
+  <div class="carousel-grid" id="carousel-grid"></div>
+  <div class="upload-order">
+    <strong>Upload order for LinkedIn:</strong> Start new post → click the image icon → select all 4 in order 1→4.
+    LinkedIn shows them as a swipeable carousel. Caption = the post copy (already in your clipboard after clicking Copy for LinkedIn above).
+  </div>
+</div>
+
+<!-- ─── hidden textarea ─── -->
+<textarea id="clip-area" readonly></textarea>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   UNICODE BOLD/ITALIC HELPERS
+   Author copy uses **bold** and _italic_ markdown markers.
+   These convert to Unicode math-bold / math-italic glyphs
+   so the formatting survives paste into LinkedIn/X.
+   ══════════════════════════════════════════════════════ */
+
+const BOLD_UPPER_START = 0x1D5D4; // 𝗔
+const BOLD_LOWER_START = 0x1D5EE; // 𝗮
+const BOLD_DIGIT_START = 0x1D7EC; // 𝟬 (sans-serif bold digits)
+
+function toUnicodeBold(str) {
+  return [...str].map(ch => {
+    const c = ch.codePointAt(0);
+    if (c >= 65  && c <= 90)  return String.fromCodePoint(BOLD_UPPER_START + (c - 65));
+    if (c >= 97  && c <= 122) return String.fromCodePoint(BOLD_LOWER_START + (c - 97));
+    if (c >= 48  && c <= 57)  return String.fromCodePoint(BOLD_DIGIT_START + (c - 48));
+    return ch;
+  }).join('');
+}
+
+const ITAL_UPPER_START = 0x1D608; // 𝘈 (sans-serif italic)
+const ITAL_LOWER_START = 0x1D622; // 𝘢
+
+function toUnicodeItalic(str) {
+  return [...str].map(ch => {
+    const c = ch.codePointAt(0);
+    if (c >= 65  && c <= 90)  return String.fromCodePoint(ITAL_UPPER_START + (c - 65));
+    if (c >= 97  && c <= 122) return String.fromCodePoint(ITAL_LOWER_START + (c - 97));
+    return ch;
+  }).join('');
+}
+
+// Convert **bold** and _italic_ markers to Unicode glyphs
+function renderMarkdown(src) {
+  return src
+    .replace(/\*\*([^*]+)\*\*/g, (_, t) => toUnicodeBold(t))
+    .replace(/_([^_]+)_/g,       (_, t) => toUnicodeItalic(t));
+}
+
+/* ══════════════════════════════════════════════════════
+   POST CONTENT
+   ══════════════════════════════════════════════════════ */
+
+const LI_POST_SRC = `i rebuilt my corner of the internet. **design language first. site second.**
+
+here's why that order matters.
+
+most personal sites start with a template. mine started with a token file — colors, type, spacing, motion — locked before a single div existed. the result is a design that reads as deliberate, not assembled.
+
+what got killed in the process:
+
+**Sora** (the sans-serif of every AI-startup landing page, circa 2025) → **Space Grotesk + Space Mono** — siblings from the same type family, so the display copy and the terminal mocks share DNA.
+
+**tag pills** → a borderless mono stack line. / python / aws / cdk. tags that don't apologize for being text.
+
+**green status dot** → an ON-AIR tally sign. same information, more honest about what "live in prod" actually means.
+
+**no dark mode** → dark mode where the accent had to change. saturated magenta vibrates on a dark navy background (chromostereopsis — the color wavelengths focus at different depths). switched to dusty rose for dark. the token handles it; the components are unchanged.
+
+this was the "anti-slop pass". the moment when every default choice gets interrogated.
+
+the build itself is deliberately boring: static HTML, a single state.json as the source of truth, token-driven inline SVGs that get dark mode for free because they use CSS variables. no build step. no framework. everything is boring so the design can be interesting.
+
+if you're curious about the tools i'm building alongside this:
+
+→ **brif** — a mission-aware statusline for Claude Code that asks before doing anything irreversible (github.com/balgaly/brif)
+→ **skit** — the npm of AI capabilities. install once, works everywhere (github.com/balgaly/skit)
+→ **workwright** — Playwright, but for terminals (github.com/balgaly/workwright)
+
+and some writing at words.balgaly.com — including one piece on what working with AI coding agents actually requires (hint: it's not a coding skill).
+
+site: me.balgaly.com`;
+
+const X_TWEETS_SRC = [
+  `i rebuilt my corner of the internet.
+
+**design language first. site second.**
+
+here's what that meant in practice 🧵`,
+
+  `started with a token file — colors, type, spacing, motion — locked before a single div existed.
+
+most sites start with a template and end up assembled.
+mine was designed before it was coded.`,
+
+  `the anti-slop pass:
+
+**Sora** → **Space Grotesk + Space Mono** (siblings, same family)
+**tag pills** → borderless mono stack line
+**green status dot** → ON-AIR tally sign
+**no dark mode** → dark mode w/ dusty rose accent
+
+saturated magenta vibrates on dark navy (chromostereopsis).
+dusty rose doesn't.`,
+
+  `the build is deliberately boring.
+
+static HTML. single state.json as source of truth.
+token-driven inline SVGs that get dark mode for free.
+
+no build step. no framework.
+everything boring so the design can be interesting.`,
+
+  `tools i'm building alongside:
+
+→ **brif** — statusline for Claude Code that asks before doing anything irreversible
+→ **skit** — npm of AI capabilities, works in every editor
+→ **workwright** — Playwright but for terminals
+
+all OSS @ github.com/balgaly`,
+
+  `and four essays at words.balgaly.com:
+
+· _"short memory"_ — on the AI safety/release PR cycle
+· _"the context bar"_ — context window saturation is silent degradation
+· _"the package manager nobody asked for"_ — how I built skit
+· _"things I didn't know"_ — working with agents is an architectural skill
+
+→ me.balgaly.com`
+];
+
+/* ══════════════════════════════════════════════════════
+   RENDER
+   ══════════════════════════════════════════════════════ */
+
+function renderLinkedIn() {
+  const rendered = renderMarkdown(LI_POST_SRC);
+  const el = document.getElementById('li-preview');
+  el.textContent = rendered;
+
+  const chars = rendered.length;
+  const countEl = document.getElementById('li-count');
+  countEl.textContent = `${chars.toLocaleString()} characters`;
+  if (chars > 3000) countEl.classList.add('over');
+}
+
+function renderXThread() {
+  const list = document.getElementById('x-thread-list');
+  list.innerHTML = '';
+  const total = X_TWEETS_SRC.length;
+
+  X_TWEETS_SRC.forEach((src, i) => {
+    const rendered = renderMarkdown(src);
+    const chars = rendered.length;
+    const over = chars > 280;
+
+    const item = document.createElement('div');
+    item.className = 'tweet-item';
+    item.innerHTML = `
+      <div class="tweet-num">TWEET ${i + 1} / ${total}</div>
+      <div class="tweet-text" id="tweet-${i}">${escHtml(rendered)}</div>
+      <div class="tweet-footer">
+        <span class="char-badge ${over ? 'over' : ''}">${chars} / 280${over ? ' ⚠ OVER' : ''}</span>
+        <button class="btn btn-ghost" style="padding:5px 12px;font-size:12px;" onclick="copyTweet(${i}, this)">
+          <span class="ico">📋</span> Copy tweet
+        </button>
+      </div>`;
+    list.appendChild(item);
+  });
+
+  document.getElementById('x-tweet-count').textContent = `${total} tweets`;
+}
+
+function renderCarousel() {
+  const grid = document.getElementById('carousel-grid');
+  const cards = [
+    { n: '1', label: 'Hook',             file: 'carousel-1-hook.png',             desc: '"i rebuilt my corner of the internet"' },
+    { n: '2', label: 'Design evolution', file: 'carousel-2-design-evolution.png', desc: 'before/after: Sora → Space Grotesk, pills → stack, ON-AIR, dark mode' },
+    { n: '3', label: 'Site visual',      file: 'carousel-3-site-visual.png',      desc: 'constellation + terminal project card mock' },
+    { n: '4', label: 'CTA',              file: 'carousel-4-cta.png',              desc: 'me.balgaly.com / words.balgaly.com / github' },
+  ];
+
+  cards.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'carousel-card';
+    el.innerHTML = `
+      <div class="carousel-thumb">
+        <img src="assets/${c.file}" alt="Carousel card ${c.n}" onerror="this.parentElement.textContent='🖼'">
+      </div>
+      <div class="carousel-info">
+        <div class="cn">CARD ${c.n} — ${c.label.toUpperCase()}</div>
+        <div class="cp">${c.desc}</div>
+        <code>promo/assets/${c.file}</code>
+      </div>`;
+    grid.appendChild(el);
+  });
+}
+
+/* ══════════════════════════════════════════════════════
+   CLIPBOARD — 3-tier fallback
+   ══════════════════════════════════════════════════════ */
+
+function copyToClipboard(text) {
+  // Tier 1: Clipboard API (requires HTTPS or localhost)
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text).then(() => true).catch(() => false);
+  }
+  return Promise.resolve(false);
+}
+
+function copyToClipboardFallback(text) {
+  // Tier 2: execCommand (deprecated but works on file://)
+  try {
+    const ta = document.getElementById('clip-area');
+    ta.value = text;
+    ta.select();
+    ta.setSelectionRange(0, 99999);
+    const ok = document.execCommand('copy');
+    ta.value = '';
+    return ok;
+  } catch { return false; }
+}
+
+async function doCopy(text, btn) {
+  const ok1 = await copyToClipboard(text);
+  if (!ok1) {
+    const ok2 = copyToClipboardFallback(text);
+    if (!ok2) {
+      // Tier 3: show in textarea for manual select
+      const ta = document.getElementById('clip-area');
+      ta.style.cssText = 'position:fixed;left:10px;top:10px;width:80vw;height:200px;z-index:9999;opacity:1;font-size:13px;';
+      ta.value = text;
+      ta.focus();
+      ta.select();
+      alert('Auto-copy unavailable on file://. Text shown in top-left — press Ctrl+C.');
+      ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;';
+      return;
+    }
+  }
+  // Visual feedback
+  const orig = btn.innerHTML;
+  btn.classList.add('copied');
+  btn.innerHTML = '<span class="ico">✓</span> Copied!';
+  setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1800);
+}
+
+function copyPost(id, btn) {
+  const text = renderMarkdown(id === 'li-copy' ? LI_POST_SRC : '');
+  doCopy(text, btn);
+}
+
+function copyTweet(idx, btn) {
+  const text = renderMarkdown(X_TWEETS_SRC[idx]);
+  doCopy(text, btn);
+}
+
+function copyThread(btn) {
+  const all = X_TWEETS_SRC.map((src, i) => {
+    const rendered = renderMarkdown(src);
+    return `${i + 1}/${X_TWEETS_SRC.length}\n\n${rendered}`;
+  }).join('\n\n---\n\n');
+  doCopy(all, btn);
+}
+
+/* ══════════════════════════════════════════════════════
+   UTILS
+   ══════════════════════════════════════════════════════ */
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Reformat plain-text \n for HTML (use in preview element as textContent, not innerHTML)
+// Note: post-text uses white-space:pre-wrap so textContent works fine.
+
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+/* ══════════════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════════════ */
+
+renderLinkedIn();
+renderXThread();
+renderCarousel();
+</script>
+</body>
+</html>
